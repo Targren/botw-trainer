@@ -1,4 +1,4 @@
-﻿{
+{
     "Items": {
         "Weapons": {
             "Weapon_Sword_001": {
@@ -2951,8 +2951,8 @@
             "LocY": 275,
             "LocZ": -1480
         },
-        "Whago_Katta": {
-            "Name": "Whago Katta Shrine",
+        "Wahgo_Katta": {
+            "Name": "Wahgo Katta Shrine",
             "LocX": 351,
             "LocY": 123,
             "LocZ": 1014
@@ -2992,7 +2992,277 @@
             "LocX": -3473,
             "LocY": 384,
             "LocZ": 442
-        }
+        },
+		"Korsh_O'hu": {
+			"Name": "Korsh O'hu", 
+			"LocX": -2695, 
+			"LocY": 105, 
+			"LocZ": 2818
+		},
+		"Dila_Maag": {
+			"Name":"Dila Maag", 
+			"LocX": -1795, 
+			"LocY": 164, 
+			"LocZ": 3456
+		},
+		"Jee_Noh": {
+			"Name":"Jee Noh", 
+			"LocX": -1797, 
+			"LocY": 113, 
+			"LocZ": 2415
+		},
+		"Keh_Namut": {
+			"Name":"Keh Namut", 
+			"LocX": -1428,
+			"LocY": 338, 
+			"LocZ": 1988
+		},
+		"Dah_Kaso": {
+			"Name":"Dah Kaso", 
+			"LocX": -1699, 
+			"LocY": 69, 
+			"LocZ": 1708
+		},
+		"Owa_Daim": {
+			"Name":"Owa Daim",
+			"LocX": -925, 
+			"LocY": 274, 
+			"LocZ": 2312
+		},
+		"Ja_Baij": {
+			"Name":"Ja Baij", 
+			"LocX": -456, 
+			"LocY": 180, 
+			"LocZ": 1990
+		},
+		"Oman_Au": {
+			"Name":"Oman Au",
+			"LocX": -666,
+			"LocY": 173, 
+			"LocZ": 1519
+		},
+		"Rota_Ooh": {
+			"Name":"Rota Ooh",
+			"LocX": -1554,
+			"LocY": 187, 
+			"LocZ": 1307
+		},
+		"Ka'o_Makagh": {
+			"Name":"Ka'o Makagh",
+			"LocX": 520, 
+			"LocY": 179, 
+			"LocZ": 3518
+		},
+		"Pumaag_Nitae": {
+			"Name":"Pumaag Nitae",
+			"LocX": 558, 
+			"LocY": 118,
+			"LocZ": 2999
+		},
+		"Bosh_Kala": {
+			"Name":"Bosh Kala",
+			"LocX": 87,
+			"LocY": 122,
+			"LocZ": 1649
+		},
+		"Shoda_Sah": {
+			"Name":"Shoda Sah",
+			"LocX": 1788,
+			"LocY": 189, 
+			"LocZ": 3000
+		},
+		"Yah_Rin": {
+			"Name":"Yah Rin",
+			"LocX": 2834,
+			"LocY": 152,
+			"LocZ": 3320
+		},
+		"Muwo_Jeem": {
+			"Name":"Muwo Jeem", 
+			"LocX": 3649,
+			"LocY": 350,
+			"LocZ": 3305
+		},
+		"Chaas_Qeta": {
+			"Name":"Chaas Qeta",
+			"LocX": 4005,
+			"LocY": 107,
+			"LocZ": 2984
+		},
+		"Tawa_Jinn": {
+			"Name":"Tawa Jinn",
+			"LocX": 2629,
+			"LocY": 318,
+			"LocZ": 2829
+		},
+		"Ha_Dahamar": {
+			"Name":"Ha Dahamar", 
+			"LocX": 1667,
+			"LocY": 115,
+			"LocZ": 1928
+		},
+		"Kaam_Ya'tak": {
+			"Name":"Kaam Ya'tak", 
+			"LocX": -966, 
+			"LocY": 127,
+			"LocZ": 724
+		},
+		"Mogg_Latan": {
+			"Name":"Mogg Latan", 
+			"LocX": -2300, 
+			"LocY": 439,
+			"LocZ": 469
+		},
+		"Toh_Yahsa": {
+			"Name":"Toh Yahsa", 
+			"LocX": -2269, 
+			"LocY": 216,
+			"LocZ": -909
+		},
+		"Rin_Oyaa": {
+			"Name":"Rin Oyaa", 
+			"LocX": -1712,
+			"LocY": 335,
+			"LocZ": -2556
+		},
+		"Sha_Gehma": {
+			"Name":"She Gehma",
+			"LocX": -1665, 
+			"LocY": 346,
+			"LocZ": -3763
+		},
+		"Qaza_Tokki": {
+			"Name":"Qaza Tokki",
+			"LocX": -829, 
+			"LocY": 341,
+			"LocZ": -3535
+		},
+		"Shae_Mo'sah": {
+			"Name":"Shae Mo'sah",
+			"LocX": 1751,
+			"LocY": 535,
+			"LocZ": -2555
+		},
+		"Sah_Dahaj": {
+			"Name":"Sah Dahaj",
+			"LocX": 2673,
+			"LocY": 247,
+			"LocZ": -1576
+		},
+		"Tahno_O'ah": {
+			"Name":"Tahno O'ah", 
+			"LocX": 4190,
+			"LocY": 288, 
+			"LocZ": 1685
+		},
+		"Ta'log_Naeg": {
+			"Name":"Ta'log Naeg",
+			"LocX": 1835,
+			"LocY": 260,
+			"LocZ": 896
+		},
+		"Daka_Tuss": {
+			"Name":"Daka Tuss",
+			"LocX": 1608, 
+			"LocY": 117,
+			"LocZ": 467
+		},
+		"Mezza_Lo": {
+			"Name":"Mezza Lo", 
+			"LocX": 2621, 
+			"LocY": 249, 
+			"LocZ": 387
+		},
+		"Rucco_Maag": {
+			"Name":"Rucco Maag", 
+			"LocX": 3333, 
+			"LocY": 119,
+			"LocZ": 410
+		},
+		"Shai_Yota": {
+			"Name":"Shai Yota",
+			"LocX": 4242,
+			"LocY": 110,
+			"LocZ": 261
+		},
+		"Dagah_Keek": {
+			"Name":"Dagah Keek",
+			"LocX": 3141, 
+			"LocY": 280,
+			"LocZ": -421
+		},
+		"Ne'ez_Yohma": {
+			"Name":"Ne'ez Yohma",
+			"LocX": 3319,
+			"LocY": 239,
+			"LocZ": -510
+		},
+		"Sheh_Rata": {
+			"Name":"Sheh Rata",
+			"LocX": 1501, 
+			"LocY": 128, 
+			"LocZ": -379
+		},
+		"Katah_Chuki": {
+			"Name":"Katah Chuki",
+			"LocX": -633,
+			"LocY": 128,
+			"LocZ": -336
+		},
+		"Zalta_Wa": {
+			"Name":"Zalta Wa",
+			"LocX": -1435, 
+			"LocY": 138,
+			"LocZ": -585
+		},
+		"Soh_Kofi": {
+			"Name":"Soh Kofi",
+			"LocX": 2245, 
+			"LocY": 148,
+			"LocZ": -287
+		},
+		"Mo'a_Keet": {
+			"Name":"Mo'a Keet", 
+			"LocX": 2719, 
+			"LocY": 285, 
+			"LocZ": -1157
+		},
+		"Ze_Kasho": {
+			"Name":"Ze Kasho",
+			"LocX": 3036,
+			"LocY": 348,
+			"LocZ": -1669
+		},
+		"Dah_Hesho": {
+			"Name":"Dah Hesho", 
+			"LocX": 3901,
+			"LocY": 354,
+			"LocZ": -1311
+		},
+		"Katosa_Aug": {
+			"Name":"Katosa Aug", 
+			"LocX": 4287,
+			"LocY": 237, 
+			"LocZ": -2726
+		},
+		"Zuna_Kai": {
+			"Name":"Zuna Kai", 
+			"LocX": 3321, 
+			"LocY": 298, 
+			"LocZ": -3428
+		},
+		"Tu_Ka'loh": {
+			"Name":"Tu Ka'loh", 
+			"LocX": 4655, 
+			"LocY": 237, 
+			"LocZ": -3700
+		},
+		"Keo_Ruug": {
+			"Name":"Keo Ruug", 
+			"LocX": 473, 
+			"LocY": 250, 
+			"LocZ": -2159
+		}
     },
     "Towers": {
         "Great_Plateau_Tower": {
