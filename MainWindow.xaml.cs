@@ -883,7 +883,7 @@
 
             var damagePointer = this.gecko.GetUInt(0x43AB9C30);
             CbDamage.SelectedValue = this.gecko.GetString(damagePointer + 0x770);
-            CbSpeed.SelectedValue = this.gecko.GetString(0x439C0514);
+            //CbSpeed.SelectedValue = this.gecko.GetString(0x439C0514);
             CbWeather.SelectedValue = this.gecko.GetString(0x407B5CE4);
 
             var time = this.GetCurrentTime();
