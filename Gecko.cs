@@ -543,6 +543,7 @@
                 this.mainWindow.LogError(overflowException);
                 return string.Empty;
             }
+
             var c = new char[count * 2];
             for (var i = 0; i < count; i++)
             {

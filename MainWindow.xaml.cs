@@ -44,9 +44,9 @@
         private readonly List<CheckBox> cbChanged = new List<CheckBox>();
 
         // Technically your first item as they are stored in reverse so we work backwards
-        private uint itemEnd = 0x43CA2AEC;
+        private const uint ItemEnd = 0x43CA2AEC;
 
-        private uint itemStart = 0x43C6B2AC;
+        //private uint itemStart = 0x43C6B2AC;
 
         private int itemTotal = 0;
 
@@ -153,13 +153,13 @@
         {
             try
             {
-                this.itemEnd = this.gecko.GetUInt(0x43C6B068) + 0x8;
+                //this.itemEnd = this.gecko.GetUInt(0x43C6B068) + 0x8;
 
-                this.itemStart = this.gecko.GetUInt(0x43C6B064) + 0x8;
+                //this.itemStart = this.gecko.GetUInt(0x43C6B064) + 0x8;
 
                 this.itemTotal = this.gecko.GetInt(0x43C6B06C);
 
-                var currentItemAddress = this.itemEnd;
+                var currentItemAddress = ItemEnd;
 
                 for (var x = 1; x <= this.itemTotal; x++)
                 {
