@@ -236,13 +236,10 @@
 
                         <Label Content="Some destinations may lock your game if they are too far." Margin="0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" />
 
-                        <ComboBox x:Name="ShrineList" Grid.Row="2" Width="150" SelectionChanged="ShrineListChanged" SelectedValuePath="Tag" HorizontalAlignment="Left" Text="Select Shrine..." IsEditable="True" IsReadOnly="True" Grid.Column="1"/>
+                        <ComboBox x:Name="ShrineList" Margin="0" Grid.Row="2" Grid.Column="1" Width="150" SelectionChanged="ShrineListChanged" SelectedValuePath="Tag" HorizontalAlignment="Left" Text="Select Shrine..." IsEditable="True" IsReadOnly="True"/>
 
-                        <ComboBox x:Name="TowerList" Margin="188,0,0,0" Grid.Row="2" Grid.Column="1" Width="150" SelectionChanged="TowerListChanged" SelectedValuePath="Tag" HorizontalAlignment="Left" Text="Select Tower..." IsEditable="True" IsReadOnly="True" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="TowerList" Margin="0" Grid.Row="2" Grid.Column="2" Width="150" SelectionChanged="TowerListChanged" SelectedValuePath="Tag" HorizontalAlignment="Left" Text="Select Tower..." IsEditable="True" IsReadOnly="True"/>
 
-                        <ComboBox x:Name="RanchList" Margin="137,0,0,0" Grid.Row="2" Grid.Column="2" Width="150" SelectionChanged="RanchListChanged" SelectedValuePath="Tag" HorizontalAlignment="Left" Text="Select Ranch..." IsEditable="True" IsReadOnly="True" Grid.ColumnSpan="2"/>
-
-                        <ComboBox x:Name="MiscList" Margin="81,0,0,0" Grid.Row="2" Grid.Column="3" Width="150" SelectionChanged="MiscListChanged" SelectedValuePath="Tag" HorizontalAlignment="Left" Text="Select Location..." IsEditable="True" IsReadOnly="True"/>
                         <TextBox x:Name="CoordsXValue" Text="-568" Grid.Row="3" Grid.Column="1" Width="75" HorizontalAlignment="Left"/>
                         <TextBox x:Name="CoordsYValue" Text="246" Grid.Row="4" Grid.Column="1" Width="75" HorizontalAlignment="Left"/>
                         <TextBox x:Name="CoordsZValue" Text="1697" Grid.Row="5" Grid.Column="1" Width="75" HorizontalAlignment="Left"/>
