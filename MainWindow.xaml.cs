@@ -136,6 +136,16 @@
                         {
                             this.TowerList.Items.Add(new ComboBoxItem { Content = tower.Value["Name"], Tag = tower.Name });
                         }
+                        var ranches = this.json.SelectToken("Ranches").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
+                        foreach (var ranch in ranches)
+                        {
+                            this.RanchList.Items.Add(new ComboBoxItem { Content = ranch.Value["Name"], Tag = ranch.Name });
+                        }
+                        var miscs = this.json.SelectToken("Miscs").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
+                        foreach (var misc in miscs)
+                        {
+                            this.MiscList.Items.Add(new ComboBoxItem { Content = misc.Value["Name"], Tag = misc.Name });
+                        }
                     }
                 }
             }
@@ -1034,6 +1044,30 @@
             var tag = tower.Tag.ToString();
 
             var data = (JObject)this.json.SelectToken("Towers");
+
+            CoordsXValue.Text = data[tag]["LocX"].ToString();
+            CoordsYValue.Text = data[tag]["LocY"].ToString();
+            CoordsZValue.Text = data[tag]["LocZ"].ToString();
+        }
+
+        private void RanchListChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var ranch = (ComboBoxItem)RanchList.SelectedItem;
+            var tag = ranch.Tag.ToString();
+
+            var data = (JObject)this.json.SelectToken("Ranches");
+
+            CoordsXValue.Text = data[tag]["LocX"].ToString();
+            CoordsYValue.Text = data[tag]["LocY"].ToString();
+            CoordsZValue.Text = data[tag]["LocZ"].ToString();
+        }
+
+        private void MiscListChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var misc = (ComboBoxItem)MiscList.SelectedItem;
+            var tag = misc.Tag.ToString();
+
+            var data = (JObject)this.json.SelectToken("Miscs");
 
             CoordsXValue.Text = data[tag]["LocX"].ToString();
             CoordsYValue.Text = data[tag]["LocY"].ToString();
