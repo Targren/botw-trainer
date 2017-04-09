@@ -136,15 +136,19 @@
                         {
                             this.TowerList.Items.Add(new ComboBoxItem { Content = tower.Value["Name"], Tag = tower.Name });
                         }
+
+                        // Ranches
                         var ranches = this.json.SelectToken("Ranches").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
                         foreach (var ranch in ranches)
                         {
                             this.RanchList.Items.Add(new ComboBoxItem { Content = ranch.Value["Name"], Tag = ranch.Name });
                         }
-                        var miscs = this.json.SelectToken("Miscs").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
-                        foreach (var misc in miscs)
+
+                        // Misc
+                        var misc = this.json.SelectToken("Misc").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
+                        foreach (var m in misc)
                         {
-                            this.MiscList.Items.Add(new ComboBoxItem { Content = misc.Value["Name"], Tag = misc.Name });
+                            this.MiscList.Items.Add(new ComboBoxItem { Content = m.Value["Name"], Tag = m.Name });
                         }
                     }
                 }
@@ -631,7 +635,7 @@
                                 CoordsX.Content = string.Format("{0}", Math.Round(xFloat, 2));
                                 CoordsY.Content = string.Format("{0}", Math.Round(yFloat, 2));
                                 CoordsZ.Content = string.Format("{0}", Math.Round(zFloat, 2));
-                                CoordsAll.Text  = string.Join(", ", "\"Name\":", Name.Text, "\"LocX\":", CoordsX.Content,"\"LocY\":", CoordsY.Content,"\"LocZ\":", CoordsZ.Content);
+
                                 run = this.connected && EnableCoords.IsChecked == true;
                             });
 
@@ -644,24 +648,6 @@
             }
         }
                 
-         private void CoordsSaveClick(object sender, RoutedEventArgs e)
-         {
-             StreamWriter log;
- 
-             if (!File.Exists("savedcoords.txt"))
-             {
-                 log = new StreamWriter("savedcoords.txt");
-             }
-             else
-             {
-                 log = File.AppendText("savedcoords.txt");
-             }
-             log.WriteLine(CoordsAll.Text);
-             log.WriteLine();
- 
-             log.Close();
- 
-         }
         private void ConnectClick(object sender, RoutedEventArgs e)
         {
             try
@@ -1086,7 +1072,7 @@
             var misc = (ComboBoxItem)MiscList.SelectedItem;
             var tag = misc.Tag.ToString();
 
-            var data = (JObject)this.json.SelectToken("Miscs");
+            var data = (JObject)this.json.SelectToken("Misc");
 
             CoordsXValue.Text = data[tag]["LocX"].ToString();
             CoordsYValue.Text = data[tag]["LocY"].ToString();
