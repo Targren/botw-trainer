@@ -230,21 +230,18 @@
                         <Label Content="Track your coordinates:" Margin="25,0,10,0" Grid.Row="0" Grid.Column="0" />
 
                         <Label x:Name="CoordsAddress" Content="-" Margin="0" Grid.Row="1" Grid.Column="0" />
-                        <CheckBox x:Name="EnableCoords" Grid.Column="0" Checked="EnableCoordsOnChecked" Width="20" HorizontalAlignment="Left" Margin="4,6,0,0" />
+                        <CheckBox x:Name="EnableCoords" Grid.Row="0" Grid.Column="0" Checked="EnableCoordsOnChecked" Width="20" HorizontalAlignment="Left" Margin="4,6,0,0" />
 
                         <Label x:Name="CoordsX" Content="0.0" Grid.Row="2" Grid.Column="0" Margin="14,4,0,0"/>
                         <Label x:Name="CoordsY" Content="0.0" Grid.Row="3" Grid.Column="0" Margin="14,4,0,0"/>
                         <Label x:Name="CoordsZ" Content="0.0" Grid.Row="4" Grid.Column="0" Margin="14,4,0,0"/>
-                        <TextBox x:Name="Name" Text="Location Name" Grid.Row="8" Width="132" HorizontalAlignment="Left" Margin="0,6,0,6" Grid.Column="0" VerticalAlignment="Top"/>
-                        <TextBox x:Name="CoordsAll" Text="0.0" Grid.Row="8" Grid.Column="0" Margin="137,6,83,21" Grid.ColumnSpan="2" />
-                        <Button Content="Save Coords" Grid.Row="8" Width="92" Click="CoordsSaveClick" HorizontalAlignment="Left" Margin="173,6,0,19" Grid.Column="1" Grid.ColumnSpan="2" />
                         <Label Content="Enter coordinates or select a destination and click GO." Margin="124,0,117,0" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" />
 
                         <Label Content="Some destinations may lock your game if they are too far." Margin="113,0,128,0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
 
-                        <Label Content="X" Margin="0,4,222,5" Grid.Row="2" />
-                        <Label Content="Y" Margin="0,4,222,5" Grid.Row="3" />
-                        <Label Content="Z" Margin="0,4,222,5" Grid.Row="4" />
+                        <Label Content="X" Margin="0,4,222,5" Grid.Row="2" Grid.Column="0" />
+                        <Label Content="Y" Margin="0,4,222,5" Grid.Row="3" Grid.Column="0" />
+                        <Label Content="Z" Margin="0,4,222,5" Grid.Row="4" Grid.Column="0" />
 
                         <Label Content="X" Margin="0,0,222,10" Grid.Row="2" Grid.Column="1" />
                         <Label Content="Y" Margin="80,0,133,10" Grid.Row="2" Grid.Column="1" />
