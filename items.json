@@ -3271,6 +3271,12 @@
       "LocY": 246,
       "LocZ": 1694
     },
+    "Hateno_Tower": {
+      "Name": "Hateno Tower",
+      "LocX": 2735,
+      "LocY": 336,
+      "LocZ": 2141
+    },
     "Lanayru_Tower": {
       "Name": "Lanayru Tower",
       "LocX": 2258,
@@ -3285,9 +3291,9 @@
     },
     "Akkala_Tower": {
       "Name": "Akkala Tower",
-      "LocX": 3300,
-      "LocY": 593,
-      "LocZ": -1506
+      "LocX": 3303.52,
+      "LocY": 593.75,
+      "LocZ": -1505.1
     },
     "Woodland_Tower": {
       "Name": "Woodland Tower",
