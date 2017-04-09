@@ -3425,8 +3425,9 @@
       "LocY": 109.06,
       "LocZ": -2655.86
     },
-	"Sprinf_of_Wisdom": {
+	"Spring_of_Wisdom": {
       "Name": "Spring of Wisdom",
+      "LocX": 3936.2,
       "LocY": 572.6,
       "LocZ": 1339.79
     }
