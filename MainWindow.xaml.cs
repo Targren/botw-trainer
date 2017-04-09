@@ -631,6 +631,7 @@
                                 CoordsX.Content = string.Format("{0}", Math.Round(xFloat, 2));
                                 CoordsY.Content = string.Format("{0}", Math.Round(yFloat, 2));
                                 CoordsZ.Content = string.Format("{0}", Math.Round(zFloat, 2));
+                                CoordsAll.Text  = string.Join(", ", "\"Name\":", Name.Text, "\"LocX\":", CoordsX.Content,"\"LocY\":", CoordsY.Content,"\"LocZ\":", CoordsZ.Content);
                                 run = this.connected && EnableCoords.IsChecked == true;
                             });
 
@@ -642,7 +643,25 @@
                 Dispatcher.Invoke(() => this.LogError(ex, "Coords Tab"));
             }
         }
-
+                
+         private void CoordsSaveClick(object sender, RoutedEventArgs e)
+         {
+             StreamWriter log;
+ 
+             if (!File.Exists("savedcoords.txt"))
+             {
+                 log = new StreamWriter("savedcoords.txt");
+             }
+             else
+             {
+                 log = File.AppendText("savedcoords.txt");
+             }
+             log.WriteLine(CoordsAll.Text);
+             log.WriteLine();
+ 
+             log.Close();
+ 
+         }
         private void ConnectClick(object sender, RoutedEventArgs e)
         {
             try
