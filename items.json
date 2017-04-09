@@ -3380,6 +3380,18 @@
       "LocX": -1437.11,
       "LocY": 138.32,
       "LocZ": 1265.14
+    },
+	"East_Akkala_Stable": {
+      "Name": "East Akkala Stable",
+      "LocX": 4236.73,
+      "LocY": 232,
+      "LocZ": -2739.76
+    },
+	"Serenne_Stable": {
+      "Name": "Serenne Stable",
+      "LocX": -1552.26,
+      "LocY": 212.88,
+      "LocZ": -1788.14
     }
   },
   "Misc": {
@@ -3388,6 +3400,35 @@
       "LocX": 453.45,
       "LocY": 253.05,
       "LocZ": -2024.66
+    },
+	"Hateno_Dye_Shop": {
+      "Name": "Hateno Dye Shop",
+      "LocX": 3406.47,
+      "LocY": 226.73,
+      "LocZ": 2148.39
+    },
+	"Hateno_Armor_Shop": {
+      "Name": "Hateno Armor Shop",
+      "LocX": 3356.42,
+      "LocY": 226.55,
+      "LocZ": 2129.16
+    },
+	"Hateno_Item_Shop": {
+      "Name": "Hateno Item Shop",
+      "LocX": 3358.4,
+      "LocY": 225.66,
+      "LocZ": 2169.71
+    },
+	"Spring_of_Power": {
+      "Name": "Spring of Power",
+      "LocX": 3744.1,
+      "LocY": 109.06,
+      "LocZ": -2655.86
+    },
+	"Sprinf_of_Wisdom": {
+      "Name": "Spring of Wisdom",
+      "LocY": 572.6,
+      "LocZ": 1339.79
     }
   }
 }
