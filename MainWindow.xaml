@@ -207,13 +207,17 @@
 
                     <Grid Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="13*"/>
+                            <RowDefinition Height="13*"/>
+                            <RowDefinition Height="18*"/>
+                            <RowDefinition Height="13*"/>
+                            <RowDefinition Height="17*"/>
+                            <RowDefinition Height="7*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="0*"/>
+                            <RowDefinition Height="21*"/>
+                            <RowDefinition Height="0*"/>
+                            <RowDefinition Height="0*"/>
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
@@ -223,27 +227,37 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <Label Content="Track your coordinates:" Margin="0" Grid.Row="0" Grid.Column="0" />
+                        <Label Content="Track your coordinates:" Margin="25,0,10,0" Grid.Row="0" Grid.Column="0" />
 
                         <Label x:Name="CoordsAddress" Content="-" Margin="0" Grid.Row="1" Grid.Column="0" />
-                        <CheckBox x:Name="EnableCoords" Grid.Row="2" Grid.Column="0" Checked="EnableCoordsOnChecked" Width="20" HorizontalAlignment="Left" />
+                        <CheckBox x:Name="EnableCoords" Grid.Row="0" Grid.Column="0" Checked="EnableCoordsOnChecked" Width="20" HorizontalAlignment="Left" Margin="4,6,0,0" />
 
-                        <Label x:Name="CoordsX" Content="0.0" Grid.Row="3" Grid.Column="0"/>
-                        <Label x:Name="CoordsY" Content="0.0" Grid.Row="4" Grid.Column="0"/>
-                        <Label x:Name="CoordsZ" Content="0.0" Grid.Row="5" Grid.Column="0"/>
+                        <Label x:Name="CoordsX" Content="0.0" Grid.Row="2" Grid.Column="0" Margin="14,4,0,0"/>
+                        <Label x:Name="CoordsY" Content="0.0" Grid.Row="3" Grid.Column="0" Margin="14,4,0,0"/>
+                        <Label x:Name="CoordsZ" Content="0.0" Grid.Row="4" Grid.Column="0" Margin="14,4,0,0"/>
+                        <Label Content="Enter coordinates or select a destination and click GO." Margin="124,0,117,0" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" />
 
-                        <Label Content="Enter coordinates or select a destination and click GO." Margin="0" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" />
+                        <Label Content="Some destinations may lock your game if they are too far." Margin="113,0,128,0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
 
-                        <Label Content="Some destinations may lock your game if they are too far." Margin="0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" />
+                        <Label Content="X" Margin="0,4,222,5" Grid.Row="2" Grid.Column="0" />
+                        <Label Content="Y" Margin="0,4,222,5" Grid.Row="3" Grid.Column="0" />
+                        <Label Content="Z" Margin="0,4,222,5" Grid.Row="4" Grid.Column="0" />
 
-                        <ComboBox x:Name="ShrineList" Margin="0" Grid.Row="2" Grid.Column="1" Width="150" SelectionChanged="ShrineListChanged" SelectedValuePath="Tag" HorizontalAlignment="Left" Text="Select Shrine..." IsEditable="True" IsReadOnly="True"/>
+                        <Label Content="X" Margin="0,0,222,10" Grid.Row="2" Grid.Column="1" />
+                        <Label Content="Y" Margin="80,0,133,10" Grid.Row="2" Grid.Column="1" />
+                        <Label Content="Z" Margin="158,0,59,10" Grid.Row="2" Grid.Column="1" />
 
-                        <ComboBox x:Name="TowerList" Margin="0" Grid.Row="2" Grid.Column="2" Width="150" SelectionChanged="TowerListChanged" SelectedValuePath="Tag" HorizontalAlignment="Left" Text="Select Tower..." IsEditable="True" IsReadOnly="True"/>
+                        <ComboBox x:Name="ShrineList" Grid.Row="3" Width="125" SelectionChanged="ShrineListChanged" SelectedValuePath="Tag" HorizontalAlignment="Left" Text="Select Shrine..." IsEditable="True" IsReadOnly="True" Grid.Column="1" Margin="0,6,0,6"/>
 
-                        <TextBox x:Name="CoordsXValue" Text="-568" Grid.Row="3" Grid.Column="1" Width="75" HorizontalAlignment="Left"/>
-                        <TextBox x:Name="CoordsYValue" Text="246" Grid.Row="4" Grid.Column="1" Width="75" HorizontalAlignment="Left"/>
-                        <TextBox x:Name="CoordsZValue" Text="1697" Grid.Row="5" Grid.Column="1" Width="75" HorizontalAlignment="Left"/>
-                        <Button Content="Go" Grid.Row="6" Grid.Column="1" Width="50" Click="CoordsGoClick" HorizontalAlignment="Left"/>
+                        <ComboBox x:Name="TowerList" Grid.Row="3" Width="125" SelectionChanged="TowerListChanged" SelectedValuePath="Tag" HorizontalAlignment="Left" Text="Select Tower..." IsEditable="True" IsReadOnly="True" Grid.Column="1" Margin="173,6,0,6" Grid.ColumnSpan="2"/>
+
+                        <ComboBox x:Name="RanchList" Grid.Row="4" Width="125" SelectionChanged="RanchListChanged" SelectedValuePath="Tag" HorizontalAlignment="Left" Text="Select Ranch..." IsEditable="True" IsReadOnly="True" Grid.Column="1" Margin="0,6,0,6" />
+
+                        <ComboBox x:Name="MiscList" Grid.Row="4" Width="125" SelectionChanged="MiscListChanged" SelectedValuePath="Tag" HorizontalAlignment="Left" Text="Select Location..." IsEditable="True" IsReadOnly="True" Grid.Column="1" Margin="173,6,0,6" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="CoordsXValue" Text="-568" Grid.Row="2" Grid.Column="1" Width="60" HorizontalAlignment="Left" Margin="20,4,00,10"/>
+                        <TextBox x:Name="CoordsYValue" Text="246" Grid.Row="2" Grid.Column="1" Width="60" HorizontalAlignment="Left" Margin="98,4,0,10"/>
+                        <TextBox x:Name="CoordsZValue" Text="1697" Grid.Row="2" Grid.Column="1" Width="60" HorizontalAlignment="Left" Margin="178,4,0,10"/>
+                        <Button Content="Go" Grid.Row="2" Grid.Column="1" Width="58" Click="CoordsGoClick" HorizontalAlignment="Left" Margin="256,4,0,10" Grid.ColumnSpan="2"/>
 
 
                     </Grid>

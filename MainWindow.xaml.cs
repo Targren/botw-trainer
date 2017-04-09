@@ -136,6 +136,20 @@
                         {
                             this.TowerList.Items.Add(new ComboBoxItem { Content = tower.Value["Name"], Tag = tower.Name });
                         }
+
+                        // Ranches
+                        var ranches = this.json.SelectToken("Ranches").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
+                        foreach (var ranch in ranches)
+                        {
+                            this.RanchList.Items.Add(new ComboBoxItem { Content = ranch.Value["Name"], Tag = ranch.Name });
+                        }
+
+                        // Misc
+                        var misc = this.json.SelectToken("Misc").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
+                        foreach (var m in misc)
+                        {
+                            this.MiscList.Items.Add(new ComboBoxItem { Content = m.Value["Name"], Tag = m.Name });
+                        }
                     }
                 }
             }
@@ -621,6 +635,7 @@
                                 CoordsX.Content = string.Format("{0}", Math.Round(xFloat, 2));
                                 CoordsY.Content = string.Format("{0}", Math.Round(yFloat, 2));
                                 CoordsZ.Content = string.Format("{0}", Math.Round(zFloat, 2));
+
                                 run = this.connected && EnableCoords.IsChecked == true;
                             });
 
@@ -632,7 +647,7 @@
                 Dispatcher.Invoke(() => this.LogError(ex, "Coords Tab"));
             }
         }
-
+                
         private void ConnectClick(object sender, RoutedEventArgs e)
         {
             try
@@ -1034,6 +1049,30 @@
             var tag = tower.Tag.ToString();
 
             var data = (JObject)this.json.SelectToken("Towers");
+
+            CoordsXValue.Text = data[tag]["LocX"].ToString();
+            CoordsYValue.Text = data[tag]["LocY"].ToString();
+            CoordsZValue.Text = data[tag]["LocZ"].ToString();
+        }
+
+        private void RanchListChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var ranch = (ComboBoxItem)RanchList.SelectedItem;
+            var tag = ranch.Tag.ToString();
+
+            var data = (JObject)this.json.SelectToken("Ranches");
+
+            CoordsXValue.Text = data[tag]["LocX"].ToString();
+            CoordsYValue.Text = data[tag]["LocY"].ToString();
+            CoordsZValue.Text = data[tag]["LocZ"].ToString();
+        }
+
+        private void MiscListChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var misc = (ComboBoxItem)MiscList.SelectedItem;
+            var tag = misc.Tag.ToString();
+
+            var data = (JObject)this.json.SelectToken("Misc");
 
             CoordsXValue.Text = data[tag]["LocX"].ToString();
             CoordsYValue.Text = data[tag]["LocY"].ToString();
