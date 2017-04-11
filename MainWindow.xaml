@@ -198,6 +198,9 @@
                     <Label Content="Inf Amiibo" Height="26" Canvas.Left="621" Canvas.Top="238" ToolTip="Infinite amiibo uses"/>
                     <CheckBox x:Name="Amiibo" Margin="0" Canvas.Left="751" Canvas.Top="244" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
 
+                    <Label Content="Immune / Abilities" Height="26" Canvas.Left="621" Canvas.Top="268" ToolTip="Heat Res. Cold Res. Flame Guard. Shock proof. Unfreezable. FireProof. Spin Atk. Waterfall climb"/>
+                    <CheckBox x:Name="Immune" Margin="0" Canvas.Left="751" Canvas.Top="274" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
+
                     <Button Content="Refresh Code Tab" Canvas.Top="455" Canvas.Left="10" Height="25" Margin="0" Click="RefreshCodeClick" Width="100" RenderTransformOrigin="-7.527,3.88"/>
                 </Canvas>
             </TabItem>
