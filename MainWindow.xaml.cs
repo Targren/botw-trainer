@@ -996,7 +996,12 @@
                 var result = e.Result;
                 if (result != Settings.Default.CurrentVersion)
                 {
-                    MessageBox.Show(string.Format("An update is available: {0}", result));
+                    MessageBoxResult choice = MessageBox.Show(string.Format("An update is available: {0}. Download?", result), "New Version", MessageBoxButton.OKCancel);
+
+                    if (choice == MessageBoxResult.OK)
+                    {
+                        Process.Start("https://github.com/joffnerd/botw-trainer/releases");
+                    }
                 }
             }
             catch (Exception)

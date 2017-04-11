@@ -3466,6 +3466,12 @@
       "LocX": 2970.15,
       "LocY": 117.93,
       "LocZ": 3377.87
+    },
+    "Akkala_Ancient_Tech_Lab": {
+      "Name": "Akkala Ancient Tech Lab",
+      "LocX": 4507,
+      "LocY": 352,
+      "LocZ": -3146
     }
   }
 }
