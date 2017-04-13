@@ -591,8 +591,8 @@
         {
             var hour = Convert.ToSingle(CurrentTime.Text) * 15;
 
-            var timePointer = this.gecko.GetUInt(0x407ABBF0);
-            this.gecko.WriteFloat(timePointer + 0x9C, hour);
+            var timePointer = this.gecko.GetUInt(0x407B3AF4);
+            this.gecko.WriteFloat(timePointer + 0xAC, hour);
         }
 
         private void LoadCoords()
@@ -898,8 +898,7 @@
 
             var damagePointer = this.gecko.GetUInt(0x43AB9C30);
             CbDamage.SelectedValue = this.gecko.GetString(damagePointer + 0x770);
-            //CbSpeed.SelectedValue = this.gecko.GetString(0x439C0514);
-            CbWeather.SelectedValue = this.gecko.GetString(0x407B5CE4);
+            CbWeather.SelectedValue = this.gecko.GetString(0x407B5CF0);
 
             var time = this.GetCurrentTime();
             CurrentTime.Text = time.ToString(CultureInfo.InvariantCulture);
@@ -1311,9 +1310,9 @@
         {
             try
             {
-                var timePointer = this.gecko.GetUInt(0x407ABBF0);
+                var timePointer = this.gecko.GetUInt(0x407B3AF4);
 
-                var time = this.gecko.GetFloat(timePointer + 0x98);
+                var time = this.gecko.GetFloat(timePointer + 0xA8);
 
                 var hour = Convert.ToInt32(time) / 15;
 

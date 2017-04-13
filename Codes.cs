@@ -469,7 +469,7 @@
                 var value = uint.Parse(this.mainWindow.CbWeather.SelectedValue.ToString(), NumberStyles.HexNumber);
 
                 codes.Add(0x00020000);
-                codes.Add(0x407B5CE4);
+                codes.Add(0x407B5CF0);
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
