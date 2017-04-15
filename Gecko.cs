@@ -20,7 +20,7 @@
             this.mainWindow = mainWindow;
             if (mainWindow.GetBufferSize.IsChecked == true)
             {
-                this.maximumMemoryChunkSize = this.ReadDataBufferSize();
+                maximumMemoryChunkSize = ReadDataBufferSize();
             }
         }
 
@@ -89,11 +89,11 @@
 
         public int GetOsVersion()
         {
-            this.SendCommand(Command.COMMAND_OS_VERSION);
+            SendCommand(Command.COMMAND_OS_VERSION);
 
             uint bytesRead = 0;
             var response = new byte[4];
-            this.tcpConn.Read(response, 4, ref bytesRead);
+            tcpConn.Read(response, 4, ref bytesRead);
 
             uint os;
 
@@ -103,17 +103,17 @@
             }
             catch (ArgumentOutOfRangeException argumentOutOfRangeException)
             {
-                this.mainWindow.LogError(argumentOutOfRangeException);
+                mainWindow.LogError(argumentOutOfRangeException);
                 return -1;
             }
             catch (ArgumentNullException argumentNullException)
             {
-                this.mainWindow.LogError(argumentNullException);
+                mainWindow.LogError(argumentNullException);
                 return -1;
             }
             catch (ArgumentException argumentException)
             {
-                this.mainWindow.LogError(argumentException);
+                mainWindow.LogError(argumentException);
                 return -1;
             }
 
@@ -122,11 +122,11 @@
 
         public string GetServerVersion()
         {
-            this.SendCommand(Command.COMMAND_SERVER_VERSION);
+            SendCommand(Command.COMMAND_SERVER_VERSION);
 
             uint bytesRead = 0;
             var response = new byte[4];
-            this.tcpConn.Read(response, 4, ref bytesRead);
+            tcpConn.Read(response, 4, ref bytesRead);
 
             uint length;
 
@@ -136,12 +136,12 @@
             }
             catch (ArgumentException argumentException)
             {
-                this.mainWindow.LogError(argumentException);
+                mainWindow.LogError(argumentException);
                 return string.Empty;
             }
 
             response = new byte[length];
-            this.tcpConn.Read(response, length, ref bytesRead);
+            tcpConn.Read(response, length, ref bytesRead);
 
             string server;
             try
@@ -150,7 +150,7 @@
             }
             catch (ArgumentException argumentException)
             {
-                this.mainWindow.LogError(argumentException);
+                mainWindow.LogError(argumentException);
                 return string.Empty;
             }
 
@@ -159,11 +159,11 @@
 
         public int GetServerStatus()
         {
-            this.SendCommand(Command.COMMAND_SERVER_STATUS);
+            SendCommand(Command.COMMAND_SERVER_STATUS);
 
             uint bytesRead = 0;
             var response = new byte[1];
-            this.tcpConn.Read(response, 1, ref bytesRead);
+            tcpConn.Read(response, 1, ref bytesRead);
 
             var status = response[0];
 
@@ -172,7 +172,7 @@
 
         public int GetInt(uint address)
         {
-            var bytes = this.ReadBytes(address, 0x4);
+            var bytes = ReadBytes(address, 0x4);
             int value;
 
             try
@@ -182,17 +182,17 @@
             }
             catch (ArgumentNullException argumentNullException)
             {
-                this.mainWindow.LogError(argumentNullException);
+                mainWindow.LogError(argumentNullException);
                 return -1;
             }
             catch (ArgumentException argumentException)
             {
-                this.mainWindow.LogError(argumentException);
+                mainWindow.LogError(argumentException);
                 return -1;
             }
             catch (RankException rankException)
             {
-                this.mainWindow.LogError(rankException);
+                mainWindow.LogError(rankException);
                 return -1;
             }
 
@@ -201,7 +201,7 @@
 
         public short GetShort(uint address)
         {
-            var bytes = this.ReadBytes(address, 0x2);
+            var bytes = ReadBytes(address, 0x2);
             short value;
 
             try
@@ -211,17 +211,17 @@
             }
             catch (ArgumentNullException argumentNullException)
             {
-                this.mainWindow.LogError(argumentNullException);
+                mainWindow.LogError(argumentNullException);
                 return -1;
             }
             catch (ArgumentException argumentException)
             {
-                this.mainWindow.LogError(argumentException);
+                mainWindow.LogError(argumentException);
                 return -1;
             }
             catch (RankException rankException)
             {
-                this.mainWindow.LogError(rankException);
+                mainWindow.LogError(rankException);
                 return -1;
             }
 
@@ -230,7 +230,7 @@
 
         public uint GetUInt(uint address)
         {
-            var bytes = this.ReadBytes(address, 0x4);
+            var bytes = ReadBytes(address, 0x4);
             uint value;
 
             try
@@ -240,17 +240,17 @@
             }
             catch (ArgumentNullException argumentNullException)
             {
-                this.mainWindow.LogError(argumentNullException);
+                mainWindow.LogError(argumentNullException);
                 return 1;
             }
             catch (ArgumentException argumentException)
             {
-                this.mainWindow.LogError(argumentException);
+                mainWindow.LogError(argumentException);
                 return 1;
             }
             catch (RankException rankException)
             {
-                this.mainWindow.LogError(rankException);
+                mainWindow.LogError(rankException);
                 return 1;
             }
 
@@ -259,7 +259,7 @@
 
         public float GetFloat(uint address)
         {
-            var bytes = this.ReadBytes(address, 0x4);
+            var bytes = ReadBytes(address, 0x4);
             float value;
 
             try
@@ -269,17 +269,17 @@
             }
             catch (ArgumentNullException argumentNullException)
             {
-                this.mainWindow.LogError(argumentNullException);
+                mainWindow.LogError(argumentNullException);
                 return 1;
             }
             catch (ArgumentException argumentException)
             {
-                this.mainWindow.LogError(argumentException);
+                mainWindow.LogError(argumentException);
                 return 1;
             }
             catch (RankException rankException)
             {
-                this.mainWindow.LogError(rankException);
+                mainWindow.LogError(rankException);
                 return 1;
             }
 
@@ -288,7 +288,7 @@
 
         public string GetString(uint address)
         {
-            var bytes = this.ReadBytes(address, 0x4);
+            var bytes = ReadBytes(address, 0x4);
             string value;
 
             try
@@ -297,7 +297,7 @@
             }
             catch (ArgumentException argumentException)
             {
-                this.mainWindow.LogError(argumentException);
+                mainWindow.LogError(argumentException);
                 return string.Empty;
             }
 
@@ -308,11 +308,11 @@
         {
             try
             {
-                this.RequestBytes(address, length);
+                RequestBytes(address, length);
 
                 uint bytesRead = 0;
                 var response = new byte[1];
-                this.tcpConn.Read(response, 1, ref bytesRead);
+                tcpConn.Read(response, 1, ref bytesRead);
 
                 var ms = new MemoryStream();
 
@@ -328,14 +328,14 @@
                     uint chunkSize = remainingBytesCount;
 
                     // Don't read more bytes than the remote buffer can hold
-                    if (chunkSize > this.maximumMemoryChunkSize)
+                    if (chunkSize > maximumMemoryChunkSize)
                     {
-                        chunkSize = this.maximumMemoryChunkSize;
+                        chunkSize = maximumMemoryChunkSize;
                     }
 
                     var buffer = new byte[chunkSize];
                     bytesRead = 0;
-                    this.tcpConn.Read(buffer, chunkSize, ref bytesRead);
+                    tcpConn.Read(buffer, chunkSize, ref bytesRead);
 
                     ms.Write(buffer, 0, (int)chunkSize);
 
@@ -346,7 +346,7 @@
             }
             catch (Exception ex)
             {
-                this.mainWindow.LogError(ex);
+                mainWindow.LogError(ex);
             }
 
             return null;
@@ -361,14 +361,14 @@
             }
             catch (ArgumentNullException argumentNullException)
             {
-                this.mainWindow.LogError(argumentNullException);
+                mainWindow.LogError(argumentNullException);
             }
             catch (RankException rankException)
             {
-                this.mainWindow.LogError(rankException);
+                mainWindow.LogError(rankException);
             }
 
-            this.WriteBytes(address, bytes);
+            WriteBytes(address, bytes);
         }
 
         public void WriteInt(uint address, int value)
@@ -380,14 +380,14 @@
             }
             catch (ArgumentNullException argumentNullException)
             {
-                this.mainWindow.LogError(argumentNullException);
+                mainWindow.LogError(argumentNullException);
             }
             catch (RankException rankException)
             {
-                this.mainWindow.LogError(rankException);
+                mainWindow.LogError(rankException);
             }
 
-            this.WriteBytes(address, bytes);
+            WriteBytes(address, bytes);
         }
 
         public void WriteShort(uint address, short value)
@@ -399,14 +399,14 @@
             }
             catch (ArgumentNullException argumentNullException)
             {
-                this.mainWindow.LogError(argumentNullException);
+                mainWindow.LogError(argumentNullException);
             }
             catch (RankException rankException)
             {
-                this.mainWindow.LogError(rankException);
+                mainWindow.LogError(rankException);
             }
 
-            this.WriteBytes(address, bytes);
+            WriteBytes(address, bytes);
         }
 
         public void WriteFloat(uint address, float value)
@@ -418,20 +418,20 @@
             }
             catch (ArgumentNullException argumentNullException)
             {
-                this.mainWindow.LogError(argumentNullException);
+                mainWindow.LogError(argumentNullException);
             }
             catch (RankException rankException)
             {
-                this.mainWindow.LogError(rankException);
+                mainWindow.LogError(rankException);
             }
 
-            this.WriteBytes(address, bytes);
+            WriteBytes(address, bytes);
         }
 
         public void WriteBytes(uint address, byte[] bytes)
         {
-            var partitionedBytes = Partition(bytes, this.maximumMemoryChunkSize);
-            this.WritePartitionedBytes(address, partitionedBytes);
+            var partitionedBytes = Partition(bytes, maximumMemoryChunkSize);
+            WritePartitionedBytes(address, partitionedBytes);
         }
 
         private static IEnumerable<byte[]> Partition(byte[] bytes, uint chunkSize)
@@ -460,24 +460,24 @@
         private void SendCommand(Command command)
         {
             uint bytesWritten = 0;
-            this.tcpConn.Write(new[] { (byte)command }, 1, ref bytesWritten);
+            tcpConn.Write(new[] { (byte)command }, 1, ref bytesWritten);
         }
 
         private void RequestBytes(uint address, uint length)
         {
             try
             {
-                this.SendCommand(Command.COMMAND_READ_MEMORY);
+                SendCommand(Command.COMMAND_READ_MEMORY);
 
                 uint bytesRead = 0;
                 var bytes = BitConverter.GetBytes(ByteSwap.Swap(address));
                 var bytes2 = BitConverter.GetBytes(ByteSwap.Swap(address + length));
-                this.tcpConn.Write(bytes, 4, ref bytesRead);
-                this.tcpConn.Write(bytes2, 4, ref bytesRead);
+                tcpConn.Write(bytes, 4, ref bytesRead);
+                tcpConn.Write(bytes2, 4, ref bytesRead);
             }
             catch (Exception ex)
             {
-                this.mainWindow.LogError(ex);
+                mainWindow.LogError(ex);
             }
         }
 
@@ -488,20 +488,20 @@
             
             try
             {
-                this.SendCommand(Command.COMMAND_UPLOAD_MEMORY);
+                SendCommand(Command.COMMAND_UPLOAD_MEMORY);
 
                 uint bytesRead = 0;
                 var start = BitConverter.GetBytes(ByteSwap.Swap(address));
                 var end = BitConverter.GetBytes(ByteSwap.Swap(address + length));
 
-                this.tcpConn.Write(start, 4, ref bytesRead);
-                this.tcpConn.Write(end, 4, ref bytesRead);
+                tcpConn.Write(start, 4, ref bytesRead);
+                tcpConn.Write(end, 4, ref bytesRead);
 
-                enumerable.Aggregate(address, this.UploadBytes);
+                enumerable.Aggregate(address, UploadBytes);
             }
             catch (Exception ex)
             {
-                this.mainWindow.LogError(ex);
+                mainWindow.LogError(ex);
             }
         }
         
@@ -511,18 +511,18 @@
 
             uint endAddress = address + (uint)bytes.Length;
             uint bytesRead = 0;
-            this.tcpConn.Write(bytes, length, ref bytesRead);
+            tcpConn.Write(bytes, length, ref bytesRead);
             
             return endAddress;
         }
         
         private uint ReadDataBufferSize()
         {
-            this.SendCommand(Command.COMMAND_GET_DATA_BUFFER_SIZE);
+            SendCommand(Command.COMMAND_GET_DATA_BUFFER_SIZE);
 
             uint bytesRead = 0;
             var response = new byte[4];
-            this.tcpConn.Read(response, 4, ref bytesRead);
+            tcpConn.Read(response, 4, ref bytesRead);
 
             Array.Reverse(response);
             var bufferSize = BitConverter.ToUInt32(response, 0);
@@ -540,7 +540,7 @@
             }
             catch (OverflowException overflowException)
             {
-                this.mainWindow.LogError(overflowException);
+                mainWindow.LogError(overflowException);
                 return string.Empty;
             }
 

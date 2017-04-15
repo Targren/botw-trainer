@@ -64,16 +64,16 @@
 
         public MainWindow()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.Loaded += this.MainWindowLoaded;
+            Loaded += MainWindowLoaded;
         }
 
         private bool HasChanged
         {
             get
             {
-                return this.tbChanged.Any() || this.cbChanged.Any() || this.ddChanged.Any();
+                return tbChanged.Any() || cbChanged.Any() || ddChanged.Any();
             }
         }
 
@@ -82,11 +82,11 @@
             // Testing
             // this.TabControl.IsEnabled = true;
 
-            this.Title = string.Format("{0} v{1}", this.Title, Settings.Default.CurrentVersion);
+            Title = string.Format("{0} v{1}", Title, Settings.Default.CurrentVersion);
 
-            this.items = new List<Item>();
+            items = new List<Item>();
 
-            this.codes = new Codes(this);
+            codes = new Codes(this);
 
             var client = new WebClient
             {
@@ -98,7 +98,7 @@
             };
 
             client.Headers.Add("Cache-Control", "no-cache");
-            client.DownloadStringCompleted += this.ClientDownloadStringCompleted;
+            client.DownloadStringCompleted += ClientDownloadStringCompleted;
 
             // try to get current version
             try
@@ -107,7 +107,7 @@
             }
             catch (Exception ex)
             {
-                this.LogError(ex, "Error loading current version.");
+                LogError(ex, "Error loading current version.");
             }
 
             // try to load json data
@@ -119,48 +119,48 @@
                     using (var reader = new StreamReader(file))
                     {
                         var data = reader.ReadToEnd();
-                        this.json = JObject.Parse(data);
+                        json = JObject.Parse(data);
 
-                        this.JsonViewer.Load(data);
+                        JsonViewer.Load(data);
 
                         // Shrine data
-                        var shrines = this.json.SelectToken("Shrines").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
+                        var shrines = json.SelectToken("Shrines").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
                         foreach (var shrine in shrines)
                         {
-                            this.ShrineList.Items.Add(new ComboBoxItem { Content = shrine.Value["Name"], Tag = shrine.Name });
+                            ShrineList.Items.Add(new ComboBoxItem { Content = shrine.Value["Name"], Tag = shrine.Name });
                         }
 
                         // Tower data
-                        var towers = this.json.SelectToken("Towers").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
+                        var towers = json.SelectToken("Towers").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
                         foreach (var tower in towers)
                         {
-                            this.TowerList.Items.Add(new ComboBoxItem { Content = tower.Value["Name"], Tag = tower.Name });
+                            TowerList.Items.Add(new ComboBoxItem { Content = tower.Value["Name"], Tag = tower.Name });
                         }
 
                         // Ranches
-                        var ranches = this.json.SelectToken("Ranches").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
+                        var ranches = json.SelectToken("Ranches").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
                         foreach (var ranch in ranches)
                         {
-                            this.RanchList.Items.Add(new ComboBoxItem { Content = ranch.Value["Name"], Tag = ranch.Name });
+                            RanchList.Items.Add(new ComboBoxItem { Content = ranch.Value["Name"], Tag = ranch.Name });
                         }
 
                         // Misc
-                        var misc = this.json.SelectToken("Misc").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
+                        var misc = json.SelectToken("Misc").Value<JObject>().Properties().ToList().OrderBy(x => x.Name);
                         foreach (var m in misc)
                         {
-                            this.MiscList.Items.Add(new ComboBoxItem { Content = m.Value["Name"], Tag = m.Name });
+                            MiscList.Items.Add(new ComboBoxItem { Content = m.Value["Name"], Tag = m.Name });
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                this.LogError(ex, "Error loading json.");
+                LogError(ex, "Error loading json.");
             }
 
             IpAddress.Text = Settings.Default.IpAddress;
 
-            this.Save.IsEnabled = this.HasChanged;
+            Save.IsEnabled = HasChanged;
         }
 
         private bool LoadData()
@@ -171,18 +171,19 @@
 
                 //this.itemStart = this.gecko.GetUInt(0x43C6B064) + 0x8;
 
-                this.itemTotal = this.gecko.GetInt(0x43C6B06C);
+                itemTotal = gecko.GetInt(0x43C6B06C);
 
                 var currentItemAddress = ItemEnd;
 
-                for (var x = 1; x <= this.itemTotal; x++)
+                for (var x = 1; x <= itemTotal; x++)
                 {
-                    var itemData = this.gecko.ReadBytes(currentItemAddress, 0x70);
+                    var itemData = gecko.ReadBytes(currentItemAddress, 0x70);
 
                     var page = BitConverter.ToInt32(itemData.Take(4).Skip(0).Reverse().ToArray(), 0);
                     if (page < 0 || page > 9)
                     {
                         currentItemAddress -= 0x220;
+                        x = x - 1;
                         continue;
                     }
 
@@ -202,6 +203,7 @@
                     if (string.IsNullOrWhiteSpace(id))
                     {
                         currentItemAddress -= 0x220;
+                        x = x - 1;
                         continue;
                     }
 
@@ -221,25 +223,25 @@
                                        Current = current,
                                        NameStart = nameStart,
                                        Id = id,
-                                       Modifier1Value = this.gecko.ByteToHexBitFiddle(itemData.Skip(92).Take(4).ToArray()),
-                                       Modifier2Value = this.gecko.ByteToHexBitFiddle(itemData.Skip(96).Take(4).ToArray()),
-                                       Modifier3Value = this.gecko.ByteToHexBitFiddle(itemData.Skip(100).Take(4).ToArray()),
-                                       Modifier4Value = this.gecko.ByteToHexBitFiddle(itemData.Skip(104).Take(4).ToArray()),
-                                       Modifier5Value = this.gecko.ByteToHexBitFiddle(itemData.Skip(108).Take(4).ToArray())
+                                       Modifier1Value = gecko.ByteToHexBitFiddle(itemData.Skip(92).Take(4).ToArray()),
+                                       Modifier2Value = gecko.ByteToHexBitFiddle(itemData.Skip(96).Take(4).ToArray()),
+                                       Modifier3Value = gecko.ByteToHexBitFiddle(itemData.Skip(100).Take(4).ToArray()),
+                                       Modifier4Value = gecko.ByteToHexBitFiddle(itemData.Skip(104).Take(4).ToArray()),
+                                       Modifier5Value = gecko.ByteToHexBitFiddle(itemData.Skip(108).Take(4).ToArray())
                                    };
 
                     // look for name in json
-                    var name = this.GetNameFromId(item.Id, item.PageName);
+                    var name = GetNameFromId(item.Id, item.PageName);
                     item.Name = name;
 
-                    this.items.Add(item);
+                    items.Add(item);
 
-                    var currentPercent = (100m / this.itemTotal) * x;
+                    var currentPercent = (100m / itemTotal) * x;
                     Dispatcher.Invoke(
                         () =>
                             {
-                                ProgressText.Text = string.Format("{0}/{1}", x, this.itemTotal);
-                                this.UpdateProgress(Convert.ToInt32(currentPercent));
+                                ProgressText.Text = string.Format("{0}/{1}", x, itemTotal);
+                                UpdateProgress(Convert.ToInt32(currentPercent));
                             });
 
                     currentItemAddress -= 0x220;
@@ -249,7 +251,7 @@
             }
             catch (Exception ex)
             {
-                Dispatcher.Invoke(() => this.LogError(ex));
+                Dispatcher.Invoke(() => LogError(ex));
                 return false;
             }
         }
@@ -259,7 +261,7 @@
             // Clear old errors
             ErrorLog.Document.Blocks.Clear();
 
-            if (!this.HasChanged)
+            if (!HasChanged)
             {
                 // Nothing to update
                 return false;
@@ -269,70 +271,70 @@
             try
             {
                 // For these we amend the 0x3FCE7FF0 area which requires save/load
-                if (Equals(tab, this.Weapons) || Equals(tab, this.Bows) || Equals(tab, this.Shields)
-                    || Equals(tab, this.Armor))
+                if (Equals(tab, Weapons) || Equals(tab, Bows) || Equals(tab, Shields)
+                    || Equals(tab, Armor))
                 {
-                    var weaponList = this.items.Where(x => x.Page == 0).ToList();
-                    var bowList = this.items.Where(x => x.Page == 1).ToList();
-                    var arrowList = this.items.Where(x => x.Page == 2).ToList();
-                    var shieldList = this.items.Where(x => x.Page == 3).ToList();
-                    var armorList = this.items.Where(x => x.Page == 4 || x.Page == 5 || x.Page == 6).ToList();
+                    var weaponList = items.Where(x => x.Page == 0).ToList();
+                    var bowList = items.Where(x => x.Page == 1).ToList();
+                    var arrowList = items.Where(x => x.Page == 2).ToList();
+                    var shieldList = items.Where(x => x.Page == 3).ToList();
+                    var armorList = items.Where(x => x.Page == 4 || x.Page == 5 || x.Page == 6).ToList();
 
                     var y = 0;
-                    if (Equals(tab, this.Weapons))
+                    if (Equals(tab, Weapons))
                     {
                         foreach (var item in weaponList)
                         {
-                            var foundTextBox = (TextBox)this.FindName("Value_" + item.ValueAddressHex);
+                            var foundTextBox = (TextBox)FindName("Value_" + item.ValueAddressHex);
                             if (foundTextBox != null)
                             {
                                 var offset = (uint)(SaveItemStart + (y * 0x8));
-                                this.gecko.WriteUInt(offset, Convert.ToUInt32(foundTextBox.Text));
+                                gecko.WriteUInt(offset, Convert.ToUInt32(foundTextBox.Text));
                             }
 
                             y++;
                         }
                     }
 
-                    if (Equals(tab, this.Bows))
+                    if (Equals(tab, Bows))
                     {
                         // jump past weapons before we start
                         y += weaponList.Count;
 
                         foreach (var item in bowList)
                         {
-                            var foundTextBox = (TextBox)this.FindName("Value_" + item.ValueAddressHex);
+                            var foundTextBox = (TextBox)FindName("Value_" + item.ValueAddressHex);
                             if (foundTextBox != null)
                             {
                                 var offset = (uint)(SaveItemStart + (y * 0x8));
 
-                                this.gecko.WriteUInt(offset, Convert.ToUInt32(foundTextBox.Text));
+                                gecko.WriteUInt(offset, Convert.ToUInt32(foundTextBox.Text));
                             }
 
                             y++;
                         }
                     }
 
-                    if (Equals(tab, this.Shields))
+                    if (Equals(tab, Shields))
                     {
                         // jump past weapons/bows/arrows before we start
                         y += weaponList.Count + bowList.Count + arrowList.Count;
 
                         foreach (var item in shieldList)
                         {
-                            var foundTextBox = (TextBox)this.FindName("Value_" + item.ValueAddressHex);
+                            var foundTextBox = (TextBox)FindName("Value_" + item.ValueAddressHex);
                             if (foundTextBox != null)
                             {
                                 var offset = (uint)(SaveItemStart + (y * 0x8));
 
-                                this.gecko.WriteUInt(offset, Convert.ToUInt32(foundTextBox.Text));
+                                gecko.WriteUInt(offset, Convert.ToUInt32(foundTextBox.Text));
                             }
 
                             y++;
                         }
                     }
 
-                    if (Equals(tab, this.Armor))
+                    if (Equals(tab, Armor))
                     {
                         // jump past weapons/bows/arrows/shields before we start
                         y += weaponList.Count + bowList.Count + arrowList.Count + shieldList.Count;
@@ -341,10 +343,10 @@
                         {
                             var offset = (uint)(SaveItemStart + (y * 0x8));
 
-                            var foundTextBox = (TextBox)this.FindName("Value_" + item.ValueAddressHex);
+                            var foundTextBox = (TextBox)FindName("Value_" + item.ValueAddressHex);
                             if (foundTextBox != null)
                             {
-                                this.gecko.WriteUInt(offset, Convert.ToUInt32(foundTextBox.Text));
+                                gecko.WriteUInt(offset, Convert.ToUInt32(foundTextBox.Text));
                             }
 
                             y++;
@@ -354,7 +356,7 @@
             }
             catch (Exception ex)
             {
-                this.LogError(ex, "Attempting to save data in 0x3FCE7FF0 region.");
+                LogError(ex, "Attempting to save data in 0x3FCE7FF0 region.");
             }
             #endregion
 
@@ -362,7 +364,7 @@
             try
             {
                 // Only update what has changed to avoid corruption.
-                foreach (var tb in this.tbChanged)
+                foreach (var tb in tbChanged)
                 {
                     if (string.IsNullOrEmpty(tb.Text))
                     {
@@ -378,7 +380,7 @@
                         var newName = Encoding.Default.GetBytes(tb.Text);
 
                         var address = uint.Parse(tag.ToString(), NumberStyles.HexNumber);
-                        var thisItem = this.items.Single(i => i.NameStart == address);
+                        var thisItem = items.Single(i => i.NameStart == address);
 
                         // clear current name
                         var zeros = new byte[36];
@@ -387,22 +389,22 @@
                             zeros[i] = 0x0;
                         }
 
-                        this.gecko.WriteBytes(address, zeros);
+                        gecko.WriteBytes(address, zeros);
 
                         uint x = 0x0;
                         foreach (var b in newName)
                         {
-                            this.gecko.WriteBytes(address + x, new[] { b });
+                            gecko.WriteBytes(address + x, new[] { b });
                             x = x + 0x1;
                         }
 
                         thisItem.Id = tb.Text;
 
                         // Name
-                        var foundTextBox = (TextBox)this.FindName("JsonName_" + tag);
+                        var foundTextBox = (TextBox)FindName("JsonName_" + tag);
                         if (foundTextBox != null)
                         {
-                            foundTextBox.Text = this.GetNameFromId(thisItem.Id, thisItem.PageName);
+                            foundTextBox.Text = GetNameFromId(thisItem.Id, thisItem.PageName);
                         }
                     }
 
@@ -413,7 +415,7 @@
                         bool parsed = int.TryParse(tb.Text, out val);
                         if (parsed)
                         {
-                            this.gecko.WriteUInt(address, Convert.ToUInt32(val));
+                            gecko.WriteUInt(address, Convert.ToUInt32(val));
                         }
                     }
 
@@ -424,7 +426,7 @@
                         bool parsed = int.TryParse(tb.Text, out val);
                         if (parsed && val < 10 && val >= 0)
                         {
-                            this.gecko.WriteUInt(address, Convert.ToUInt32(val));
+                            gecko.WriteUInt(address, Convert.ToUInt32(val));
                         }
                     }
 
@@ -435,14 +437,14 @@
                         bool parsed = uint.TryParse(tb.Text, NumberStyles.HexNumber, CultureInfo.CurrentCulture, out val);
                         if (parsed)
                         {
-                            this.gecko.WriteUInt(address, val);
+                            gecko.WriteUInt(address, val);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                this.LogError(ex, "Attempting to update changed fields");
+                LogError(ex, "Attempting to update changed fields");
             }
             #endregion
 
@@ -450,17 +452,17 @@
             try
             {
                 // For the 'Codes' tab we mimic JGecko and send cheats to codehandler
-                if (Equals(tab, this.Codes))
+                if (Equals(tab, Codes))
                 {
                     // Disable codehandler before we modify
-                    this.gecko.WriteUInt(CodeHandlerEnabled, 0x00000000);
+                    gecko.WriteUInt(CodeHandlerEnabled, 0x00000000);
 
                     // clear current codes
                     var array = new byte[4864];
                     Array.Clear(array, 0, array.Length);
-                    this.gecko.WriteBytes(CodeHandlerStart, array);
+                    gecko.WriteBytes(CodeHandlerStart, array);
 
-                    var codelist = this.codes.CreateCodeList();
+                    var codelist = codes.CreateCodeList();
 
                     // Write our selected codes to mem stream
                     var ms = new MemoryStream();
@@ -471,10 +473,10 @@
                     }
 
                     var bytes = ms.ToArray();
-                    this.gecko.WriteBytes(CodeHandlerStart, bytes);
+                    gecko.WriteBytes(CodeHandlerStart, bytes);
 
                     // Re-enable codehandler
-                    this.gecko.WriteUInt(CodeHandlerEnabled, 0x00000001);
+                    gecko.WriteUInt(CodeHandlerEnabled, 0x00000001);
 
                     // Save controller choice
                     if (Controller.SelectedValue.ToString() != Settings.Default.Controller)
@@ -484,18 +486,18 @@
                     }
                 }
 
-                DebugGrid.ItemsSource = this.items;
+                DebugGrid.ItemsSource = items;
                 DebugGrid.UpdateLayout();
                 Debug.UpdateLayout();
 
                 // clear changed after save
-                this.tbChanged.Clear();
-                this.cbChanged.Clear();
-                this.ddChanged.Clear();
+                tbChanged.Clear();
+                cbChanged.Clear();
+                ddChanged.Clear();
             }
             catch (Exception ex)
             {
-                this.LogError(ex);
+                LogError(ex);
             }
             #endregion
 
@@ -504,59 +506,59 @@
 
         private async void EnableCoordsOnChecked(object sender, RoutedEventArgs e)
         {
-            await Task.Run(() => this.LoadCoords());
+            await Task.Run(() => LoadCoords());
         }
 
         private async void LoadClick(object sender, RoutedEventArgs e)
         {
-            this.ToggleControls("Load");
+            ToggleControls("Load");
 
-            this.items.Clear();
+            items.Clear();
 
             try
             {
                 // talk to wii u and get mem dump of data
-                var result = await Task.Run(() => this.LoadData());
+                var result = await Task.Run(() => LoadData());
 
                 if (result)
                 {
-                    this.GetNonItemData();
+                    GetNonItemData();
 
-                    this.LoadTab(this.Weapons, 0);
-                    this.LoadTab(this.Bows, 1);
-                    this.LoadTab(this.Arrows, 2);
-                    this.LoadTab(this.Shields, 3);
-                    this.LoadTab(this.Armor, 4);
-                    this.LoadTab(this.Materials, 7);
-                    this.LoadTab(this.Food, 8);
-                    this.LoadTab(this.KeyItems, 9);
+                    LoadTab(Weapons, 0);
+                    LoadTab(Bows, 1);
+                    LoadTab(Arrows, 2);
+                    LoadTab(Shields, 3);
+                    LoadTab(Armor, 4);
+                    LoadTab(Materials, 7);
+                    LoadTab(Food, 8);
+                    LoadTab(KeyItems, 9);
 
-                    this.Notification.Content = string.Format("Items found: {0}", this.itemTotal);
+                    Notification.Content = string.Format("Items found: {0}", itemTotal);
 
-                    this.ToggleControls("DataLoaded");
+                    ToggleControls("DataLoaded");
 
-                    this.cbChanged.Clear();
-                    this.tbChanged.Clear();
-                    this.ddChanged.Clear();
+                    cbChanged.Clear();
+                    tbChanged.Clear();
+                    ddChanged.Clear();
 
-                    this.Save.IsEnabled = this.HasChanged;
+                    Save.IsEnabled = HasChanged;
 
-                    DebugGrid.ItemsSource = this.items;
+                    DebugGrid.ItemsSource = items;
                     DebugGrid.UpdateLayout();
                     Debug.UpdateLayout();
                 }
             }
             catch (Exception ex)
             {
-                this.LogError(ex, "Load Data");
+                LogError(ex, "Load Data");
             }
         }
 
         private void SaveClick(object sender, RoutedEventArgs e)
         {
-            this.Save.IsEnabled = false;
+            Save.IsEnabled = false;
 
-            var result = this.SaveData((TabItem)TabControl.SelectedItem);
+            var result = SaveData((TabItem)TabControl.SelectedItem);
 
             if (!result)
             {
@@ -581,18 +583,18 @@
 
             var bytes = ms.ToArray();
 
-            var pointer = this.gecko.GetUInt(0x439C0794);
+            var pointer = gecko.GetUInt(0x439C0794);
             var address = pointer + 0x140;
 
-            this.gecko.WriteBytes(address, bytes);
+            gecko.WriteBytes(address, bytes);
         }
 
         private void ChangeTimeClick(object sender, RoutedEventArgs e)
         {
             var hour = Convert.ToSingle(CurrentTime.Text) * 15;
 
-            var timePointer = this.gecko.GetUInt(0x407B3AF4);
-            this.gecko.WriteFloat(timePointer + 0xAC, hour);
+            var timePointer = gecko.GetUInt(0x407B3AF4);
+            gecko.WriteFloat(timePointer + 0xAC, hour);
         }
 
         private void LoadCoords()
@@ -601,19 +603,19 @@
 
             try
             {
-                var pointer = this.gecko.GetUInt(0x439C0794);
+                var pointer = gecko.GetUInt(0x439C0794);
                 var address = pointer + 0x140;
 
                 Dispatcher.Invoke(
                     () =>
                     {
-                        run = this.connected && EnableCoords.IsChecked == true;
+                        run = connected && EnableCoords.IsChecked == true;
                         CoordsAddress.Content = "0x" + address.ToString("x8").ToUpper() + " <- Memory Address";
                     });
 
                 while (run)
                 {
-                    var coords = this.gecko.ReadBytes(address, 0xC);
+                    var coords = gecko.ReadBytes(address, 0xC);
 
                     if (!coords.Any())
                     {
@@ -636,7 +638,7 @@
                                 CoordsY.Content = string.Format("{0}", Math.Round(yFloat, 2));
                                 CoordsZ.Content = string.Format("{0}", Math.Round(zFloat, 2));
 
-                                run = this.connected && EnableCoords.IsChecked == true;
+                                run = connected && EnableCoords.IsChecked == true;
                             });
 
                     Thread.Sleep(1000);
@@ -644,7 +646,7 @@
             }
             catch (Exception ex)
             {
-                Dispatcher.Invoke(() => this.LogError(ex, "Coords Tab"));
+                Dispatcher.Invoke(() => LogError(ex, "Coords Tab"));
             }
         }
                 
@@ -652,45 +654,45 @@
         {
             try
             {
-                this.tcpConn = new TcpConn(this.IpAddress.Text, 7331);
-                this.connected = this.tcpConn.Connect();
+                tcpConn = new TcpConn(IpAddress.Text, 7331);
+                connected = tcpConn.Connect();
 
-                if (!this.connected)
+                if (!connected)
                 {
-                    this.LogError(new Exception("Failed to connect"));
+                    LogError(new Exception("Failed to connect"));
                     return;
                 }
 
                 // init gecko
-                this.gecko = new Gecko(this.tcpConn, this);
+                gecko = new Gecko(tcpConn, this);
 
-                if (this.connected)
+                if (connected)
                 {
-                    var status = this.gecko.GetServerStatus();
+                    var status = gecko.GetServerStatus();
                     if (status == 0)
                     {
                         return;
                     }
 
-                    this.GetNonItemData();
+                    GetNonItemData();
 
                     Settings.Default.IpAddress = IpAddress.Text;
                     Settings.Default.Save();
 
                     Controller.SelectedValue = Settings.Default.Controller;
 
-                    this.ToggleControls("Connected");
+                    ToggleControls("Connected");
                 }
             }
             catch (System.Net.Sockets.SocketException)
             {
-                this.connected = false;
+                connected = false;
 
                 MessageBox.Show("Wrong IP");
             }
             catch (Exception ex)
             {
-                this.LogError(ex);
+                LogError(ex);
             }
         }
 
@@ -698,9 +700,9 @@
         {
             try
             {
-                this.tcpConn.Close();
+                tcpConn.Close();
 
-                this.ToggleControls("Disconnected");
+                ToggleControls("Disconnected");
             }
             catch (Exception ex)
             {
@@ -733,15 +735,15 @@
 
         private void TestClick(object sender, RoutedEventArgs e)
         {
-            var server = this.gecko.GetServerVersion();
-            var os = this.gecko.GetOsVersion();
+            var server = gecko.GetServerVersion();
+            var os = gecko.GetOsVersion();
 
             MessageBox.Show(string.Format("Server: {0}\nOs: {1}", server, os));
         }
 
         private void RefreshCodeClick(object sender, RoutedEventArgs e)
         {
-            this.GetNonItemData();
+            GetNonItemData();
         }
 
         private void LoadTab(ContentControl tab, int page)
@@ -751,14 +753,14 @@
             var holder = new WrapPanel { Margin = new Thickness(0), VerticalAlignment = VerticalAlignment.Top };
 
             // setup grid
-            var grid = this.GenerateTabGrid(tab.Name);
+            var grid = GenerateTabGrid(tab.Name);
 
             var x = 1;
-            var list = this.items.Where(i => i.Page == page).OrderBy(i => i.Name);
+            var list = items.Where(i => i.Page == page).OrderBy(i => i.Name);
 
             if (page == 4)
             {
-                list = this.items.Where(i => i.Page == 4 || i.Page == 5 || i.Page == 6).OrderBy(i => i.Name);
+                list = items.Where(i => i.Page == 4 || i.Page == 5 || i.Page == 6).OrderBy(i => i.Name);
             }
 
             foreach (var item in list)
@@ -778,13 +780,13 @@
                 };
 
                 // we register the name so we can update it later without having to refresh
-                var check = (TextBox)this.FindName("JsonName_" + item.NameStartHex);
+                var check = (TextBox)FindName("JsonName_" + item.NameStartHex);
                 if (check != null)
                 {
-                    this.UnregisterName("JsonName_" + item.NameStartHex);
+                    UnregisterName("JsonName_" + item.NameStartHex);
                 }
 
-                this.RegisterName("JsonName_" + item.NameStartHex, name);
+                RegisterName("JsonName_" + item.NameStartHex, name);
 
                 // Id
                 var id = new TextBox
@@ -799,15 +801,15 @@
                     Name = "Id_" + item.NameStartHex
                 };
 
-                id.TextChanged += this.TextChanged;
+                id.TextChanged += TextChanged;
 
-                check = (TextBox)this.FindName("Id_" + item.NameStartHex);
+                check = (TextBox)FindName("Id_" + item.NameStartHex);
                 if (check != null)
                 {
-                    this.UnregisterName("Id_" + item.NameStartHex);
+                    UnregisterName("Id_" + item.NameStartHex);
                 }
 
-                this.RegisterName("Id_" + item.NameStartHex, id);
+                RegisterName("Id_" + item.NameStartHex, id);
 
                 // Current item is red
                 if (item.Equipped)
@@ -832,33 +834,33 @@
                     value = 0;
                 }
 
-                var val = this.GenerateGridTextBox(value.ToString(CultureInfo.InvariantCulture), item.ValueAddressHex, "Value_", x, 2, 70);
-                val.PreviewTextInput += this.NumberValidationTextBox;
+                var val = GenerateGridTextBox(value.ToString(CultureInfo.InvariantCulture), item.ValueAddressHex, "Value_", x, 2, 70);
+                val.PreviewTextInput += NumberValidationTextBox;
                 grid.Children.Add(val);
 
                 // Page
-                var pgtb = this.GenerateGridTextBox(item.Page.ToString(CultureInfo.InvariantCulture), item.BaseAddressHex, "Page_", x, 3, 20);
-                pgtb.PreviewTextInput += this.NumberValidationTextBox;
+                var pgtb = GenerateGridTextBox(item.Page.ToString(CultureInfo.InvariantCulture), item.BaseAddressHex, "Page_", x, 3, 20);
+                pgtb.PreviewTextInput += NumberValidationTextBox;
                 grid.Children.Add(pgtb);
 
                 // Mod1
-                var mtb1 = this.GenerateGridTextBox(item.Modifier1Value, item.Modifier1Address, "Mod_", x, 4, 70);
+                var mtb1 = GenerateGridTextBox(item.Modifier1Value, item.Modifier1Address, "Mod_", x, 4, 70);
                 grid.Children.Add(mtb1);
 
                 // Mod2
-                var mtb2 = this.GenerateGridTextBox(item.Modifier2Value, item.Modifier2Address, "Mod_", x, 5, 70);
+                var mtb2 = GenerateGridTextBox(item.Modifier2Value, item.Modifier2Address, "Mod_", x, 5, 70);
                 grid.Children.Add(mtb2);
 
                 // Mod3s
-                var mtb3 = this.GenerateGridTextBox(item.Modifier3Value, item.Modifier3Address, "Mod_", x, 6, 70);
+                var mtb3 = GenerateGridTextBox(item.Modifier3Value, item.Modifier3Address, "Mod_", x, 6, 70);
                 grid.Children.Add(mtb3);
 
                 // Mod4
-                var mtb4 = this.GenerateGridTextBox(item.Modifier4Value, item.Modifier4Address, "Mod_", x, 7, 70);
+                var mtb4 = GenerateGridTextBox(item.Modifier4Value, item.Modifier4Address, "Mod_", x, 7, 70);
                 grid.Children.Add(mtb4);
 
                 // Mod5
-                var mtb5 = this.GenerateGridTextBox(item.Modifier5Value, item.Modifier5Address, "Mod_", x, 8, 70);
+                var mtb5 = GenerateGridTextBox(item.Modifier5Value, item.Modifier5Address, "Mod_", x, 8, 70);
                 grid.Children.Add(mtb5);
 
                 x++;
@@ -887,98 +889,98 @@
         private void GetNonItemData()
         {
             // Code Tab Values
-            CurrentStamina.Text = this.gecko.GetString(0x4243A598);
-            var healthPointer = this.gecko.GetUInt(0x4225C780);
-            CurrentHealth.Text = this.gecko.GetInt(healthPointer + 0x388).ToString(CultureInfo.InvariantCulture);
-            CurrentRupees.Text = this.gecko.GetInt(0x4010BA4C).ToString(CultureInfo.InvariantCulture);
-            CurrentMon.Text = this.gecko.GetInt(0x4010C18C).ToString(CultureInfo.InvariantCulture);
-            CurrentWeaponSlots.Text = this.gecko.GetInt(0x4010C38C).ToString(CultureInfo.InvariantCulture);
-            CurrentBowSlots.Text = this.gecko.GetInt(0x401122AC).ToString(CultureInfo.InvariantCulture);
-            CurrentShieldSlots.Text = this.gecko.GetInt(0x401122CC).ToString(CultureInfo.InvariantCulture);
+            CurrentStamina.Text = gecko.GetString(0x4243A598);
+            var healthPointer = gecko.GetUInt(0x4225C780);
+            CurrentHealth.Text = gecko.GetInt(healthPointer + 0x388).ToString(CultureInfo.InvariantCulture);
+            CurrentRupees.Text = gecko.GetInt(0x4010BA4C).ToString(CultureInfo.InvariantCulture);
+            CurrentMon.Text = gecko.GetInt(0x4010C18C).ToString(CultureInfo.InvariantCulture);
+            CurrentWeaponSlots.Text = gecko.GetInt(0x4010C38C).ToString(CultureInfo.InvariantCulture);
+            CurrentBowSlots.Text = gecko.GetInt(0x401122AC).ToString(CultureInfo.InvariantCulture);
+            CurrentShieldSlots.Text = gecko.GetInt(0x401122CC).ToString(CultureInfo.InvariantCulture);
 
-            var damagePointer = this.gecko.GetUInt(0x43AB9C30);
-            CbDamage.SelectedValue = this.gecko.GetString(damagePointer + 0x770);
-            CbWeather.SelectedValue = this.gecko.GetString(0x407B5CF0);
+            var damagePointer = gecko.GetUInt(0x43AB9C30);
+            CbDamage.SelectedValue = gecko.GetString(damagePointer + 0x770);
+            CbWeather.SelectedValue = gecko.GetString(0x407B5CF0);
 
-            var time = this.GetCurrentTime();
+            var time = GetCurrentTime();
             CurrentTime.Text = time.ToString(CultureInfo.InvariantCulture);
             TimeSlider.Value = time;
 
-            this.tbChanged.Clear();
-            this.cbChanged.Clear();
-            this.ddChanged.Clear();
+            tbChanged.Clear();
+            cbChanged.Clear();
+            ddChanged.Clear();
         }
 
         private void ToggleControls(string state)
         {
             if (state == "Connected")
             {
-                this.Load.IsEnabled = true;
-                this.Connect.IsEnabled = false;
-                this.Connect.Visibility = Visibility.Hidden;
+                Load.IsEnabled = true;
+                Connect.IsEnabled = false;
+                Connect.Visibility = Visibility.Hidden;
 
-                this.Disconnect.IsEnabled = true;
-                this.Disconnect.Visibility = Visibility.Visible;
+                Disconnect.IsEnabled = true;
+                Disconnect.Visibility = Visibility.Visible;
 
-                this.IpAddress.IsEnabled = false;
+                IpAddress.IsEnabled = false;
 
-                if (this.Load.Visibility == Visibility.Hidden)
+                if (Load.Visibility == Visibility.Hidden)
                 {
-                    this.Refresh.IsEnabled = true;
+                    Refresh.IsEnabled = true;
                 }
 
-                this.Test.IsEnabled = true;
-                this.GetBufferSize.IsEnabled = false;
+                Test.IsEnabled = true;
+                GetBufferSize.IsEnabled = false;
 
-                this.TabControl.IsEnabled = true;
+                TabControl.IsEnabled = true;
             }
 
             if (state == "Disconnected")
             {
-                this.Load.IsEnabled = false;
-                this.Connect.IsEnabled = true;
-                this.Connect.Visibility = Visibility.Visible;
-                this.Disconnect.IsEnabled = false;
-                this.Disconnect.Visibility = Visibility.Hidden;
-                this.IpAddress.IsEnabled = true;
+                Load.IsEnabled = false;
+                Connect.IsEnabled = true;
+                Connect.Visibility = Visibility.Visible;
+                Disconnect.IsEnabled = false;
+                Disconnect.Visibility = Visibility.Hidden;
+                IpAddress.IsEnabled = true;
 
-                this.Refresh.IsEnabled = false;
-                this.Test.IsEnabled = false;
-                this.TabControl.IsEnabled = false;
-                this.GetBufferSize.IsEnabled = true;
+                Refresh.IsEnabled = false;
+                Test.IsEnabled = false;
+                TabControl.IsEnabled = false;
+                GetBufferSize.IsEnabled = true;
             }
 
             if (state == "Load")
             {
                 TabControl.IsEnabled = false;
-                this.Load.IsEnabled = false;
-                this.Load.Visibility = Visibility.Hidden;
+                Load.IsEnabled = false;
+                Load.Visibility = Visibility.Hidden;
 
-                this.Refresh.IsEnabled = false;
-                this.Test.IsEnabled = false;
-                this.Weapons.IsEnabled = true;
-                this.Bows.IsEnabled = true;
-                this.Shields.IsEnabled = true;
-                this.Weapons.IsEnabled = true;
-                this.Armor.IsEnabled = true;
-                this.Arrows.IsEnabled = true;
-                this.Materials.IsEnabled = true;
-                this.Food.IsEnabled = true;
-                this.KeyItems.IsEnabled = true;
-                this.Debug.IsEnabled = true;
+                Refresh.IsEnabled = false;
+                Test.IsEnabled = false;
+                Weapons.IsEnabled = true;
+                Bows.IsEnabled = true;
+                Shields.IsEnabled = true;
+                Weapons.IsEnabled = true;
+                Armor.IsEnabled = true;
+                Arrows.IsEnabled = true;
+                Materials.IsEnabled = true;
+                Food.IsEnabled = true;
+                KeyItems.IsEnabled = true;
+                Debug.IsEnabled = true;
             }
 
             if (state == "DataLoaded")
             {
                 TabControl.IsEnabled = true;
-                this.Refresh.IsEnabled = true;
-                this.Test.IsEnabled = true;
+                Refresh.IsEnabled = true;
+                Test.IsEnabled = true;
             }
 
             if (state == "ForceRefresh")
             {
                 TabControl.IsEnabled = false;
-                this.Save.IsEnabled = false;
+                Save.IsEnabled = false;
             }
         }
 
@@ -1016,18 +1018,18 @@
 
         private void TabControlSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (this.Save == null)
+            if (Save == null)
             {
                 return;
             }
 
             if (Debug.IsSelected || Help.IsSelected || Credits.IsSelected)
             {
-                this.Save.IsEnabled = false;
+                Save.IsEnabled = false;
                 return;
             }
 
-            this.Save.IsEnabled = this.HasChanged;
+            Save.IsEnabled = HasChanged;
 
             if (!Codes.IsSelected)
             {
@@ -1040,7 +1042,7 @@
             var shrine = (ComboBoxItem)ShrineList.SelectedItem;
             var tag = shrine.Tag.ToString();
 
-            var data = (JObject)this.json.SelectToken("Shrines");
+            var data = (JObject)json.SelectToken("Shrines");
 
             CoordsXValue.Text = data[tag]["LocX"].ToString();
             CoordsYValue.Text = data[tag]["LocY"].ToString();
@@ -1052,7 +1054,7 @@
             var tower = (ComboBoxItem)TowerList.SelectedItem;
             var tag = tower.Tag.ToString();
 
-            var data = (JObject)this.json.SelectToken("Towers");
+            var data = (JObject)json.SelectToken("Towers");
 
             CoordsXValue.Text = data[tag]["LocX"].ToString();
             CoordsYValue.Text = data[tag]["LocY"].ToString();
@@ -1064,7 +1066,7 @@
             var ranch = (ComboBoxItem)RanchList.SelectedItem;
             var tag = ranch.Tag.ToString();
 
-            var data = (JObject)this.json.SelectToken("Ranches");
+            var data = (JObject)json.SelectToken("Ranches");
 
             CoordsXValue.Text = data[tag]["LocX"].ToString();
             CoordsYValue.Text = data[tag]["LocY"].ToString();
@@ -1076,7 +1078,7 @@
             var misc = (ComboBoxItem)MiscList.SelectedItem;
             var tag = misc.Tag.ToString();
 
-            var data = (JObject)this.json.SelectToken("Misc");
+            var data = (JObject)json.SelectToken("Misc");
 
             CoordsXValue.Text = data[tag]["LocX"].ToString();
             CoordsYValue.Text = data[tag]["LocY"].ToString();
@@ -1085,32 +1087,32 @@
 
         private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.ddChanged.Add(sender as ComboBox);
+            ddChanged.Add(sender as ComboBox);
 
-            this.Save.IsEnabled = this.HasChanged;
+            Save.IsEnabled = HasChanged;
         }
 
         private void TextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
         {
             var thisTb = sender as TextBox;
 
-            var exists = this.tbChanged.Where(x => thisTb != null && x.Tag == thisTb.Tag);
+            var exists = tbChanged.Where(x => thisTb != null && x.Tag == thisTb.Tag);
 
             if (exists.Any())
             {
                 return;
             }
 
-            this.tbChanged.Add(thisTb);
+            tbChanged.Add(thisTb);
 
-            this.Save.IsEnabled = this.HasChanged;
+            Save.IsEnabled = HasChanged;
         }
 
         private void CheckBoxChanged(object sender, RoutedEventArgs e)
         {
-            this.cbChanged.Add(sender as CheckBox);
+            cbChanged.Add(sender as CheckBox);
 
-            this.Save.IsEnabled = this.HasChanged;
+            Save.IsEnabled = HasChanged;
         }
 
         private void HyperlinkRequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -1166,15 +1168,15 @@
                 MaxLength = 8
             };
 
-            tb.TextChanged += this.TextChanged;
+            tb.TextChanged += TextChanged;
 
-            var check = (TextBox)this.FindName(type + field);
+            var check = (TextBox)FindName(type + field);
             if (check != null)
             {
-                this.UnregisterName(type + field);
+                UnregisterName(type + field);
             }
 
-            this.RegisterName(type + field, tb);
+            RegisterName(type + field, tb);
 
             Grid.SetRow(tb, x);
             Grid.SetColumn(tb, col);
@@ -1292,7 +1294,7 @@
 
                 var name = "Unknown";
                 var path = string.Format("Items.{0}.{1}.Name", pagename.Replace(" ", string.Empty), id);
-                var obj = this.json.SelectToken(path);
+                var obj = json.SelectToken(path);
                 if (obj != null)
                 {
                     name = obj.ToString();
@@ -1310,9 +1312,9 @@
         {
             try
             {
-                var timePointer = this.gecko.GetUInt(0x407B3AF4);
+                var timePointer = gecko.GetUInt(0x407B3AF4);
 
-                var time = this.gecko.GetFloat(timePointer + 0xA8);
+                var time = gecko.GetFloat(timePointer + 0xA8);
 
                 var hour = Convert.ToInt32(time) / 15;
 
@@ -1320,7 +1322,7 @@
             }
             catch (Exception ex)
             {
-                this.LogError(ex, "Time");
+                LogError(ex, "Time");
             }
 
             return 1;

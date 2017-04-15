@@ -48,132 +48,132 @@
         {
             var selected = new List<Cheat>();
 
-            if (this.mainWindow.Stamina.IsChecked == true)
+            if (mainWindow.Stamina.IsChecked == true)
             {
                 selected.Add(Cheat.Stamina);
             }
 
-            if (this.mainWindow.Health.IsChecked == true)
+            if (mainWindow.Health.IsChecked == true)
             {
                 selected.Add(Cheat.Health);
             }
 
-            if (this.mainWindow.Rupees.IsChecked == true)
+            if (mainWindow.Rupees.IsChecked == true)
             {
                 selected.Add(Cheat.Rupees);
             }
 
-            if (this.mainWindow.Mon.IsChecked == true)
+            if (mainWindow.Mon.IsChecked == true)
             {
                 selected.Add(Cheat.Mon);
             }
 
-            if (this.mainWindow.Speed.IsChecked == true)
+            if (mainWindow.Speed.IsChecked == true)
             {
                 selected.Add(Cheat.Speed);
             }
 
-            if (this.mainWindow.MoonJump.IsChecked == true)
+            if (mainWindow.MoonJump.IsChecked == true)
             {
                 selected.Add(Cheat.MoonJump);
             }
 
-            if (this.mainWindow.WeaponSlots.IsChecked == true)
+            if (mainWindow.WeaponSlots.IsChecked == true)
             {
                 selected.Add(Cheat.WeaponInv);
             }
 
-            if (this.mainWindow.BowSlots.IsChecked == true)
+            if (mainWindow.BowSlots.IsChecked == true)
             {
                 selected.Add(Cheat.BowInv);
             }
 
-            if (this.mainWindow.ShieldSlots.IsChecked == true)
+            if (mainWindow.ShieldSlots.IsChecked == true)
             {
                 selected.Add(Cheat.ShieldInv);
             }
 
-            if (this.mainWindow.Urbosa.IsChecked == true)
+            if (mainWindow.Urbosa.IsChecked == true)
             {
                 selected.Add(Cheat.Urbosa);
             }
 
-            if (this.mainWindow.Revali.IsChecked == true)
+            if (mainWindow.Revali.IsChecked == true)
             {
                 selected.Add(Cheat.Revali);
             }
 
-            if (this.mainWindow.Daruk.IsChecked == true)
+            if (mainWindow.Daruk.IsChecked == true)
             {
                 selected.Add(Cheat.Daruk);
             }
 
-            if (this.mainWindow.Mipha.IsChecked == true)
+            if (mainWindow.Mipha.IsChecked == true)
             {
                 selected.Add(Cheat.Mipha);
             }
 
-            if (this.mainWindow.BombTime.IsChecked == true)
+            if (mainWindow.BombTime.IsChecked == true)
             {
                 selected.Add(Cheat.Bombs);
             }
 
-            if (this.mainWindow.HorseWhips.IsChecked == true)
+            if (mainWindow.HorseWhips.IsChecked == true)
             {
                 selected.Add(Cheat.Whips);
             }
 
-            if (this.mainWindow.Damage.IsChecked == true)
+            if (mainWindow.Damage.IsChecked == true)
             {
                 selected.Add(Cheat.Damage);
             }
 
-            if (this.mainWindow.Weather.IsChecked == true)
+            if (mainWindow.Weather.IsChecked == true)
             {
                 selected.Add(Cheat.Weather);
             }
 
-            if (this.mainWindow.WolfHealth.IsChecked == true)
+            if (mainWindow.WolfHealth.IsChecked == true)
             {
                 selected.Add(Cheat.WolfHealth);
             }
 
-            if (this.mainWindow.WeaponDurability.IsChecked == true)
+            if (mainWindow.WeaponDurability.IsChecked == true)
             {
                 selected.Add(Cheat.WeaponDurability);
             }
 
-            if (this.mainWindow.ShieldDurability.IsChecked == true)
+            if (mainWindow.ShieldDurability.IsChecked == true)
             {
                 selected.Add(Cheat.ShieldDurability);
             }
 
-            if (this.mainWindow.BowDurability.IsChecked == true)
+            if (mainWindow.BowDurability.IsChecked == true)
             {
                 selected.Add(Cheat.BowDurability);
             }
 
-            if (this.mainWindow.MasterCharge.IsChecked == true)
+            if (mainWindow.MasterCharge.IsChecked == true)
             {
                 selected.Add(Cheat.MasterCharge);
             }
 
-            if (this.mainWindow.StasisCooldown.IsChecked == true)
+            if (mainWindow.StasisCooldown.IsChecked == true)
             {
                 selected.Add(Cheat.StasisCooldown);
             }
 
-            if (this.mainWindow.Stealthy.IsChecked == true)
+            if (mainWindow.Stealthy.IsChecked == true)
             {
                 selected.Add(Cheat.Stealthy);
             }
 
-            if (this.mainWindow.Amiibo.IsChecked == true)
+            if (mainWindow.Amiibo.IsChecked == true)
             {
                 selected.Add(Cheat.Amiibo);
             }
 
-            if (this.mainWindow.Immune.IsChecked == true)
+            if (mainWindow.Immune.IsChecked == true)
             {
                 selected.Add(Cheat.Immune);
             }
@@ -185,12 +185,12 @@
         {
             var codes = new List<uint>();
 
-            var cheats = this.GetSelected();
+            var cheats = GetSelected();
 
             if (cheats.Contains(Cheat.Stamina))
             {
                 // Max 453B8000
-                var value = uint.Parse(this.mainWindow.CurrentStamina.Text, NumberStyles.HexNumber);
+                var value = uint.Parse(mainWindow.CurrentStamina.Text, NumberStyles.HexNumber);
 
                 codes.Add(0x00020000);
                 codes.Add(0x4243A594);
@@ -205,7 +205,7 @@
 
             if (cheats.Contains(Cheat.Health))
             {
-                var value = Convert.ToUInt32(this.mainWindow.CurrentHealth.Text);
+                var value = Convert.ToUInt32(mainWindow.CurrentHealth.Text);
 
                 codes.Add(0x30000000);
                 codes.Add(0x4225C780);
@@ -219,10 +219,10 @@
 
             if (cheats.Contains(Cheat.Speed))
             {
-                var value = uint.Parse(this.mainWindow.CbSpeed.SelectedValue.ToString(), NumberStyles.HexNumber);
+                var value = uint.Parse(mainWindow.CbSpeed.SelectedValue.ToString(), NumberStyles.HexNumber);
 
                 uint activator;
-                if (this.mainWindow.Controller.SelectedValue.ToString() == "Pro")
+                if (mainWindow.Controller.SelectedValue.ToString() == "Pro")
                 {
                     activator = 0x112671AB;
                 }
@@ -256,7 +256,7 @@
 
             if (cheats.Contains(Cheat.Rupees))
             {
-                var value = Convert.ToUInt32(this.mainWindow.CurrentRupees.Text);
+                var value = Convert.ToUInt32(mainWindow.CurrentRupees.Text);
 
                 codes.Add(0x00020000);
                 codes.Add(0x3FC93D10);
@@ -271,7 +271,7 @@
 
             if (cheats.Contains(Cheat.Mon))
             {
-                var value = Convert.ToUInt32(this.mainWindow.CurrentMon.Text);
+                var value = Convert.ToUInt32(mainWindow.CurrentMon.Text);
 
                 codes.Add(0x00020000);
                 codes.Add(0x3FD42158);
@@ -288,7 +288,7 @@
             {
                 uint button;
                 uint activator;
-                if (this.mainWindow.Controller.SelectedValue.ToString() == "Pro")
+                if (mainWindow.Controller.SelectedValue.ToString() == "Pro")
                 {
                     activator = 0x112671AB;
                     button = 0x00000008;
@@ -324,7 +324,7 @@
 
             if (cheats.Contains(Cheat.WeaponInv))
             {
-                var value = Convert.ToUInt32(this.mainWindow.CurrentWeaponSlots.Text);
+                var value = Convert.ToUInt32(mainWindow.CurrentWeaponSlots.Text);
 
                 codes.Add(0x00020000);
                 codes.Add(0x3FCFC498);
@@ -339,7 +339,7 @@
 
             if (cheats.Contains(Cheat.BowInv))
             {
-                var value = Convert.ToUInt32(this.mainWindow.CurrentBowSlots.Text);
+                var value = Convert.ToUInt32(mainWindow.CurrentBowSlots.Text);
 
                 codes.Add(0x00020000);
                 codes.Add(0x3FD4CB50);
@@ -354,7 +354,7 @@
 
             if (cheats.Contains(Cheat.ShieldInv))
             {
-                var value = Convert.ToUInt32(this.mainWindow.CurrentShieldSlots.Text);
+                var value = Convert.ToUInt32(mainWindow.CurrentShieldSlots.Text);
 
                 codes.Add(0x00020000);
                 codes.Add(0x3FCC1B40);
@@ -452,7 +452,7 @@
 
             if (cheats.Contains(Cheat.Damage))
             {
-                var value = uint.Parse(this.mainWindow.CbDamage.SelectedValue.ToString(), NumberStyles.HexNumber);
+                var value = uint.Parse(mainWindow.CbDamage.SelectedValue.ToString(), NumberStyles.HexNumber);
 
                 codes.Add(0x30000000);
                 codes.Add(0x43AB9C30);
@@ -466,7 +466,7 @@
 
             if (cheats.Contains(Cheat.Weather))
             {
-                var value = uint.Parse(this.mainWindow.CbWeather.SelectedValue.ToString(), NumberStyles.HexNumber);
+                var value = uint.Parse(mainWindow.CbWeather.SelectedValue.ToString(), NumberStyles.HexNumber);
 
                 codes.Add(0x00020000);
                 codes.Add(0x407B5CF0);

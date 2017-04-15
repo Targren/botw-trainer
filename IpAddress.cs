@@ -25,10 +25,10 @@
 
         public IpAddress()
         {
-            this.FoundList = new List<string>();
-            this.baseIp = "192.168.1.";
+            FoundList = new List<string>();
+            baseIp = "192.168.1.";
 
-            this.CreatePingers(255);
+            CreatePingers(255);
 
             var po = new PingOptions(Ttl, true);
             var enc = new ASCIIEncoding();
@@ -43,11 +43,11 @@
                     instances += 1;
                 }
 
-                ping.SendAsync(string.Concat(this.baseIp, cnt.ToString(CultureInfo.InvariantCulture)), TimeOut, data, po);
+                ping.SendAsync(string.Concat(baseIp, cnt.ToString(CultureInfo.InvariantCulture)), TimeOut, data, po);
                 cnt += 1;
             }
 
-            this.DestroyPingers();
+            DestroyPingers();
         }
 
         private void PingCompleted(object s, PingCompletedEventArgs e)
@@ -59,7 +59,7 @@
 
             if (e.Reply.Status == IPStatus.Success)
             {
-                this.FoundList.Add(e.Reply.Address.ToString());
+                FoundList.Add(e.Reply.Address.ToString());
             }
         }
 
@@ -68,7 +68,7 @@
             for (var i = 1; i <= cnt; i++)
             {
                 var p = new Ping();
-                p.PingCompleted += this.PingCompleted;
+                p.PingCompleted += PingCompleted;
                 Pingers.Add(p);
             }
         }
@@ -77,7 +77,7 @@
         {
             foreach (var p in Pingers)
             {
-                p.PingCompleted -= this.PingCompleted;
+                p.PingCompleted -= PingCompleted;
                 p.Dispose();
             }
 

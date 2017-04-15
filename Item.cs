@@ -17,7 +17,7 @@
             {
                 try
                 {
-                    return this.NameStart.ToString("x8").ToUpper();
+                    return NameStart.ToString("x8").ToUpper();
                 }
                 catch (FormatException formatException)
                 {
@@ -35,7 +35,7 @@
             {
                 try
                 {
-                    return this.BaseAddress.ToString("x8").ToUpper();
+                    return BaseAddress.ToString("x8").ToUpper();
                 }
                 catch (FormatException formatException)
                 {
@@ -53,7 +53,7 @@
             {
                 try
                 {
-                    return this.Value.ToString("x8").ToUpper();
+                    return Value.ToString("x8").ToUpper();
                 }
                 catch (FormatException formatException)
                 {
@@ -69,7 +69,7 @@
             {
                 try
                 {
-                    return (this.BaseAddress + 0x8).ToString("x8").ToUpper();
+                    return (BaseAddress + 0x8).ToString("x8").ToUpper();
                 }
                 catch (FormatException formatException)
                 {
@@ -89,7 +89,7 @@
         {
             get
             {
-                var offset = this.BaseAddress + 0x5c;
+                var offset = BaseAddress + 0x5c;
                 try
                 {
                     return offset.ToString("x8").ToUpper();
@@ -108,7 +108,7 @@
         {
             get
             {
-                var offset = this.BaseAddress + 0x60;
+                var offset = BaseAddress + 0x60;
                 try
                 {
                     return offset.ToString("x8").ToUpper();
@@ -127,7 +127,7 @@
         {
             get
             {
-                var offset = this.BaseAddress + 0x64;
+                var offset = BaseAddress + 0x64;
                 try
                 {
                     return offset.ToString("x8").ToUpper();
@@ -146,7 +146,7 @@
         {
             get
             {
-                var offset = this.BaseAddress + 0x68;
+                var offset = BaseAddress + 0x68;
                 try
                 {
                     return offset.ToString("x8").ToUpper();
@@ -165,7 +165,7 @@
         {
             get
             {
-                var offset = this.BaseAddress + 0x6c;
+                var offset = BaseAddress + 0x6c;
                 try
                 {
                     return offset.ToString("x8").ToUpper();
@@ -185,7 +185,7 @@
             get
             {
                 string name;
-                switch (this.Page)
+                switch (Page)
                 {
                     case 0:
                         name = "Weapons";

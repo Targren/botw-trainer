@@ -15,10 +15,10 @@
 
         public TcpConn(string host, int port)
         {
-            this.Host = host;
-            this.Port = port;
-            this.client = null;
-            this.stream = null;
+            Host = host;
+            Port = port;
+            client = null;
+            stream = null;
         }
 
         private string Host { get; set; }
@@ -29,27 +29,27 @@
         {
             try
             {
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
-            this.client = new TcpClient { NoDelay = true };
+            client = new TcpClient { NoDelay = true };
             var waitHandle = new object() as WaitHandle;
 
             try
             {
-                var asyncResult = this.client.BeginConnect(this.Host, this.Port, null, null);
+                var asyncResult = client.BeginConnect(Host, Port, null, null);
                 waitHandle = asyncResult.AsyncWaitHandle;
                 if (!asyncResult.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(5), false))
                 {
-                    this.client.Close();
+                    client.Close();
                     return false;
                 }
 
-                this.client.EndConnect(asyncResult);
+                client.EndConnect(asyncResult);
             }
             catch (ArgumentNullException argumentNullException)
             {
@@ -97,9 +97,9 @@
 
             try
             {
-                this.stream = this.client.GetStream();
-                this.stream.ReadTimeout = 10000;
-                this.stream.WriteTimeout = 10000;
+                stream = client.GetStream();
+                stream.ReadTimeout = 10000;
+                stream.WriteTimeout = 10000;
             }
             catch (InvalidOperationException invalidOperationException)
             {
@@ -117,10 +117,10 @@
         {
             try
             {
-                if (this.client != null)
+                if (client != null)
                 {
-                    this.client.Close();
-                    this.client.Dispose();
+                    client.Close();
+                    client.Dispose();
                 }
             }
             catch (Exception ex)
@@ -129,7 +129,7 @@
             }
             finally
             {
-                this.client = null;
+                client = null;
             }
         }
 
@@ -139,7 +139,7 @@
             try
             {
                 var offset = 0;
-                if (this.stream == null)
+                if (stream == null)
                 {
                     throw new IOException("Not connected.", new NullReferenceException());
                 }
@@ -147,7 +147,7 @@
                 bytesRead = 0;
                 while (nobytes > 0)
                 {
-                    var read = this.stream.Read(buffer, offset, (int)nobytes);
+                    var read = stream.Read(buffer, offset, (int)nobytes);
                     if (read >= 0)
                     {
                         bytesRead += (uint)read;
@@ -183,12 +183,12 @@
         {
             try
             {
-                if (this.stream == null)
+                if (stream == null)
                 {
                     throw new IOException("Not connected.", new NullReferenceException());
                 }
 
-                this.stream.Write(buffer, 0, nobytes);
+                stream.Write(buffer, 0, nobytes);
                 if (nobytes >= 0)
                 {
                     bytesWritten = (uint)nobytes;
@@ -198,7 +198,7 @@
                     bytesWritten = 0;
                 }
 
-                this.stream.Flush();
+                stream.Flush();
             }
             catch (ArgumentNullException argumentNullException)
             {
