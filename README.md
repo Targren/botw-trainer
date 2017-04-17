@@ -14,7 +14,7 @@ Web installer is [here](https://www.microsoft.com/en-us/download/details.aspx?id
 
 Please download/run the installer if you are not sure that you have the latest framework!
 
-Make sure you use the latest files for TCPGecko/CodeHandler, https://github.com/BullyWiiPlaza/Gecko-U-Updater is a great tool for this.
+Make sure you use the latest version from Bully for TCPGecko/CodeHandler, https://github.com/BullyWiiPlaza/Gecko-U-Updater is a great tool for this.
 
 The latest version of the compiled trainer can be found [here](https://github.com/joffnerd/botw-trainer/releases).
 
