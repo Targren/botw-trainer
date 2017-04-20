@@ -477,7 +477,7 @@
             if (cheats.Contains(Cheat.WolfHealth))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x108FC4D4);
+                codes.Add(0x108FC954);
                 codes.Add(0x45000000);
                 codes.Add(0x4C89FFFF);
                 codes.Add(0x31000000);

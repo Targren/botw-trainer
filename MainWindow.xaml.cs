@@ -37,6 +37,10 @@
 
         private const uint CodeHandlerEnabled = 0x10014CFC;
 
+        private const uint ObjectStart = 0x4090FEF8;
+
+        private const uint ObjectEnd = 0x40A4A88C;
+
         private readonly List<TextBox> tbChanged = new List<TextBox>();
 
         private readonly List<ComboBox> ddChanged = new List<ComboBox>();
@@ -51,6 +55,8 @@
         private int itemTotal = 0;
 
         private List<Item> items;
+
+        private List<Obj> objects;
 
         private JToken json;
 
@@ -84,7 +90,28 @@
 
             Title = string.Format("{0} v{1}", Title, Settings.Default.CurrentVersion);
 
+            var netVersion = new GetDotNetVersion().Get45PlusFromRegistry();
+            if(netVersion.Version == null)
+            {
+                MessageBoxResult choice = MessageBox.Show("Required .NET Version 4.6.2 not found. Please update.", "New Version", MessageBoxButton.OKCancel);
+
+                if (choice == MessageBoxResult.OK)
+                {
+                    Process.Start("https://www.microsoft.com/en-us/download/details.aspx?id=53345");
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                Title += string.Format(" | .NET Version: {0}", netVersion.Version);
+            }            
+
             items = new List<Item>();
+
+            objects = new List<Obj>();
 
             codes = new Codes(this);
 
@@ -163,14 +190,10 @@
             Save.IsEnabled = HasChanged;
         }
 
-        private bool LoadData()
+        private bool LoadItemData()
         {
             try
             {
-                //this.itemEnd = this.gecko.GetUInt(0x43C6B068) + 0x8;
-
-                //this.itemStart = this.gecko.GetUInt(0x43C6B064) + 0x8;
-
                 itemTotal = gecko.GetInt(0x43C6B06C);
 
                 var currentItemAddress = ItemEnd;
@@ -256,7 +279,7 @@
             }
         }
 
-        private bool SaveData(TabItem tab)
+        private bool SaveItemData(TabItem tab)
         {
             // Clear old errors
             ErrorLog.Document.Blocks.Clear();
@@ -504,12 +527,66 @@
             return true;
         }
 
+        private bool LoadObjectData()
+        {
+            try
+            {
+                var objectTotal = 4414;
+
+                var currentObjectAddress = ObjectStart;
+
+                for (var x = 1; x <= objectTotal; x++)
+                {
+                    var objectData = gecko.ReadBytes(currentObjectAddress, 0x120);
+
+                    var builder = new StringBuilder();
+                    for (var i = 0; i < 36; i++)
+                    {
+                        var data = objectData.Skip(i).Take(1).ToArray()[0];
+                        if (data == 0)
+                        {
+                            break;
+                        }
+
+                        builder.Append((char)data);
+                    }
+
+                    var id = builder.ToString();
+
+                    var obj = new Obj
+                    {
+                        Id = id,
+                        Address = currentObjectAddress
+                    };
+
+                    objects.Add(obj);
+
+                    var currentPercent = (100m / objectTotal) * x;
+                    Dispatcher.Invoke(
+                        () =>
+                        {
+                            ProgressText.Text = string.Format("{0}/{1}", x, objectTotal);
+                            UpdateProgress(Convert.ToInt32(currentPercent));
+                        });
+
+                    currentObjectAddress += 0x124;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.Invoke(() => LogError(ex));
+                return false;
+            }
+        }
+
         private async void EnableCoordsOnChecked(object sender, RoutedEventArgs e)
         {
             await Task.Run(() => LoadCoords());
         }
 
-        private async void LoadClick(object sender, RoutedEventArgs e)
+        private async void LoadItemsClick(object sender, RoutedEventArgs e)
         {
             ToggleControls("Load");
 
@@ -518,7 +595,7 @@
             try
             {
                 // talk to wii u and get mem dump of data
-                var result = await Task.Run(() => LoadData());
+                var result = await Task.Run(() => LoadItemData());
 
                 if (result)
                 {
@@ -550,7 +627,36 @@
             }
             catch (Exception ex)
             {
-                LogError(ex, "Load Data");
+                LogError(ex, "Load Items");
+            }
+        }
+
+        private async void LoadObjectsClick(object sender, RoutedEventArgs e)
+        {
+            objects.Clear();
+
+            LoadObjects.IsEnabled = false;
+
+            try
+            {
+                var result = await Task.Run(() => LoadObjectData());
+
+                if (result)
+                {
+                    using (StreamWriter sw = File.CreateText("objects.csv"))
+                    {
+                        for (int i = 0; i < objects.Count; i++)
+                        {
+                            sw.WriteLine(objects[i].Id + "," + objects[i].Address.ToString("X"));
+                        }                        
+                    }
+
+                    MessageBox.Show("List saved (objects.csv)");
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex, "Load Objects");
             }
         }
 
@@ -558,7 +664,7 @@
         {
             Save.IsEnabled = false;
 
-            var result = SaveData((TabItem)TabControl.SelectedItem);
+            var result = SaveItemData((TabItem)TabControl.SelectedItem);
 
             if (!result)
             {
@@ -915,7 +1021,8 @@
         {
             if (state == "Connected")
             {
-                Load.IsEnabled = true;
+                LoadItems.IsEnabled = true;
+                LoadObjects.IsEnabled = true;
                 Connect.IsEnabled = false;
                 Connect.Visibility = Visibility.Hidden;
 
@@ -924,7 +1031,7 @@
 
                 IpAddress.IsEnabled = false;
 
-                if (Load.Visibility == Visibility.Hidden)
+                if (LoadItems.Visibility == Visibility.Hidden)
                 {
                     Refresh.IsEnabled = true;
                 }
@@ -937,7 +1044,7 @@
 
             if (state == "Disconnected")
             {
-                Load.IsEnabled = false;
+                LoadItems.IsEnabled = false;
                 Connect.IsEnabled = true;
                 Connect.Visibility = Visibility.Visible;
                 Disconnect.IsEnabled = false;
@@ -953,8 +1060,8 @@
             if (state == "Load")
             {
                 TabControl.IsEnabled = false;
-                Load.IsEnabled = false;
-                Load.Visibility = Visibility.Hidden;
+                LoadItems.IsEnabled = false;
+                LoadItems.Visibility = Visibility.Hidden;
 
                 Refresh.IsEnabled = false;
                 Test.IsEnabled = false;
