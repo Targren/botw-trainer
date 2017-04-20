@@ -16,7 +16,7 @@ Please download/run the installer if you are not sure that you have the latest f
 
 Make sure you use the latest version from Bully for TCPGecko/CodeHandler, https://github.com/BullyWiiPlaza/Gecko-U-Updater is a great tool for this.
 
-# Bully's TCP Gecko looks liek this with the IP Address:
+## Bully's TCP Gecko looks like this, notice the IP Address at the top:
 https://joffnerd.s3.amazonaws.com/tcpgecko.jpg
 
 The latest version of the compiled trainer can be found [here](https://github.com/joffnerd/botw-trainer/releases).
