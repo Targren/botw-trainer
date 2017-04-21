@@ -24,7 +24,7 @@
 
             <Button x:Name="Disconnect" Content="Disconnect" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="DisconnectClick" IsEnabled="False" Canvas.Left="120" Canvas.Top="13" Visibility="Hidden"/>
 
-            <Button x:Name="LoadItems" Content="Load Items" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Click="LoadItemsClick" Canvas.Left="360" Canvas.Top="13" IsEnabled="False" />            
+            <Button x:Name="LoadItems" Content="Load Items" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Click="LoadItemsClick" Canvas.Left="360" Canvas.Top="13" IsEnabled="False" />
 
             <TextBlock Canvas.Right="10" Canvas.Top="14" Canvas.Left="555">           
                 <Hyperlink Foreground="SeaGreen" FontSize="14" NavigateUri="https://github.com/joffnerd/botw-trainer/blob/master/README.md" RequestNavigate="HyperlinkRequestNavigate">
@@ -148,10 +148,6 @@
 
                     <Slider x:Name="TimeSlider" Width="240" Height="20" Orientation="Horizontal" Minimum="0" Maximum="23" Value="12" Canvas.Top="404" Canvas.Left="10" IsSnapToTickEnabled="True" TickFrequency="1" Margin="0" />
 
-                    <Label Content="Horse Whips" Height="26" Canvas.Left="9" Canvas.Top="329"/>
-                    <CheckBox x:Name="HorseWhips" Margin="0" Canvas.Left="160" Canvas.Top="335" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" IsEnabled="False"/>
-                    <Label Content="Disabled, bad code" Height="25" Margin="0" Canvas.Left="199" Canvas.Top="329"/>
-
                     <Label Content="Urbosa's Fury" Height="26" Margin="0" Canvas.Left="401" Canvas.Top="58" ToolTip="Instant Urbosa's Fury Recharge" />
                     <CheckBox x:Name="Urbosa" Margin="0" Canvas.Left="521" Canvas.Top="64" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
 
@@ -176,6 +172,9 @@
                     <CheckBox x:Name="ShieldSlots" Margin="0" Canvas.Left="521" Canvas.Top="244" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
                     <TextBox x:Name="CurrentShieldSlots" Height="25" Width="30" Margin="0" Canvas.Left="551" Canvas.Top="239" PreviewTextInput="NumberValidationTextBox" TextChanged="TextChanged"/>
 
+                    <Label Content="Horse Whips" Height="26" Canvas.Left="401" Canvas.Top="268"/>
+                    <CheckBox x:Name="HorseWhips" Margin="0" Canvas.Left="521" Canvas.Top="274" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" IsEnabled="False"/>
+
                     <Label Content="Moon Jump" Height="26" Canvas.Left="621" Canvas.Top="58"/>
                     <CheckBox x:Name="MoonJump" Margin="0" Canvas.Left="751" Canvas.Top="64" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
                     <Label Content="Hold X" Height="25" Margin="0" Canvas.Left="781" Canvas.Top="58"/>
@@ -192,14 +191,17 @@
                     <Label Content="Master Sword Charge" Height="26" Canvas.Left="621" Canvas.Top="178" ToolTip="Instant Master Sword Recharge"/>
                     <CheckBox x:Name="MasterCharge" Margin="0" Canvas.Left="751" Canvas.Top="184" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
 
-                    <Label Content="Stealthy" Height="26" Canvas.Left="621" Canvas.Top="208" ToolTip="Always stealthy (Meter still moves)"/>
-                    <CheckBox x:Name="Stealthy" Margin="0" Canvas.Left="751" Canvas.Top="214" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
+                    <Label Content="Master Sword Glow" Height="26" Canvas.Left="621" Canvas.Top="208" ToolTip="Master Sword Always Glowing"/>
+                    <CheckBox x:Name="MasterGlow" Margin="0" Canvas.Left="751" Canvas.Top="214" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
 
-                    <Label Content="Inf Amiibo" Height="26" Canvas.Left="621" Canvas.Top="238" ToolTip="Infinite amiibo uses"/>
-                    <CheckBox x:Name="Amiibo" Margin="0" Canvas.Left="751" Canvas.Top="244" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
+                    <Label Content="Stealthy" Height="26" Canvas.Left="621" Canvas.Top="238" ToolTip="Always stealthy (Meter still moves)"/>
+                    <CheckBox x:Name="Stealthy" Margin="0" Canvas.Left="751" Canvas.Top="244" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
 
-                    <Label Content="Immune / Abilities" Height="26" Canvas.Left="621" Canvas.Top="268" ToolTip="Heat Res. Cold Res. Flame Guard. Shock proof. Unfreezable. FireProof. Spin Atk. Waterfall climb"/>
-                    <CheckBox x:Name="Immune" Margin="0" Canvas.Left="751" Canvas.Top="274" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
+                    <Label Content="Inf Amiibo" Height="26" Canvas.Left="621" Canvas.Top="268" ToolTip="Infinite amiibo uses"/>
+                    <CheckBox x:Name="Amiibo" Margin="0" Canvas.Left="751" Canvas.Top="274" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
+
+                    <Label Content="Immune / Abilities" Height="26" Canvas.Left="621" Canvas.Top="298" ToolTip="Heat Res. Cold Res. Flame Guard. Shock proof. Unfreezable. FireProof. Spin Atk. Waterfall climb"/>
+                    <CheckBox x:Name="Immune" Margin="0" Canvas.Left="751" Canvas.Top="304" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
 
                     <Button Content="Refresh Code Tab" Canvas.Top="455" Canvas.Left="10" Height="25" Margin="0" Click="RefreshCodeClick" Width="100" RenderTransformOrigin="-7.527,3.88"/>
                 </Canvas>
@@ -372,7 +374,7 @@
             <Label x:Name="Notification" Content="You can only save if a value has been changed." Canvas.Right="10" Canvas.Top="7" Width="770" Canvas.Left="200"/>
 
             <Button x:Name="LoadObjects" Content="Save Object List" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="95" Click="LoadObjectsClick" Canvas.Right="130" Canvas.Top="10" IsEnabled="False" Visibility="Visible" />
-            
+
             <Button x:Name="Test" Content="Test" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Click="TestClick" Canvas.Right="10" Canvas.Top="10" RenderTransformOrigin="2.867,0.4" IsEnabled="False" />
 
         </Canvas>

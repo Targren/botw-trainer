@@ -41,7 +41,8 @@
             StasisCooldown = 23,
             Stealthy = 24,
             Amiibo = 25,
-            Immune = 26
+            Immune = 26,
+            MasterGlow = 27
         }
 
         private List<Cheat> GetSelected()
@@ -156,6 +157,11 @@
             if (mainWindow.MasterCharge.IsChecked == true)
             {
                 selected.Add(Cheat.MasterCharge);
+            }
+
+            if(mainWindow.MasterGlow.IsChecked == true)
+            {
+                selected.Add(Cheat.MasterGlow);
             }
 
             if (mainWindow.StasisCooldown.IsChecked == true)
@@ -560,6 +566,20 @@
                 codes.Add(0x00000000);
                 codes.Add(0x00120000);
                 codes.Add(0x40200000);
+                codes.Add(0xD0000000);
+                codes.Add(0xDEADCAFE);
+            }
+
+            if (cheats.Contains(Cheat.MasterGlow))
+            {
+                codes.Add(0x30000000);
+                codes.Add(0x4243A468);
+                codes.Add(0x42400000);
+                codes.Add(0x42500000);
+                codes.Add(0x31000000);
+                codes.Add(0x00002B64);
+                codes.Add(0x00100000);
+                codes.Add(0x00000001);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
             }
