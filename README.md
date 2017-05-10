@@ -17,7 +17,7 @@ Please download/run the installer if you are not sure that you have the latest f
 Make sure you use the latest version from Bully for TCPGecko/CodeHandler, https://github.com/BullyWiiPlaza/Gecko-U-Updater is a great tool for this.
 
 ## Bully's TCP Gecko looks like this, notice the IP Address at the top:
-https://joffnerd.s3.amazonaws.com/tcpgecko.jpg
+https://joffnerd.s3.amazonaws.com/tcpgecko1.jpg
 
 The latest version of the compiled trainer can be found [here](https://github.com/joffnerd/botw-trainer/releases).
 
@@ -29,9 +29,9 @@ To avoid crashing and unwanted errors please wait until you have loaded into you
 
 2. Open TCP Gecko on the Wii U
 
-3. Press X to start Gecko with CosmoCortney's CodeHandler
+3. Press A to start Tcp Gecko (Codehandler now built into tcpgecko)
 
-4. Start Legend of Zelda: Breath of The Wild
+4. Start Legend of Zelda: Breath of The Wild and load your saved game
 
 5. Open the Trainer on your PC and Connect to your Wii U using its IP (You can find this in your modem or with other software)
 
