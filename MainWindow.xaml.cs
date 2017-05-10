@@ -29,7 +29,7 @@
     public partial class MainWindow
     {
         // The original list of values that take effect when you save / load
-        private const uint SaveItemStart = 0x3FCE8FF0;
+        private const uint SaveItemStart = 0x3FD00FD0;
 
         private const uint CodeHandlerStart = 0x01133000;
 
@@ -48,9 +48,7 @@
         private readonly List<CheckBox> cbChanged = new List<CheckBox>();
 
         // Technically your first item as they are stored in reverse so we work backwards
-        private const uint ItemEnd = 0x43CA2AEC;
-
-        //private uint itemStart = 0x43C6B2AC;
+        private const uint ItemEnd = 0x43CBAB10;
 
         private int itemTotal = 0;
 
@@ -194,7 +192,7 @@
         {
             try
             {
-                itemTotal = gecko.GetInt(0x43C6B06C);
+                itemTotal = gecko.GetInt(0x43C83090);
 
                 var currentItemAddress = ItemEnd;
 
@@ -778,14 +776,14 @@
                     if (status == 0)
                     {
                         return;
-                    }
-
-                    GetNonItemData();
+                    }                    
 
                     Settings.Default.IpAddress = IpAddress.Text;
                     Settings.Default.Save();
 
                     Controller.SelectedValue = Settings.Default.Controller;
+
+                    GetNonItemData();
 
                     ToggleControls("Connected");
                 }
@@ -995,18 +993,18 @@
         private void GetNonItemData()
         {
             // Code Tab Values
-            CurrentStamina.Text = gecko.GetString(0x4243A598);
-            var healthPointer = gecko.GetUInt(0x4225C780);
+            CurrentStamina.Text = gecko.GetString(0x424527A4);
+            var healthPointer = gecko.GetUInt(0x42274980);
             CurrentHealth.Text = gecko.GetInt(healthPointer + 0x388).ToString(CultureInfo.InvariantCulture);
-            CurrentRupees.Text = gecko.GetInt(0x4010BA4C).ToString(CultureInfo.InvariantCulture);
-            CurrentMon.Text = gecko.GetInt(0x4010C18C).ToString(CultureInfo.InvariantCulture);
-            CurrentWeaponSlots.Text = gecko.GetInt(0x4010C38C).ToString(CultureInfo.InvariantCulture);
-            CurrentBowSlots.Text = gecko.GetInt(0x401122AC).ToString(CultureInfo.InvariantCulture);
-            CurrentShieldSlots.Text = gecko.GetInt(0x401122CC).ToString(CultureInfo.InvariantCulture);
+            CurrentRupees.Text = gecko.GetInt(0x40123BA4).ToString(CultureInfo.InvariantCulture);
+            CurrentMon.Text = gecko.GetInt(0x401242E4).ToString(CultureInfo.InvariantCulture);
+            CurrentWeaponSlots.Text = gecko.GetInt(0x401244E4).ToString(CultureInfo.InvariantCulture);
+            CurrentBowSlots.Text = gecko.GetInt(0x4012A404).ToString(CultureInfo.InvariantCulture);
+            CurrentShieldSlots.Text = gecko.GetInt(0x4012A424).ToString(CultureInfo.InvariantCulture);
 
-            var damagePointer = gecko.GetUInt(0x43AB9C30);
+            var damagePointer = gecko.GetUInt(0x43AD1E30);
             CbDamage.SelectedValue = gecko.GetString(damagePointer + 0x770);
-            CbWeather.SelectedValue = gecko.GetString(0x407B5CF0);
+            CbWeather.SelectedValue = gecko.GetString(0x407CDE1C);
 
             var time = GetCurrentTime();
             CurrentTime.Text = time.ToString(CultureInfo.InvariantCulture);
@@ -1419,7 +1417,7 @@
         {
             try
             {
-                var timePointer = gecko.GetUInt(0x407B3AF4);
+                var timePointer = gecko.GetUInt(0x407CBC20);
 
                 var time = gecko.GetFloat(timePointer + 0xA8);
 

@@ -1,6 +1,6 @@
 # Legend of Zelda: Breath of The Wild Trainer
 
-# Version Of The Game Needed: 1.1.2 (v64)
+# Version Of The Game Needed: 1.2.0 (v80)
 
 ## About
 

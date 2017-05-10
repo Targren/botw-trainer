@@ -199,12 +199,12 @@
                 var value = uint.Parse(mainWindow.CurrentStamina.Text, NumberStyles.HexNumber);
 
                 codes.Add(0x00020000);
-                codes.Add(0x4243A594);
+                codes.Add(0x424527A4);
                 codes.Add(value);
                 codes.Add(0x00000000);
 
                 codes.Add(0x00020000);
-                codes.Add(0x4243A598);
+                codes.Add(0x424527A8);
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
@@ -214,7 +214,7 @@
                 var value = Convert.ToUInt32(mainWindow.CurrentHealth.Text);
 
                 codes.Add(0x30000000);
-                codes.Add(0x4225C780);
+                codes.Add(0x42274980);
                 codes.Add(0x43000000);
                 codes.Add(0x46000000);
                 codes.Add(0x00120388);
@@ -242,7 +242,7 @@
                 codes.Add(0x00000080);
                 codes.Add(0x00000000);
                 codes.Add(0x00020000);
-                codes.Add(0x439C0514);
+                codes.Add(0x439D8724);
                 codes.Add(value);
                 codes.Add(0x00000000);
                 codes.Add(0xD0000000);
@@ -253,7 +253,7 @@
                 codes.Add(0x00000080);
                 codes.Add(0x00000000);
                 codes.Add(0x00020000);
-                codes.Add(0x439C0514);
+                codes.Add(0x439D8724);
                 codes.Add(0x3F800000);
                 codes.Add(0x00000000);
                 codes.Add(0xD0000000);
@@ -265,12 +265,12 @@
                 var value = Convert.ToUInt32(mainWindow.CurrentRupees.Text);
 
                 codes.Add(0x00020000);
-                codes.Add(0x3FC93D10);
+                codes.Add(0x3FCABD10);
                 codes.Add(value);
                 codes.Add(0x00000000);
 
                 codes.Add(0x00020000);
-                codes.Add(0x4010BA4C);
+                codes.Add(0x40123BA4);
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
@@ -280,12 +280,12 @@
                 var value = Convert.ToUInt32(mainWindow.CurrentMon.Text);
 
                 codes.Add(0x00020000);
-                codes.Add(0x3FD42158);
+                codes.Add(0x3FD5A158);
                 codes.Add(value);
                 codes.Add(0x00000000);
                 
                 codes.Add(0x00020000);
-                codes.Add(0x4010C18C);
+                codes.Add(0x401242E4);
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
@@ -310,7 +310,7 @@
                 codes.Add(button);
                 codes.Add(0x00000000);
                 codes.Add(0x00020000);
-                codes.Add(0x439C0528);
+                codes.Add(0x439D8738);
                 codes.Add(0xBE800000);
                 codes.Add(0x00000000);
                 codes.Add(0xD0000000);
@@ -321,7 +321,7 @@
                 codes.Add(button);
                 codes.Add(0x00000000);
                 codes.Add(0x00020000);
-                codes.Add(0x439C0528);
+                codes.Add(0x439D8738);
                 codes.Add(0x3F800000);
                 codes.Add(0x00000000);
                 codes.Add(0xD0000000);
@@ -333,12 +333,12 @@
                 var value = Convert.ToUInt32(mainWindow.CurrentWeaponSlots.Text);
 
                 codes.Add(0x00020000);
-                codes.Add(0x3FCFC498);
+                codes.Add(0x3FD14480);
                 codes.Add(value);
                 codes.Add(0x00000000);
 
                 codes.Add(0x00020000);
-                codes.Add(0x4010C38C);
+                codes.Add(0x401244E4);
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
@@ -348,12 +348,12 @@
                 var value = Convert.ToUInt32(mainWindow.CurrentBowSlots.Text);
 
                 codes.Add(0x00020000);
-                codes.Add(0x3FD4CB50);
+                codes.Add(0x3FD64B28);
                 codes.Add(value);
                 codes.Add(0x00000000);
 
                 codes.Add(0x00020000);
-                codes.Add(0x401122AC);
+                codes.Add(0x4012A404);
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
@@ -363,12 +363,12 @@
                 var value = Convert.ToUInt32(mainWindow.CurrentShieldSlots.Text);
 
                 codes.Add(0x00020000);
-                codes.Add(0x3FCC1B40);
+                codes.Add(0x3FCD9B40);
                 codes.Add(value);
                 codes.Add(0x00000000);
 
                 codes.Add(0x00020000);
-                codes.Add(0x401122CC);
+                codes.Add(0x4012A424);
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
@@ -376,7 +376,7 @@
             if (cheats.Contains(Cheat.Urbosa))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x43ABA020);
+                codes.Add(0x43AD2220);
                 codes.Add(0x10000000);
                 codes.Add(0x50000000);
                 codes.Add(0x31000000);
@@ -390,7 +390,7 @@
             if (cheats.Contains(Cheat.Revali))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x43ABA020);
+                codes.Add(0x43AD2220);
                 codes.Add(0x10000000);
                 codes.Add(0x50000000);
                 codes.Add(0x31000000);
@@ -404,7 +404,7 @@
             if (cheats.Contains(Cheat.Daruk))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x43ABA020);
+                codes.Add(0x43AD2220);
                 codes.Add(0x10000000);
                 codes.Add(0x50000000);
                 codes.Add(0x31000000);
@@ -418,7 +418,7 @@
             if (cheats.Contains(Cheat.Mipha))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x43ABA020);
+                codes.Add(0x43AD2220);
                 codes.Add(0x40000000);
                 codes.Add(0x48000000);
                 codes.Add(0x31000000);
@@ -432,28 +432,28 @@
             if (cheats.Contains(Cheat.Bombs))
             {
                 codes.Add(0x00020000);
-                codes.Add(0x4383EA34);
+                codes.Add(0x43856C44);
                 codes.Add(0x45B70000);
                 codes.Add(0x00000000);
 
                 codes.Add(0x00020000);
-                codes.Add(0x4383EA4C);
+                codes.Add(0x43856C5C);
                 codes.Add(0x45B70000);
                 codes.Add(0x00000000);
             }
 
             if (cheats.Contains(Cheat.Whips))
             {
-                codes.Add(0x00000000);
-                codes.Add(0x4011224F);
-                codes.Add(0x000000FF);
-                codes.Add(0x00000000);
                 /*
-                codes.Add(0x00000000);
-                codes.Add(0x44AFFA8F);
-                codes.Add(0x000000FF);
-                codes.Add(0x00000000);
-                 */
+30000000 3FAB6B1C
+10000000 50000000
+31000000 FFFFCA38
+30100000 00000000
+10000000 50000000
+31000000 00002DD8
+00110000 00000008
+D0000000 DEADCAFE    
+             */
             }
 
             if (cheats.Contains(Cheat.Damage))
@@ -461,7 +461,7 @@
                 var value = uint.Parse(mainWindow.CbDamage.SelectedValue.ToString(), NumberStyles.HexNumber);
 
                 codes.Add(0x30000000);
-                codes.Add(0x43AB9C30);
+                codes.Add(0x43AD1E30);
                 codes.Add(0x41000000);
                 codes.Add(0x46000000);
                 codes.Add(0x00120770);
@@ -475,7 +475,7 @@
                 var value = uint.Parse(mainWindow.CbWeather.SelectedValue.ToString(), NumberStyles.HexNumber);
 
                 codes.Add(0x00020000);
-                codes.Add(0x407B5CF0);
+                codes.Add(0x407CDE1C);
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
@@ -501,7 +501,7 @@
             if (cheats.Contains(Cheat.WeaponDurability))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x45188784);
+                codes.Add(0x451A0994);
                 codes.Add(0x40000000);
                 codes.Add(0x48000000);
                 codes.Add(0x31000000);
@@ -519,7 +519,7 @@
             if (cheats.Contains(Cheat.ShieldDurability))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x451887E0);
+                codes.Add(0x451A09F0);
                 codes.Add(0x40000000);
                 codes.Add(0x48000000);
                 codes.Add(0x31000000);
@@ -537,7 +537,7 @@
             if (cheats.Contains(Cheat.BowDurability))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x4518883C);
+                codes.Add(0x451A0A4C);
                 codes.Add(0x40000000);
                 codes.Add(0x48000000);
                 codes.Add(0x31000000);
@@ -555,7 +555,7 @@
             if (cheats.Contains(Cheat.MasterCharge))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x43ABA020);
+                codes.Add(0x43AD2220);
                 codes.Add(0x10000000);
                 codes.Add(0x50000000);
                 codes.Add(0x31000000);
@@ -573,7 +573,7 @@
             if (cheats.Contains(Cheat.MasterGlow))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x4243A468);
+                codes.Add(0x42452678);
                 codes.Add(0x42400000);
                 codes.Add(0x42500000);
                 codes.Add(0x31000000);
@@ -587,7 +587,7 @@
             if (cheats.Contains(Cheat.StasisCooldown))
             {
                 codes.Add(0x00020000);
-                codes.Add(0x4383EABC);
+                codes.Add(0x43856CCC);
                 codes.Add(0x00000000);
                 codes.Add(0x00000000);
             }
@@ -595,7 +595,7 @@
             if (cheats.Contains(Cheat.Stealthy))
             {
                 codes.Add(0x00020000);
-                codes.Add(0x43A5FCA8);
+                codes.Add(0x43A77EA8);
                 codes.Add(0x00000000);
                 codes.Add(0x00000000);
             }
@@ -603,7 +603,7 @@
             if (cheats.Contains(Cheat.Amiibo))
             {
                 codes.Add(0x00020000);
-                codes.Add(0x4011C28C);
+                codes.Add(0x401343E4);
                 codes.Add(0x012C9985);
                 codes.Add(0x00000000);
             }
@@ -611,7 +611,7 @@
             if (cheats.Contains(Cheat.Immune))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x43AB9C30);
+                codes.Add(0x43AD1E30);
                 codes.Add(0x10000000);
                 codes.Add(0x50000000);
                 codes.Add(0x31000000);

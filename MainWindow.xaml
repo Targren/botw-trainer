@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:json="clr-namespace:BotwTrainer.Json"
       mc:Ignorable="d"
-        Title="BOTW Trainer (PAL/NTSC 1.1.2) |" Height="700" Width="1020">
+        Title="BOTW Trainer (PAL/NTSC 1.2.0) |" Height="700" Width="1020">
 
     <Grid Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -186,7 +186,7 @@
                     <CheckBox x:Name="StasisCooldown" Margin="0" Canvas.Left="751" Canvas.Top="124" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
 
                     <Label Content="Wolf Health" Height="26" Canvas.Left="621" Canvas.Top="148" ToolTip="Infinite health for Amiibo Wolf Link"/>
-                    <CheckBox x:Name="WolfHealth" Margin="0" Canvas.Left="751" Canvas.Top="154" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
+                    <CheckBox x:Name="WolfHealth" Margin="0" Canvas.Left="751" Canvas.Top="154" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" IsEnabled="False"/>
 
                     <Label Content="Master Sword Charge" Height="26" Canvas.Left="621" Canvas.Top="178" ToolTip="Instant Master Sword Recharge"/>
                     <CheckBox x:Name="MasterCharge" Margin="0" Canvas.Left="751" Canvas.Top="184" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
@@ -373,7 +373,7 @@
 
             <Label x:Name="Notification" Content="You can only save if a value has been changed." Canvas.Right="10" Canvas.Top="7" Width="770" Canvas.Left="200"/>
 
-            <Button x:Name="LoadObjects" Content="Save Object List" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="95" Click="LoadObjectsClick" Canvas.Right="130" Canvas.Top="10" IsEnabled="False" Visibility="Visible" />
+            <Button x:Name="LoadObjects" Content="Save Object List" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="95" Click="LoadObjectsClick" Canvas.Right="130" Canvas.Top="10" IsEnabled="False" Visibility="Hidden" />
 
             <Button x:Name="Test" Content="Test" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Click="TestClick" Canvas.Right="10" Canvas.Top="10" RenderTransformOrigin="2.867,0.4" IsEnabled="False" />
 
