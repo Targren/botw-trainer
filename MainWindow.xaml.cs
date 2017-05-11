@@ -697,8 +697,8 @@
         {
             var hour = Convert.ToSingle(CurrentTime.Text) * 15;
 
-            var timePointer = gecko.GetUInt(0x407B3AF4);
-            gecko.WriteFloat(timePointer + 0xAC, hour);
+            var timePointer = gecko.GetUInt(0x407C3D24);
+            gecko.WriteFloat(timePointer + 0xA0, hour);
         }
 
         private void LoadCoords()
@@ -1417,9 +1417,9 @@
         {
             try
             {
-                var timePointer = gecko.GetUInt(0x407CBC20);
+                var timePointer = gecko.GetUInt(0x407C3D24);
 
-                var time = gecko.GetFloat(timePointer + 0xA8);
+                var time = gecko.GetFloat(timePointer + 0x98);
 
                 var hour = Convert.ToInt32(time) / 15;
 
