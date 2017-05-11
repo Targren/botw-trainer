@@ -37,9 +37,9 @@
 
         private const uint CodeHandlerEnabled = 0x10014CFC;
 
-        private const uint ObjectStart = 0x4090FEF8;
+        private const uint ObjectStart = 0x4090FEF8; // old
 
-        private const uint ObjectEnd = 0x40A4A88C;
+        private const uint ObjectEnd = 0x40A4A88C; // old
 
         private readonly List<TextBox> tbChanged = new List<TextBox>();
 
@@ -687,7 +687,7 @@
 
             var bytes = ms.ToArray();
 
-            var pointer = gecko.GetUInt(0x439C0794);
+            var pointer = gecko.GetUInt(0x439D89A4);
             var address = pointer + 0x140;
 
             gecko.WriteBytes(address, bytes);
@@ -707,7 +707,7 @@
 
             try
             {
-                var pointer = gecko.GetUInt(0x439C0794);
+                var pointer = gecko.GetUInt(0x439D89A4);
                 var address = pointer + 0x140;
 
                 Dispatcher.Invoke(

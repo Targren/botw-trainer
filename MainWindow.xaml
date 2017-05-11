@@ -186,7 +186,7 @@
                     <CheckBox x:Name="StasisCooldown" Margin="0" Canvas.Left="751" Canvas.Top="124" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
 
                     <Label Content="Wolf Health" Height="26" Canvas.Left="621" Canvas.Top="148" ToolTip="Infinite health for Amiibo Wolf Link"/>
-                    <CheckBox x:Name="WolfHealth" Margin="0" Canvas.Left="751" Canvas.Top="154" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" IsEnabled="False"/>
+                    <CheckBox x:Name="WolfHealth" Margin="0" Canvas.Left="751" Canvas.Top="154" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" />
 
                     <Label Content="Master Sword Charge" Height="26" Canvas.Left="621" Canvas.Top="178" ToolTip="Instant Master Sword Recharge"/>
                     <CheckBox x:Name="MasterCharge" Margin="0" Canvas.Left="751" Canvas.Top="184" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>

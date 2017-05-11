@@ -483,14 +483,14 @@ D0000000 DEADCAFE
             if (cheats.Contains(Cheat.WolfHealth))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x108FC954);
-                codes.Add(0x45000000);
+                codes.Add(0x10903D74);
+                codes.Add(0x40000000);
                 codes.Add(0x4C89FFFF);
                 codes.Add(0x31000000);
                 codes.Add(0x00000050);
                 codes.Add(0x30100000);
                 codes.Add(0x00000000);
-                codes.Add(0x45000000);
+                codes.Add(0x40000000);
                 codes.Add(0x4C89FFFF);
                 codes.Add(0x00120160);
                 codes.Add(0x00000028);
