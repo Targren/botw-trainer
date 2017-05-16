@@ -230,7 +230,7 @@
                 uint activator;
                 if (mainWindow.Controller.SelectedValue.ToString() == "Pro")
                 {
-                    activator = 0x112671AB;
+                    activator = 0x11287DA7;
                 }
                 else
                 {
@@ -296,7 +296,7 @@
                 uint activator;
                 if (mainWindow.Controller.SelectedValue.ToString() == "Pro")
                 {
-                    activator = 0x112671AB;
+                    activator = 0x11287DA7;
                     button = 0x00000008;
                 }
                 else
