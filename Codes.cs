@@ -227,19 +227,22 @@
             {
                 var value = uint.Parse(mainWindow.CbSpeed.SelectedValue.ToString(), NumberStyles.HexNumber);
 
+                uint button;
                 uint activator;
                 if (mainWindow.Controller.SelectedValue.ToString() == "Pro")
                 {
                     activator = 0x11287DA7;
+                    button = 0x00000004;
                 }
                 else
                 {
                     activator = 0x102F48AB;
+                    button = 0x00000080;
                 }
 
                 codes.Add(0x09000000);
                 codes.Add(activator);
-                codes.Add(0x00000080);
+                codes.Add(button);
                 codes.Add(0x00000000);
                 codes.Add(0x00020000);
                 codes.Add(0x439D8724);
@@ -250,7 +253,7 @@
 
                 codes.Add(0x06000000);
                 codes.Add(activator);
-                codes.Add(0x00000080);
+                codes.Add(button);
                 codes.Add(0x00000000);
                 codes.Add(0x00020000);
                 codes.Add(0x439D8724);
