@@ -447,17 +447,40 @@
 
             if (cheats.Contains(Cheat.Whips))
             {
-                /*
-30000000 3FAB6B1C
-10000000 50000000
-31000000 FFFFCA38
-30100000 00000000
-10000000 50000000
-31000000 00002DD8
-00110000 00000008
-D0000000 DEADCAFE    
-             */
-            }
+                codes.Add(0x30000000);
+                codes.Add(0x3FAB6B1C);
+                codes.Add(0x10000000);
+                codes.Add(0x50000000);
+                codes.Add(0x31000000);
+                codes.Add(0xFFFFCA38);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x10000000);
+                codes.Add(0x50000000);
+                codes.Add(0x31000000);
+                codes.Add(0x00002DD8);
+                codes.Add(0x00110000);
+                codes.Add(0x00000008);
+                codes.Add(0xD0000000);
+                codes.Add(0xDEADCAFE);
+
+                codes.Add(0x30000000);
+                codes.Add(0x3FAB6A44);
+                codes.Add(0x10000000);
+                codes.Add(0x50000000);
+                codes.Add(0x31000000);
+                codes.Add(0xFFFFD0B8);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x10000000);
+                codes.Add(0x50000000);
+                codes.Add(0x31000000);
+                codes.Add(0x000007C0);
+                codes.Add(0x00120000);
+                codes.Add(0x00006FFF);
+                codes.Add(0xD0000000);
+                codes.Add(0xDEADCAFE);
+             }
 
             if (cheats.Contains(Cheat.Damage))
             {

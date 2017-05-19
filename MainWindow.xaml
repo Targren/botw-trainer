@@ -83,7 +83,7 @@
                     <Label Content="To enable these codes check the box and click save." Height="30" Margin="0" Canvas.Left="10" Canvas.Top="8" FontSize="14" Width="348"/>
 
                     <Label Content="Controller Type" Height="26" Margin="0" Canvas.Left="10" Canvas.Top="40"/>
-                    <ComboBox x:Name="Controller" Canvas.Left="200" Canvas.Top="43" Width="90" SelectedValuePath="Content">
+                    <ComboBox x:Name="Controller" Canvas.Left="200" Canvas.Top="43" Width="90" SelectedValuePath="Content" SelectionChanged="SelectionChanged">
                         <ComboBoxItem Content="Pro"/>
                         <ComboBoxItem Content="Gamepad"/>
                     </ComboBox>
@@ -172,8 +172,8 @@
                     <CheckBox x:Name="ShieldSlots" Margin="0" Canvas.Left="521" Canvas.Top="244" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
                     <TextBox x:Name="CurrentShieldSlots" Height="25" Width="30" Margin="0" Canvas.Left="551" Canvas.Top="239" PreviewTextInput="NumberValidationTextBox" TextChanged="TextChanged"/>
 
-                    <Label Content="Horse Whips" Height="26" Canvas.Left="401" Canvas.Top="268"/>
-                    <CheckBox x:Name="HorseWhips" Margin="0" Canvas.Left="521" Canvas.Top="274" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" IsEnabled="False"/>
+                    <Label Content="Horse Whips/Health" Height="26" Canvas.Left="401" Canvas.Top="268"/>
+                    <CheckBox x:Name="HorseWhips" Margin="0" Canvas.Left="521" Canvas.Top="274" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" />
 
                     <Label Content="Moon Jump" Height="26" Canvas.Left="621" Canvas.Top="58"/>
                     <CheckBox x:Name="MoonJump" Margin="0" Canvas.Left="751" Canvas.Top="64" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
