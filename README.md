@@ -45,3 +45,7 @@ ReadMe: [AecdArmy](http://gbatemp.net/members/aecdarmy.378662/) / totesadorbs
 See Credits Tab for full list
 
 Thanks to all who help
+
+## Donate
+
+https://joffnerd.s3.amazonaws.com/donate.html
