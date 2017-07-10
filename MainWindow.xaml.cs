@@ -687,8 +687,8 @@
 
             var bytes = ms.ToArray();
 
-            var pointer = gecko.GetUInt(0x439D89A4);
-            var address = pointer + 0x140;
+            var pointer = gecko.GetUInt(0x3F93B768) + 0x338;
+            var address = gecko.GetUInt(pointer) + 0x140;
 
             gecko.WriteBytes(address, bytes);
         }
@@ -709,8 +709,8 @@
 
             try
             {
-                var pointer = gecko.GetUInt(0x439D89A4);
-                var address = pointer + 0x140;
+                var pointer = gecko.GetUInt(0x3F93B768) + 0x338;
+                var address = gecko.GetUInt(pointer) + 0x140;
 
                 Dispatcher.Invoke(
                     () =>
