@@ -234,8 +234,8 @@
                 uint activator;
                 if (mainWindow.Controller.SelectedValue.ToString() == "Pro")
                 {
-                    activator = 0x11287DA6;
-                    button = 0x00000004;
+                    activator = 0x112B4FA2;
+                    button = 0x00000080;
                 }
                 else
                 {
@@ -297,8 +297,8 @@
                 uint activator;
                 if (mainWindow.Controller.SelectedValue.ToString() == "Pro")
                 {
-                    activator = 0x11287DA7;
-                    button = 0x00000080;
+                    activator = 0x112B4FA2;
+                    button = 0x00000008;
                 }
                 else
                 {
