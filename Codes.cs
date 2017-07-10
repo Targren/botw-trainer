@@ -159,7 +159,7 @@
                 selected.Add(Cheat.MasterCharge);
             }
 
-            if(mainWindow.MasterGlow.IsChecked == true)
+            if (mainWindow.MasterGlow.IsChecked == true)
             {
                 selected.Add(Cheat.MasterGlow);
             }
@@ -193,28 +193,30 @@
 
             var cheats = GetSelected();
 
+            //
             if (cheats.Contains(Cheat.Stamina))
             {
                 // Max 453B8000
                 var value = uint.Parse(mainWindow.CurrentStamina.Text, NumberStyles.HexNumber);
 
                 codes.Add(0x00020000);
-                codes.Add(0x424527A4);
+                codes.Add(0x4228B0CC);
                 codes.Add(value);
                 codes.Add(0x00000000);
 
                 codes.Add(0x00020000);
-                codes.Add(0x424527A8);
+                codes.Add(0x4228B0D0);
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
 
+            //
             if (cheats.Contains(Cheat.Health))
             {
                 var value = Convert.ToUInt32(mainWindow.CurrentHealth.Text);
 
                 codes.Add(0x30000000);
-                codes.Add(0x42274980);
+                codes.Add(0x420ACBF0);
                 codes.Add(0x43000000);
                 codes.Add(0x46000000);
                 codes.Add(0x00120388);
@@ -223,6 +225,7 @@
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.Speed))
             {
                 var value = uint.Parse(mainWindow.CbSpeed.SelectedValue.ToString(), NumberStyles.HexNumber);
@@ -231,68 +234,63 @@
                 uint activator;
                 if (mainWindow.Controller.SelectedValue.ToString() == "Pro")
                 {
-                    activator = 0x11287DA7;
+                    activator = 0x11287DA6;
                     button = 0x00000004;
                 }
                 else
                 {
-                    activator = 0x102F48AB;
+                    activator = 0x102F48AA;
                     button = 0x00000080;
                 }
 
-                codes.Add(0x09000000);
+                codes.Add(0x30000000);
+                codes.Add(0x3F93B768);
+                codes.Add(0x417A9202);
+                codes.Add(0x45876E2D);
+                codes.Add(0x31000000);
+                codes.Add(0x000000CC);
+                codes.Add(0x03010000);
                 codes.Add(activator);
                 codes.Add(button);
                 codes.Add(0x00000000);
-                codes.Add(0x00020000);
-                codes.Add(0x439D8724);
-                codes.Add(value);
-                codes.Add(0x00000000);
+                codes.Add(0x00120000);
+                codes.Add(0x40C00000);
                 codes.Add(0xD0000000);
-                codes.Add(0xDEADCAFE);
 
-                codes.Add(0x06000000);
+                codes.Add(0xDEADCAFE);
+                codes.Add(0x04010000);
                 codes.Add(activator);
                 codes.Add(button);
                 codes.Add(0x00000000);
-                codes.Add(0x00020000);
-                codes.Add(0x439D8724);
+                codes.Add(0x00120000);
                 codes.Add(0x3F800000);
-                codes.Add(0x00000000);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.Rupees))
             {
                 var value = Convert.ToUInt32(mainWindow.CurrentRupees.Text);
 
                 codes.Add(0x00020000);
-                codes.Add(0x3FCABD10);
-                codes.Add(value);
-                codes.Add(0x00000000);
-
-                codes.Add(0x00020000);
-                codes.Add(0x40123BA4);
+                codes.Add(0x3FF52244);
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
 
+            //
             if (cheats.Contains(Cheat.Mon))
             {
                 var value = Convert.ToUInt32(mainWindow.CurrentMon.Text);
 
                 codes.Add(0x00020000);
-                codes.Add(0x3FD5A158);
-                codes.Add(value);
-                codes.Add(0x00000000);
-                
-                codes.Add(0x00020000);
-                codes.Add(0x401242E4);
+                codes.Add(0x3FF52984);
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
 
+            //
             if (cheats.Contains(Cheat.MoonJump))
             {
                 uint button;
@@ -300,220 +298,266 @@
                 if (mainWindow.Controller.SelectedValue.ToString() == "Pro")
                 {
                     activator = 0x11287DA7;
-                    button = 0x00000008;
+                    button = 0x00000080;
                 }
                 else
                 {
                     activator = 0x102F48AA;
-                    button = 0x00000020;
+                    button = 0x00002000;
                 }
 
-                codes.Add(0x09000000);
+                codes.Add(0x30000000);
+                codes.Add(0x3F93B768);
+                codes.Add(0x417A9202);
+                codes.Add(0x45876E2D);
+                codes.Add(0x31000000);
+                codes.Add(0x000000E0);
+                codes.Add(0x03010000);
                 codes.Add(activator);
                 codes.Add(button);
                 codes.Add(0x00000000);
-                codes.Add(0x00020000);
-                codes.Add(0x439D8738);
-                codes.Add(0xBE800000);
-                codes.Add(0x00000000);
+                codes.Add(0x00120000);
+                codes.Add(0xBF800000);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
 
-                codes.Add(0x06000000);
+                codes.Add(0x04010000);
                 codes.Add(activator);
                 codes.Add(button);
                 codes.Add(0x00000000);
-                codes.Add(0x00020000);
-                codes.Add(0x439D8738);
+                codes.Add(0x00120000);
                 codes.Add(0x3F800000);
-                codes.Add(0x00000000);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.WeaponInv))
             {
                 var value = Convert.ToUInt32(mainWindow.CurrentWeaponSlots.Text);
 
                 codes.Add(0x00020000);
-                codes.Add(0x3FD14480);
+                codes.Add(0x3FB3E000); // 0x3FD14480
                 codes.Add(value);
                 codes.Add(0x00000000);
 
                 codes.Add(0x00020000);
-                codes.Add(0x401244E4);
+                codes.Add(0x3FF52B84);
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
 
+            //
             if (cheats.Contains(Cheat.BowInv))
             {
                 var value = Convert.ToUInt32(mainWindow.CurrentBowSlots.Text);
 
                 codes.Add(0x00020000);
-                codes.Add(0x3FD64B28);
+                codes.Add(0x3FB8F4E8); // 0x3FD64B28
                 codes.Add(value);
                 codes.Add(0x00000000);
 
                 codes.Add(0x00020000);
-                codes.Add(0x4012A404);
+                codes.Add(0x3FF58AA4); // 0x4012A404
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
 
+            //
             if (cheats.Contains(Cheat.ShieldInv))
             {
                 var value = Convert.ToUInt32(mainWindow.CurrentShieldSlots.Text);
 
                 codes.Add(0x00020000);
-                codes.Add(0x3FCD9B40);
+                codes.Add(0x3FB02708); // 0x3FCD9B40
                 codes.Add(value);
                 codes.Add(0x00000000);
 
                 codes.Add(0x00020000);
-                codes.Add(0x4012A424);
+                codes.Add(0x3FF58AC4); // 0x4012A424
                 codes.Add(value);
                 codes.Add(0x00000000);
             }
 
+            //
             if (cheats.Contains(Cheat.Urbosa))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x43AD2220);
-                codes.Add(0x10000000);
-                codes.Add(0x50000000);
+                codes.Add(0x109387CC);
+                codes.Add(0x402CA193);
+                codes.Add(0x4424D5CC);
                 codes.Add(0x31000000);
-                codes.Add(0x00000470);
+                codes.Add(0xFFFFF4E4);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x417A0192);
+                codes.Add(0x4586D4CD);
+                codes.Add(0x31000000);
+                codes.Add(0x00001828);
                 codes.Add(0x00120000);
                 codes.Add(0x00000000);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.Revali))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x43AD2220);
-                codes.Add(0x10000000);
-                codes.Add(0x50000000);
+                codes.Add(0x109387CC);
+                codes.Add(0x402CA193);
+                codes.Add(0x4424D5CC);
                 codes.Add(0x31000000);
-                codes.Add(0x00000458);
+                codes.Add(0xFFFFF4E4);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x417A0192);
+                codes.Add(0x4586D4CD);
+                codes.Add(0x31000000);
+                codes.Add(0x00001810);
                 codes.Add(0x00120000);
                 codes.Add(0x00000000);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.Daruk))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x43AD2220);
-                codes.Add(0x10000000);
-                codes.Add(0x50000000);
+                codes.Add(0x109387CC);
+                codes.Add(0x402CA193);
+                codes.Add(0x4424D5CC);
                 codes.Add(0x31000000);
-                codes.Add(0x00000464);
+                codes.Add(0xFFFFF4E4);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x417A0192);
+                codes.Add(0x4586D4CD);
+                codes.Add(0x31000000);
+                codes.Add(0x0000181C);
                 codes.Add(0x00120000);
                 codes.Add(0x00000000);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.Mipha))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x43AD2220);
-                codes.Add(0x40000000);
-                codes.Add(0x48000000);
+                codes.Add(0x109387CC);
+                codes.Add(0x402CA193);
+                codes.Add(0x4424D5CC);
                 codes.Add(0x31000000);
-                codes.Add(0x0000047C);
+                codes.Add(0xFFFFF4E4);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x417A0192);
+                codes.Add(0x4586D4CD);
+                codes.Add(0x31000000);
+                codes.Add(0x00001834);
                 codes.Add(0x00120000);
                 codes.Add(0x00000000);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.Bombs))
             {
-                codes.Add(0x00020000);
-                codes.Add(0x43856C44);
+                codes.Add(0x30000000);
+                codes.Add(0x109387F8);
+                codes.Add(0x4163401D);
+                codes.Add(0x456EAB02);
+                codes.Add(0x31000000);
+                codes.Add(0x000002E4);
+                codes.Add(0x00120018);
                 codes.Add(0x45B70000);
-                codes.Add(0x00000000);
-
-                codes.Add(0x00020000);
-                codes.Add(0x43856C5C);
+                codes.Add(0x00120000);
                 codes.Add(0x45B70000);
-                codes.Add(0x00000000);
+                codes.Add(0xD0000000);
+                codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.Whips))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x3FAB6B1C);
-                codes.Add(0x10000000);
-                codes.Add(0x50000000);
+                codes.Add(0x4221FE74);
+                codes.Add(0x456A6046);
+                codes.Add(0x49B59319);
                 codes.Add(0x31000000);
-                codes.Add(0xFFFFCA38);
-                codes.Add(0x30100000);
+                codes.Add(0x00003578);
+                codes.Add(0x03100000);
+                codes.Add(0x00000002);
+                codes.Add(0x000000FF);
                 codes.Add(0x00000000);
-                codes.Add(0x10000000);
-                codes.Add(0x50000000);
-                codes.Add(0x31000000);
-                codes.Add(0x00002DD8);
+                codes.Add(0x03100000);
+                codes.Add(0x00000000);
+                codes.Add(0x00000000);
+                codes.Add(0x00000000);
                 codes.Add(0x00110000);
                 codes.Add(0x00000008);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
+            }
 
-                codes.Add(0x30000000);
-                codes.Add(0x3FAB6A44);
-                codes.Add(0x10000000);
-                codes.Add(0x50000000);
-                codes.Add(0x31000000);
-                codes.Add(0xFFFFD0B8);
-                codes.Add(0x30100000);
-                codes.Add(0x00000000);
-                codes.Add(0x10000000);
-                codes.Add(0x50000000);
-                codes.Add(0x31000000);
-                codes.Add(0x000007C0);
-                codes.Add(0x00120000);
-                codes.Add(0x00006FFF);
-                codes.Add(0xD0000000);
-                codes.Add(0xDEADCAFE);
-             }
-
+            //
             if (cheats.Contains(Cheat.Damage))
             {
                 var value = uint.Parse(mainWindow.CbDamage.SelectedValue.ToString(), NumberStyles.HexNumber);
 
                 codes.Add(0x30000000);
-                codes.Add(0x43AD1E30);
-                codes.Add(0x41000000);
-                codes.Add(0x46000000);
-                codes.Add(0x00120770);
+                codes.Add(0x109387CC);
+                codes.Add(0x402CA193);
+                codes.Add(0x4424D5CC);
+                codes.Add(0x31000000);
+                codes.Add(0xFFFFF4E4);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x417A0192);
+                codes.Add(0x4586D4CD);
+                codes.Add(0x31000000);
+                codes.Add(0x00001AA0);
+                codes.Add(0x00120000);
                 codes.Add(value);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.Weather))
             {
                 var value = uint.Parse(mainWindow.CbWeather.SelectedValue.ToString(), NumberStyles.HexNumber);
 
-                codes.Add(0x00020000);
-                codes.Add(0x407CDE1C);
-                codes.Add(value);
+                codes.Add(0x30000000);
+                codes.Add(0x10937E90);
+                codes.Add(0x3E719999);
+                codes.Add(0x424E6666);
+                codes.Add(0x31000000);
+                codes.Add(0x0000008C);
+                codes.Add(0x30100000);
                 codes.Add(0x00000000);
+                codes.Add(0x3E7198E7);
+                codes.Add(0x424E65A8);
+                codes.Add(0x31000000);
+                codes.Add(0x00002340);
+                codes.Add(0x00120000);
+                codes.Add(value);
+                codes.Add(0xD0000000);
+                codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.WolfHealth))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x10903D74);
+                codes.Add(0x1093886C);
                 codes.Add(0x40000000);
                 codes.Add(0x4C89FFFF);
                 codes.Add(0x31000000);
-                codes.Add(0x00000050);
+                codes.Add(0x0000004C);
                 codes.Add(0x30100000);
                 codes.Add(0x00000000);
                 codes.Add(0x40000000);
@@ -524,68 +568,102 @@
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.WeaponDurability))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x451A0994);
-                codes.Add(0x40000000);
-                codes.Add(0x48000000);
+                codes.Add(0x10938798);
+                codes.Add(0x42EBBFD6);
+                codes.Add(0x470F71F9);
+                codes.Add(0x31000000);
+                codes.Add(0x0000009C);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x4024066B);
+                codes.Add(0x441BB25C);
                 codes.Add(0x31000000);
                 codes.Add(0x00000040);
                 codes.Add(0x30100000);
                 codes.Add(0x00000000);
-                codes.Add(0x40000000);
-                codes.Add(0x48000000);
-                codes.Add(0x00120980);
-                codes.Add(0x0063FF9C);
+                codes.Add(0x4302537A);
+                codes.Add(0x47276B1D);
+                codes.Add(0x31000000);
+                codes.Add(0x00000980);
+                codes.Add(0x00120000);
+                codes.Add(0x0000FFFF);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.ShieldDurability))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x451A09F0);
-                codes.Add(0x40000000);
-                codes.Add(0x48000000);
+                codes.Add(0x10938798);
+                codes.Add(0x42EBBFD6);
+                codes.Add(0x470F71F9);
+                codes.Add(0x31000000);
+                codes.Add(0x000000F8);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x402406B1);
+                codes.Add(0x441BB2A6);
                 codes.Add(0x31000000);
                 codes.Add(0x00000040);
                 codes.Add(0x30100000);
                 codes.Add(0x00000000);
-                codes.Add(0x40000000);
-                codes.Add(0x48000000);
-                codes.Add(0x00120980);
-                codes.Add(0x0063FF9C);
+                codes.Add(0x43025E8E);
+                codes.Add(0x472776E1);
+                codes.Add(0x31000000);
+                codes.Add(0x00000980);
+                codes.Add(0x00120000);
+                codes.Add(0x0000FFFF);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.BowDurability))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x451A0A4C);
-                codes.Add(0x40000000);
-                codes.Add(0x48000000);
+                codes.Add(0x10938798);
+                codes.Add(0x42EBBFD6);
+                codes.Add(0x470F71F9);
+                codes.Add(0x31000000);
+                codes.Add(0x00000154);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x402406F6);
+                codes.Add(0x441BB2F1);
                 codes.Add(0x31000000);
                 codes.Add(0x00000040);
                 codes.Add(0x30100000);
                 codes.Add(0x00000000);
-                codes.Add(0x40000000);
-                codes.Add(0x48000000);
-                codes.Add(0x00120980);
-                codes.Add(0x0063FF9C);
+                codes.Add(0x430269A2);
+                codes.Add(0x472782A5);
+                codes.Add(0x31000000);
+                codes.Add(0x00000980);
+                codes.Add(0x00120000);
+                codes.Add(0x0000FFFF);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.MasterCharge))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x43AD2220);
-                codes.Add(0x10000000);
-                codes.Add(0x50000000);
+                codes.Add(0x109387CC);
+                codes.Add(0x402CA193);
+                codes.Add(0x4424D5CC);
                 codes.Add(0x31000000);
-                codes.Add(0x00000488);
+                codes.Add(0xFFFFF4E4);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x417A0192);
+                codes.Add(0x4586D4CD);
+                codes.Add(0x31000000);
+                codes.Add(0x00001840);
                 codes.Add(0x05120000);
                 codes.Add(0x00000000);
                 codes.Add(0x40800000);
@@ -596,52 +674,99 @@
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.MasterGlow))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x42452678);
-                codes.Add(0x42400000);
-                codes.Add(0x42500000);
+                codes.Add(0x109387CC);
+                codes.Add(0x402CA193);
+                codes.Add(0x4424D5CC);
                 codes.Add(0x31000000);
-                codes.Add(0x00002B64);
+                codes.Add(0xFFFFF3F0);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x402C96A6);
+                codes.Add(0x4424CA31);
+                codes.Add(0x31000000);
+                codes.Add(0x00002E6C);
                 codes.Add(0x00100000);
                 codes.Add(0x00000001);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.StasisCooldown))
             {
-                codes.Add(0x00020000);
-                codes.Add(0x43856CCC);
+                codes.Add(0x30000000);
+                codes.Add(0x109387F8);
+                codes.Add(0x4163401D);
+                codes.Add(0x456EAB02);
+                codes.Add(0x31000000);
+                codes.Add(0x0000036C);
+                codes.Add(0x00120000);
                 codes.Add(0x00000000);
-                codes.Add(0x00000000);
+                codes.Add(0xD0000000);
+                codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.Stealthy))
             {
-                codes.Add(0x00020000);
-                codes.Add(0x43A77EA8);
+                codes.Add(0x30000000);
+                codes.Add(0x109387CC);
+                codes.Add(0x402CA193);
+                codes.Add(0x4424D5CC);
+                codes.Add(0x31000000);
+                codes.Add(0xFFFFF4E4);
+                codes.Add(0x30100000);
                 codes.Add(0x00000000);
+                codes.Add(0x417A0192);
+                codes.Add(0x4586D4CD);
+                codes.Add(0x31000000);
+                codes.Add(0x000003C4);
+                codes.Add(0x30100000);
                 codes.Add(0x00000000);
+                codes.Add(0x41843686);
+                codes.Add(0x4591AB61);
+                codes.Add(0x31000000);
+                codes.Add(0x00000134);
+                codes.Add(0x00120000);
+                codes.Add(0x00000000);
+                codes.Add(0xD0000000);
+                codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.Amiibo))
             {
-                codes.Add(0x00020000);
-                codes.Add(0x401343E4);
+                codes.Add(0x30000000);
+                codes.Add(0x3EB76A78);
+                codes.Add(0x3E0AECF6);
+                codes.Add(0x41E15FE9);
+                codes.Add(0x31000000);
+                codes.Add(0x00000414);
+                codes.Add(0x00120000);
                 codes.Add(0x012C9985);
-                codes.Add(0x00000000);
+                codes.Add(0xD0000000);
+                codes.Add(0xDEADCAFE);
             }
 
+            //
             if (cheats.Contains(Cheat.Immune))
             {
                 codes.Add(0x30000000);
-                codes.Add(0x43AD1E30);
-                codes.Add(0x10000000);
-                codes.Add(0x50000000);
+                codes.Add(0x109387CC);
+                codes.Add(0x402CA193);
+                codes.Add(0x4424D5CC);
                 codes.Add(0x31000000);
-                codes.Add(0x000006FC);
+                codes.Add(0xFFFFF4E4);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x417A0192);
+                codes.Add(0x4586D4CD);
+                codes.Add(0x31000000);
+                codes.Add(0x00001A2C);
                 codes.Add(0x00120000);
                 codes.Add(0x00000003);
                 codes.Add(0x0012001C);
@@ -663,6 +788,6 @@
             }
 
             return codes;
-        } 
+        }
     }
 }

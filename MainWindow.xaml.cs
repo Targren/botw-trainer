@@ -29,7 +29,7 @@
     public partial class MainWindow
     {
         // The original list of values that take effect when you save / load
-        private const uint SaveItemStart = 0x3FD00FD0;
+        private const uint SaveItemStart = 0x3FB2A550; // 0x3FD00FD0
 
         private const uint CodeHandlerStart = 0x01133000;
 
@@ -39,7 +39,7 @@
 
         private const uint ObjectStart = 0x4090FEF8; // old
 
-        private const uint ObjectEnd = 0x40A4A88C; // old
+        //private const uint ObjectEnd = 0x40A4A88C; // old
 
         private readonly List<TextBox> tbChanged = new List<TextBox>();
 
@@ -48,7 +48,7 @@
         private readonly List<CheckBox> cbChanged = new List<CheckBox>();
 
         // Technically your first item as they are stored in reverse so we work backwards
-        private const uint ItemEnd = 0x43CBAB10;
+        private const uint ItemEnd = 0x43AF4B14; //0x43CBAB10;
 
         private int itemTotal = 0;
 
@@ -192,7 +192,7 @@
         {
             try
             {
-                itemTotal = gecko.GetInt(0x43C83090);
+                itemTotal = gecko.GetInt(0x43ABD094); // 0x43C83090
 
                 var currentItemAddress = ItemEnd;
 
@@ -697,8 +697,10 @@
         {
             var hour = Convert.ToSingle(CurrentTime.Text) * 15;
 
-            var timePointer = gecko.GetUInt(0x407C3D24);
-            gecko.WriteFloat(timePointer + 0xA0, hour);
+            var timePointer = gecko.GetUInt(0x10937E90) + 0x8C;
+            timePointer = gecko.GetUInt(timePointer) + 0xA8;
+
+            gecko.WriteFloat(timePointer + 0x8, hour);
         }
 
         private void LoadCoords()
@@ -993,18 +995,28 @@
         private void GetNonItemData()
         {
             // Code Tab Values
-            CurrentStamina.Text = gecko.GetString(0x424527A4);
-            var healthPointer = gecko.GetUInt(0x42274980);
-            CurrentHealth.Text = gecko.GetInt(healthPointer + 0x388).ToString(CultureInfo.InvariantCulture);
-            CurrentRupees.Text = gecko.GetInt(0x40123BA4).ToString(CultureInfo.InvariantCulture);
-            CurrentMon.Text = gecko.GetInt(0x401242E4).ToString(CultureInfo.InvariantCulture);
-            CurrentWeaponSlots.Text = gecko.GetInt(0x401244E4).ToString(CultureInfo.InvariantCulture);
-            CurrentBowSlots.Text = gecko.GetInt(0x4012A404).ToString(CultureInfo.InvariantCulture);
-            CurrentShieldSlots.Text = gecko.GetInt(0x4012A424).ToString(CultureInfo.InvariantCulture);
+            CurrentStamina.Text = gecko.GetString(0x4228B0CC);
 
-            var damagePointer = gecko.GetUInt(0x43AD1E30);
-            CbDamage.SelectedValue = gecko.GetString(damagePointer + 0x770);
-            CbWeather.SelectedValue = gecko.GetString(0x407CDE1C);
+            var healthPointer = gecko.GetUInt(0x420ACBF0);
+            CurrentHealth.Text = gecko.GetInt(healthPointer + 0x388).ToString(CultureInfo.InvariantCulture);
+
+            CurrentRupees.Text = gecko.GetInt(0x3FF52244).ToString(CultureInfo.InvariantCulture);
+
+            CurrentMon.Text = gecko.GetInt(0x3FF52984).ToString(CultureInfo.InvariantCulture);
+
+            CurrentWeaponSlots.Text = gecko.GetInt(0x3FF52B84).ToString(CultureInfo.InvariantCulture);
+
+            CurrentBowSlots.Text = gecko.GetInt(0x3FF58AA4).ToString(CultureInfo.InvariantCulture);
+
+            CurrentShieldSlots.Text = gecko.GetInt(0x3FF58AC4).ToString(CultureInfo.InvariantCulture);
+            
+            var damagePointer = gecko.GetUInt(0x109387CC) - 0xB1B;
+            damagePointer = gecko.GetUInt(0x109387CC) + 0x1AA0;
+            CbDamage.SelectedValue = gecko.GetString(damagePointer);
+
+            var weatherPointer = gecko.GetUInt(0x10937E90) + 0x8C;
+            weatherPointer = gecko.GetUInt(weatherPointer) + 0x2340;
+            CbWeather.SelectedValue = gecko.GetString(weatherPointer);
 
             var time = GetCurrentTime();
             CurrentTime.Text = time.ToString(CultureInfo.InvariantCulture);
@@ -1417,9 +1429,10 @@
         {
             try
             {
-                var timePointer = gecko.GetUInt(0x407C3D24);
+                var timePointer = gecko.GetUInt(0x10937E90) + 0x8C;
+                timePointer = gecko.GetUInt(timePointer) + 0xA8;
 
-                var time = gecko.GetFloat(timePointer + 0x98);
+                var time = gecko.GetFloat(timePointer);
 
                 var hour = Convert.ToInt32(time) / 15;
 

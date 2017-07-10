@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:json="clr-namespace:BotwTrainer.Json"
       mc:Ignorable="d"
-        Title="BOTW Trainer (PAL/NTSC 1.2.0) |" Height="700" Width="1020">
+        Title="BOTW Trainer (PAL/NTSC 1.3.0) |" Height="700" Width="1020">
 
     <Grid Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -88,9 +88,9 @@
                         <ComboBoxItem Content="Gamepad"/>
                     </ComboBox>
 
-                    <Label Content="Stamina" Height="26" Margin="0" Canvas.Left="10" Canvas.Top="88" ToolTip="Infinite Stamina"/>
+                    <Label Content="Inf Stamina" Height="26" Margin="0" Canvas.Left="10" Canvas.Top="88" ToolTip="Infinite Stamina"/>
                     <CheckBox x:Name="Stamina" Margin="0" Canvas.Left="160" Canvas.Top="94" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" />
-                    <TextBox x:Name="CurrentStamina" Height="25" Width="90" Margin="0" Canvas.Left="200" Canvas.Top="88" CharacterCasing="Upper" MaxLength="8" TextChanged="TextChanged"/>
+                    <TextBox x:Name="CurrentStamina" Height="25" Width="90" Margin="0" Canvas.Left="200" Canvas.Top="88" CharacterCasing="Upper" MaxLength="8" TextChanged="TextChanged" />
 
                     <Label Content="Health (Max 120)" Height="26" Margin="0" Canvas.Left="10" Canvas.Top="118" ToolTip="Infinite Health"/>
                     <CheckBox x:Name="Health" Margin="0" Canvas.Left="160" Canvas.Top="124" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
@@ -117,7 +117,7 @@
                     <Label Content="Hold ZL" Height="25" Margin="0" Canvas.Left="295" Canvas.Top="208"/>
 
                     <Label Content="Damage Mult." Height="26" Margin="0" Canvas.Left="10" Canvas.Top="238" ToolTip="Damage Multiplier when striking an enemy"/>
-                    <CheckBox x:Name="Damage" Margin="0" Canvas.Left="160" Canvas.Top="244" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
+                    <CheckBox x:Name="Damage" Margin="0" Canvas.Left="160" Canvas.Top="244" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" />
                     <ComboBox x:Name="CbDamage" Canvas.Left="200" Canvas.Top="241" Width="90" SelectedValuePath="Tag" SelectionChanged="SelectionChanged">
                         <ComboBoxItem Tag="3F000000" Content="3F000000 - 0.5"/>
                         <ComboBoxItem Tag="3F800000" Content="3F800000 - 1.0 (Default)"/>
