@@ -273,10 +273,27 @@
             {
                 var value = Convert.ToUInt32(mainWindow.CurrentRupees.Text);
 
+                /*
                 codes.Add(0x00020000);
                 codes.Add(0x3FF52244);
                 codes.Add(value);
                 codes.Add(0x00000000);
+                */
+
+                codes.Add(0x00020000);
+                codes.Add(0x13000188);
+                codes.Add(value);
+                codes.Add(0x00000000);
+                codes.Add(0x12000001);
+                codes.Add(0x13000188);
+                codes.Add(0x13000001);
+                codes.Add(0x43D6675C);
+                codes.Add(0x13000001);
+                codes.Add(0x43D66760);
+                codes.Add(0x13000001);
+                codes.Add(0x3FAD4678);
+                codes.Add(0x13000001);
+                codes.Add(0x3FF52244);
             }
 
             //
@@ -284,10 +301,27 @@
             {
                 var value = Convert.ToUInt32(mainWindow.CurrentMon.Text);
 
+                /*
                 codes.Add(0x00020000);
                 codes.Add(0x3FF52984);
                 codes.Add(value);
                 codes.Add(0x00000000);
+                */
+
+                codes.Add(0x00020000);
+                codes.Add(0x1300018C);
+                codes.Add(value);
+                codes.Add(0x00000000);
+                codes.Add(0x12000001);
+                codes.Add(0x1300018C);
+                codes.Add(0x13000001);
+                codes.Add(0x449AD5CC);
+                codes.Add(0x13000001);
+                codes.Add(0x449AD5D0);
+                codes.Add(0x13000001);
+                codes.Add(0x3FB84728);
+                codes.Add(0x13000001);
+                codes.Add(0x3FF52984);
             }
 
             //
