@@ -254,7 +254,7 @@
                 codes.Add(button);
                 codes.Add(0x00000000);
                 codes.Add(0x00120000);
-                codes.Add(0x40C00000);
+                codes.Add(value);
                 codes.Add(0xD0000000);
 
                 codes.Add(0xDEADCAFE);
