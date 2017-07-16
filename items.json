@@ -2922,6 +2922,9 @@
       "GameRomHorseSaddle_05": {
         "Name": "Extravagant Saddle"
       }
+      "Obj_WarpDLC": {
+        "Name": "Travel Medallion"
+      }
     }
   },
   "Others": {
