@@ -1345,6 +1345,33 @@
       "Armor_170_Upper": {
         "Name": "Nintendo Switch Shirt"
       },
+      "Armor_171_Head": {
+        "Name": "Phantom Helmet"
+      },
+      "Armor_171_Upper": {
+        "Name": "Phantom Armor"
+      },
+      "Armor_171_Lower": {
+        "Name": "Phantom Greaves"
+      },
+      "Armor_172_Head": {
+        "Name": "Majora's Mask"
+      },
+      "Armor_173_Head": {
+        "Name": "Midna's Helmet"
+      },
+      "Armor_174_Head": {
+        "Name": "Tingle's Hood"
+      },
+      "Armor_174_Upper": {
+        "Name": "Tingle's Shirt"
+      },
+      "Armor_174_Lower": {
+        "Name": "Tingle's Tights"
+      },
+      "Armor_176_Head": {
+        "Name": "Korok Mask"
+      },
       "Armor_200_Head": {
         "Name": "Cap of Time"
       },
@@ -2894,6 +2921,9 @@
       },
       "GameRomHorseSaddle_05": {
         "Name": "Extravagant Saddle"
+      },
+      "Obj_WarpDLC": {
+        "Name": "Travel Medallion"
       }
     }
   },
