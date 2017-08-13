@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:json="clr-namespace:BotwTrainer.Json"
       mc:Ignorable="d"
-        Title="BOTW Trainer (PAL/NTSC 1.3.0) |" Height="700" Width="1020">
+        Title="BOTW Trainer (PAL/NTSC 1.3.1) |" Height="700" Width="1020">
 
     <Grid Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -132,7 +132,7 @@
                     <ComboBox x:Name="CbWeather" Canvas.Left="200" Canvas.Top="271" Width="90" SelectedValuePath="Tag" SelectionChanged="SelectionChanged">
                         <ComboBoxItem Tag="01030002" Content="01030002 - Cloudy"/>
                         <ComboBoxItem Tag="03010002" Content="03010002 - Raining"/>
-                        <ComboBoxItem Tag="00010002" Content="00000100 - Sunny"/>
+                        <ComboBoxItem Tag="00010002" Content="00010002 - Sunny"/>
                         <ComboBoxItem Tag="07000007" Content="07000007 - Lightning"/>
                         <ComboBoxItem Tag="05000007" Content="05000007 - Fog/Snow"/>
                     </ComboBox>

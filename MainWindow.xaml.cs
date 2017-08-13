@@ -192,7 +192,10 @@
         {
             try
             {
-                itemTotal = gecko.GetInt(0x43ABD094); // 0x43C83090
+                itemTotal = gecko.GetInt(0x43ABD094); 
+                    // 0x43ABD094 - 1.3.1
+                    // 0x43ABD094 - 1.3.0
+                    // 0x43C83090
 
                 var currentItemAddress = ItemEnd;
 
@@ -696,8 +699,8 @@
         private void ChangeTimeClick(object sender, RoutedEventArgs e)
         {
             var hour = Convert.ToSingle(CurrentTime.Text) * 15;
-
-            var timePointer = gecko.GetUInt(0x10937E90) + 0x8C;
+            
+            var timePointer = gecko.GetUInt(0x10938150) + 0x8C; //0x10937E90
             timePointer = gecko.GetUInt(timePointer) + 0xA8;
 
             gecko.WriteFloat(timePointer + 0x8, hour);
@@ -994,8 +997,11 @@
 
         private void GetNonItemData()
         {
-            // Code Tab Values
-            CurrentStamina.Text = gecko.GetString(0x4228B0CC);
+            // Code Tab Values       
+            // This seems to change in 1.3.1. Redone according to Skoolzout1's Inf Stamina code
+            var staminaPointer = gecko.GetUInt(0x10938A8C) - 0xC10;
+            staminaPointer = gecko.GetUInt(staminaPointer) + 0x60;
+            CurrentStamina.Text = gecko.GetString(staminaPointer);//0x4228B0CC
 
             var healthPointer = gecko.GetUInt(0x420ACBF0);
             CurrentHealth.Text = gecko.GetInt(healthPointer + 0x388).ToString(CultureInfo.InvariantCulture);
@@ -1009,14 +1015,26 @@
             CurrentBowSlots.Text = gecko.GetInt(0x3FF58AA4).ToString(CultureInfo.InvariantCulture);
 
             CurrentShieldSlots.Text = gecko.GetInt(0x3FF58AC4).ToString(CultureInfo.InvariantCulture);
-            
+
+
+            //Damage Mult. 
+            //Causes DSI error when reading on 1.3.1?
+            /*
             var damagePointer = gecko.GetUInt(0x109387CC) - 0xB1B;
             damagePointer = gecko.GetUInt(0x109387CC) + 0x1AA0;
             CbDamage.SelectedValue = gecko.GetString(damagePointer);
+            */
 
+            /*
             var weatherPointer = gecko.GetUInt(0x10937E90) + 0x8C;
             weatherPointer = gecko.GetUInt(weatherPointer) + 0x2340;
             CbWeather.SelectedValue = gecko.GetString(weatherPointer);
+            */
+            //1.3.1
+            var weatherPointer = gecko.GetUInt(0x10938150) + 0x8C;
+            weatherPointer = gecko.GetUInt(weatherPointer) + 0x2340;
+            CbWeather.SelectedValue = gecko.GetString(weatherPointer);
+
 
             var time = GetCurrentTime();
             CurrentTime.Text = time.ToString(CultureInfo.InvariantCulture);
@@ -1429,7 +1447,8 @@
         {
             try
             {
-                var timePointer = gecko.GetUInt(0x10937E90) + 0x8C;
+                
+                var timePointer = gecko.GetUInt(0x10938150) + 0x8C; //0x10937E90
                 timePointer = gecko.GetUInt(timePointer) + 0xA8;
 
                 var time = gecko.GetFloat(timePointer);
