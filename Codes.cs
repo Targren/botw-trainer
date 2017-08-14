@@ -631,25 +631,49 @@
                 codes.Add(0xDEADCAFE);
                 */
                 //1.3.1 by Skoolzout1
-                //Changed to latest version, but still doesn't seem to work
+                //New codes for Inf Whips and Inf Horse Health
+                //Note: Only works on horses taken out of stable with code active
+                //Whips
                 codes.Add(0x30000000);
-                codes.Add(0x4221FE74);
-                codes.Add(0x456A6046);
-                codes.Add(0x49B59319);
+                codes.Add(0x3F8DECC4);
+                codes.Add(0x4572665B);
+                codes.Add(0x49BE183C);
                 codes.Add(0x31000000);
-                codes.Add(0x00003578);
-                codes.Add(0x03100000);
-                codes.Add(0x00000002);
-                codes.Add(0x000000FF);
+                codes.Add(0xFFFFC064);
+                codes.Add(0x30100000);
                 codes.Add(0x00000000);
-                codes.Add(0x03100000);
-                codes.Add(0x00000000);
-                codes.Add(0x00000000);
-                codes.Add(0x00000000);
+                codes.Add(0x4571FDC3);
+                codes.Add(0x49BDA92C);
+                codes.Add(0x31000000);
+                codes.Add(0x000006B0);
                 codes.Add(0x00110000);
                 codes.Add(0x00000008);
                 codes.Add(0xD0000000);
                 codes.Add(0xDEADCAFE);
+                //Health
+                
+                codes.Add(0x30000000);
+                codes.Add(0x3F8DECC4);
+                codes.Add(0x4572665B);
+                codes.Add(0x49BE183C);
+                codes.Add(0x31000000);
+                codes.Add(0xFFFFC064);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x4571FDC3);
+                codes.Add(0x49BDA92C);
+                codes.Add(0x31000000);
+                codes.Add(0x000006BC);
+                codes.Add(0x30100000);
+                codes.Add(0x00000000);
+                codes.Add(0x452E876E);
+                codes.Add(0x49760691);
+                codes.Add(0x31000000);
+                codes.Add(0x000007C0);
+                codes.Add(0x00120000);
+                codes.Add(0x00007F00);
+                codes.Add(0xD0000000);
+                codes.Add(0xDEADCAFE);                
             }
 
             //
