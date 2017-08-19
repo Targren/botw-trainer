@@ -66,6 +66,8 @@
 
         private bool connected;
 
+        private string game_version; 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -84,10 +86,9 @@
         private void MainWindowLoaded(object sender, RoutedEventArgs e)
         {
             // Testing
-            // this.TabControl.IsEnabled = true;
-
+            // this.TabControl.IsEnabled = true;            
             Title = string.Format("{0} v{1}", Title, Settings.Default.CurrentVersion);
-
+            
             var netVersion = new GetDotNetVersion().Get45PlusFromRegistry();
             if(netVersion.Version == null)
             {
@@ -183,8 +184,7 @@
                 LogError(ex, "Error loading json.");
             }
 
-            IpAddress.Text = Settings.Default.IpAddress;
-
+            IpAddress.Text = Settings.Default.IpAddress;            
             Save.IsEnabled = HasChanged;
         }
 
@@ -776,7 +776,7 @@
                 gecko = new Gecko(tcpConn, this);
 
                 if (connected)
-                {
+                {                    
                     var status = gecko.GetServerStatus();
                     if (status == 0)
                     {
@@ -788,6 +788,7 @@
 
                     Controller.SelectedValue = Settings.Default.Controller;
 
+                    GetGameVersion();
                     GetNonItemData();
 
                     ToggleControls("Connected");
@@ -995,8 +996,32 @@
             tab.Content = scroll;
         }
 
-        private void GetNonItemData()
+        private void GetGameVersion()
         {
+            //Installed Game Version (Experimental)
+            //Pointer found to be stable from 1.1.2 to 1.3.1 (Thanks, skoolzout1)
+            //[[0x10045D5C] + 0x4BC] + 0xCCC
+            GameVersion.Content = "Game Version ";
+            var versionPtr = gecko.GetUInt(0x10045D5C) + 0x4BC;
+            versionPtr = gecko.GetUInt(versionPtr) + 0xCCC;
+            List<byte> versionBytes = new List<byte>();
+
+            byte[] vbytes;
+            bool flag = true;
+            while (flag)
+            {
+                vbytes = gecko.ReadBytes(versionPtr++, 0x1); //Read one byte at a time so we can watch for the null terminator                
+                if (vbytes.Length == 0 || vbytes[0] == (byte)0) { flag = false; break; }
+                versionBytes.Add(vbytes[0]);
+            }
+
+            game_version = System.Text.Encoding.Default.GetString(versionBytes.ToArray());
+            GameVersion.Content += game_version;
+
+        }
+
+        private void GetNonItemData()
+        {         
             // Code Tab Values       
             // This seems to change in 1.3.1. Redone according to Skoolzout1's Inf Stamina code
             var staminaPointer = gecko.GetUInt(0x10938A8C) - 0xC10;

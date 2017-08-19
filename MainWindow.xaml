@@ -17,6 +17,9 @@
 
         <Canvas Grid.Row="0" Margin="0" HorizontalAlignment="Stretch">
             <TextBox x:Name="IpAddress" HorizontalAlignment="Left" Height="21" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" Canvas.Left="4" Canvas.Top="13" Visibility="Visible"/>
+            <TextBlock HorizontalAlignment="Left" Canvas.Top="30" Canvas.Left="4">
+               <Label x:Name="GameVersion"/>
+            </TextBlock>
 
             <CheckBox x:Name="GetBufferSize" Content="Get Buffer Size" Canvas.Left="209" Canvas.Top="16" IsChecked="True"/>
 
@@ -116,8 +119,8 @@
                     </ComboBox>
                     <Label Content="Hold ZL" Height="25" Margin="0" Canvas.Left="295" Canvas.Top="208"/>
 
-                    <Label Content="Damage Mult." Height="26" Margin="0" Canvas.Left="10" Canvas.Top="238" ToolTip="Damage Multiplier when striking an enemy"/>
-                    <CheckBox x:Name="Damage" Margin="0" Canvas.Left="160" Canvas.Top="244" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" />
+                    <Label Content="Damage Mult. (broken)" Height="26" Margin="0" Canvas.Left="10" Canvas.Top="238" ToolTip="Damage Multiplier when striking an enemy"/>
+                    <!--CheckBox x:Name="Damage" Margin="0" Canvas.Left="160" Canvas.Top="244" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" />
                     <ComboBox x:Name="CbDamage" Canvas.Left="200" Canvas.Top="241" Width="90" SelectedValuePath="Tag" SelectionChanged="SelectionChanged">
                         <ComboBoxItem Tag="3F000000" Content="3F000000 - 0.5"/>
                         <ComboBoxItem Tag="3F800000" Content="3F800000 - 1.0 (Default)"/>
@@ -125,7 +128,7 @@
                         <ComboBoxItem Tag="42C80000" Content="42C80000 - 100"/>
                         <ComboBoxItem Tag="43FA0000" Content="43FA0000 - 500"/>
                         <ComboBoxItem Tag="461C4000" Content="461C4000 - 10,000"/>
-                    </ComboBox>
+                    </ComboBox-->                    
 
                     <Label Content="Weather" Height="26" Margin="0" Canvas.Left="10" Canvas.Top="268" ToolTip="Set the current weather"/>
                     <CheckBox x:Name="Weather" Margin="0" Canvas.Left="160" Canvas.Top="274" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
