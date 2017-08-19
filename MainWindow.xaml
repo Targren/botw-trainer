@@ -128,7 +128,7 @@
                         <ComboBoxItem Tag="42C80000" Content="42C80000 - 100"/>
                         <ComboBoxItem Tag="43FA0000" Content="43FA0000 - 500"/>
                         <ComboBoxItem Tag="461C4000" Content="461C4000 - 10,000"/>
-                    </ComboBox-->                    
+                    </ComboBox>                    
 
                     <Label Content="Weather" Height="26" Margin="0" Canvas.Left="10" Canvas.Top="268" ToolTip="Set the current weather"/>
                     <CheckBox x:Name="Weather" Margin="0" Canvas.Left="160" Canvas.Top="274" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>
