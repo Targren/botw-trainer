@@ -117,8 +117,8 @@
                     <Label Content="Hold ZL" Height="25" Margin="0" Canvas.Left="295" Canvas.Top="208"/>
 
                     <Label Content="Damage Mult." Height="26" Margin="0" Canvas.Left="10" Canvas.Top="238" ToolTip="Damage Multiplier when striking an enemy"/>
-                    <CheckBox x:Name="Damage" Margin="0" Canvas.Left="160" Canvas.Top="244" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" IsEnabled="False" />
-                    <ComboBox x:Name="CbDamage" Canvas.Left="200" Canvas.Top="241" Width="90" SelectedValuePath="Tag" SelectionChanged="SelectionChanged" IsEnabled="False">
+                    <CheckBox x:Name="Damage" Margin="0" Canvas.Left="160" Canvas.Top="244" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" />
+                    <ComboBox x:Name="CbDamage" Canvas.Left="200" Canvas.Top="241" Width="90" SelectedValuePath="Tag" SelectionChanged="SelectionChanged">
                         <ComboBoxItem Tag="3F000000" Content="3F000000 - 0.5"/>
                         <ComboBoxItem Tag="3F800000" Content="3F800000 - 1.0 (Default)"/>
                         <ComboBoxItem Tag="42480000" Content="42480000 - 50"/>
@@ -173,7 +173,7 @@
                     <TextBox x:Name="CurrentShieldSlots" Height="25" Width="30" Margin="0" Canvas.Left="551" Canvas.Top="239" PreviewTextInput="NumberValidationTextBox" TextChanged="TextChanged"/>
 
                     <Label Content="Horse Whips/Health" Height="26" Canvas.Left="401" Canvas.Top="268"/>
-                    <CheckBox x:Name="HorseWhips" Margin="0" Canvas.Left="521" Canvas.Top="274" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" IsEnabled="False" />
+                    <CheckBox x:Name="HorseWhips" Margin="0" Canvas.Left="521" Canvas.Top="274" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" />
 
                     <Label Content="Moon Jump" Height="26" Canvas.Left="621" Canvas.Top="58"/>
                     <CheckBox x:Name="MoonJump" Margin="0" Canvas.Left="751" Canvas.Top="64" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"/>

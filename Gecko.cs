@@ -20,7 +20,14 @@
          this.mainWindow = mainWindow;
          if (mainWindow.GetBufferSize.IsChecked == true)
          {
-            maximumMemoryChunkSize = ReadDataBufferSize();
+            try
+            {
+               maximumMemoryChunkSize = ReadDataBufferSize();
+            }
+            catch (Exception ex)
+            {
+               mainWindow.LogError(ex);
+            }
          }
       }
 
