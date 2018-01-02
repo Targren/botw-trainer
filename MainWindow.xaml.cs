@@ -18,7 +18,7 @@
    using System.Windows.Input;
    using System.Windows.Media;
    using System.Windows.Navigation;
-
+   using System.Xml.Linq;
    using BotwTrainer.Properties;
 
    using Newtonsoft.Json.Linq;
@@ -29,17 +29,13 @@
    public partial class MainWindow
    {
       // The original list of values that take effect when you save / load
-      private const uint SaveItemStart = 0x3FB2A550;
+      private const uint SaveItemStart = 0x3FDF91C8; //0x3FB2A550;
 
       private const uint CodeHandlerStart = 0x01133000;
 
       private const uint CodeHandlerEnd = 0x01134300;
 
       private const uint CodeHandlerEnabled = 0x10014CFC;
-
-      private const uint ObjectStart = 0x4090FEF8;
-
-      //private const uint ObjectEnd = 0x40A4A88C;
 
       private readonly List<TextBox> tbChanged = new List<TextBox>();
 
@@ -48,21 +44,20 @@
       private readonly List<CheckBox> cbChanged = new List<CheckBox>();
 
       // Technically your first item as they are stored in reverse so we work backwards
-      private const uint ItemEnd = 0x43AF4B14;
+      // start 43DAB0D8?
+      private const uint ItemEnd = 0x43DC4B18; //0x43AF4B14;
 
       private int itemTotal = 0;
 
       private List<Item> items;
 
-      private List<Obj> objects;
+      private List<uint> codes;
 
       private JToken json;
 
       private TcpConn tcpConn;
 
       private Gecko gecko;
-
-      private Codes codes;
 
       private bool connected;
 
@@ -105,10 +100,6 @@
          }
 
          items = new List<Item>();
-
-         objects = new List<Obj>();
-
-         codes = new Codes(this);
 
          var client = new WebClient
          {
@@ -189,7 +180,7 @@
       {
          try
          {
-            itemTotal = gecko.GetInt(0x43ABD094);
+            itemTotal = gecko.GetInt(0x43D8D098);
             // 0x43ABD094 - 1.3.1
             // 0x43ABD094 - 1.3.0
             // 0x43C83090
@@ -291,7 +282,7 @@
          #region SaveLoad
          try
          {
-            // For these we amend the 0x3FCE7FF0 area which requires save/load
+            // For these we amend the 0x3F area which requires save/load
             if (Equals(tab, Weapons) || Equals(tab, Bows) || Equals(tab, Shields)
                 || Equals(tab, Armor))
             {
@@ -483,11 +474,9 @@
                Array.Clear(array, 0, array.Length);
                gecko.WriteBytes(CodeHandlerStart, array);
 
-               var codelist = codes.CreateCodeList();
-
                // Write our selected codes to mem stream
                var ms = new MemoryStream();
-               foreach (var code in codelist)
+               foreach (var code in codes)
                {
                   var b = BitConverter.GetBytes(code);
                   ms.Write(b.Reverse().ToArray(), 0, 4);
@@ -500,11 +489,13 @@
                gecko.WriteUInt(CodeHandlerEnabled, 0x00000001);
 
                // Save controller choice
+               /*
                if (Controller.SelectedValue.ToString() != Settings.Default.Controller)
                {
                   Settings.Default.Controller = Controller.SelectedValue.ToString();
                   Settings.Default.Save();
                }
+               */
             }
 
             DebugGrid.ItemsSource = items;
@@ -523,60 +514,6 @@
          #endregion
 
          return true;
-      }
-
-      private bool LoadObjectData()
-      {
-         try
-         {
-            var objectTotal = 4414;
-
-            var currentObjectAddress = ObjectStart;
-
-            for (var x = 1; x <= objectTotal; x++)
-            {
-               var objectData = gecko.ReadBytes(currentObjectAddress, 0x120);
-
-               var builder = new StringBuilder();
-               for (var i = 0; i < 36; i++)
-               {
-                  var data = objectData.Skip(i).Take(1).ToArray()[0];
-                  if (data == 0)
-                  {
-                     break;
-                  }
-
-                  builder.Append((char)data);
-               }
-
-               var id = builder.ToString();
-
-               var obj = new Obj
-               {
-                  Id = id,
-                  Address = currentObjectAddress
-               };
-
-               objects.Add(obj);
-
-               var currentPercent = (100m / objectTotal) * x;
-               Dispatcher.Invoke(
-                   () =>
-                   {
-                      ProgressText.Text = string.Format("{0}/{1}", x, objectTotal);
-                      UpdateProgress(Convert.ToInt32(currentPercent));
-                   });
-
-               currentObjectAddress += 0x124;
-            }
-
-            return true;
-         }
-         catch (Exception ex)
-         {
-            Dispatcher.Invoke(() => LogError(ex));
-            return false;
-         }
       }
 
       private async void EnableCoordsOnChecked(object sender, RoutedEventArgs e)
@@ -629,38 +566,15 @@
          }
       }
 
-      private async void LoadObjectsClick(object sender, RoutedEventArgs e)
-      {
-         objects.Clear();
-
-         LoadObjects.IsEnabled = false;
-
-         try
-         {
-            var result = await Task.Run(() => LoadObjectData());
-
-            if (result)
-            {
-               using (StreamWriter sw = File.CreateText("objects.csv"))
-               {
-                  for (int i = 0; i < objects.Count; i++)
-                  {
-                     sw.WriteLine(objects[i].Id + "," + objects[i].Address.ToString("X"));
-                  }
-               }
-
-               MessageBox.Show("List saved (objects.csv)");
-            }
-         }
-         catch (Exception ex)
-         {
-            LogError(ex, "Load Objects");
-         }
-      }
-
       private void SaveClick(object sender, RoutedEventArgs e)
       {
          Save.IsEnabled = false;
+
+         if (Codes.IsSelected)
+         {
+            LoadApplyCodes();
+            return;
+         }
 
          var result = SaveItemData((TabItem)TabControl.SelectedItem);
 
@@ -687,7 +601,10 @@
 
          var bytes = ms.ToArray();
 
-         var pointer = gecko.GetUInt(0x3F93B768) + 0x338;
+         var pointer = gecko.GetUInt(0x109657EC) + 0xFFFFF4E4;
+         pointer = gecko.GetUInt(pointer) + 0x53c;
+         pointer = gecko.GetUInt(pointer) + 0xFFFFEA24;
+         pointer = gecko.GetUInt(pointer) + 0x338;
          var address = gecko.GetUInt(pointer) + 0x140;
 
          gecko.WriteBytes(address, bytes);
@@ -697,8 +614,8 @@
       {
          var hour = Convert.ToSingle(CurrentTime.Text) * 15;
 
-         var timePointer = gecko.GetUInt(0x10938150) + 0x8C; //0x10937E90
-         timePointer = gecko.GetUInt(timePointer) + 0xA8;
+         var timePointer = gecko.GetUInt(0x1097DF08) + 0x664; //0x10937E90
+         timePointer = gecko.GetUInt(timePointer) + 0x98;
 
          gecko.WriteFloat(timePointer + 0x8, hour);
       }
@@ -709,7 +626,11 @@
 
          try
          {
-            var pointer = gecko.GetUInt(0x3F93B768) + 0x338;
+            //[[[[[0x109657EC] + 0xFFFFF4E4] + 0x53c] + 0xFFFFEA24] + 0x338] + 0x140
+            var pointer = gecko.GetUInt(0x109657EC) + 0xFFFFF4E4;
+            pointer = gecko.GetUInt(pointer) + 0x53c;
+            pointer = gecko.GetUInt(pointer) + 0xFFFFEA24;
+            pointer = gecko.GetUInt(pointer) + 0x338;
             var address = gecko.GetUInt(pointer) + 0x140;
 
             Dispatcher.Invoke(
@@ -785,7 +706,7 @@
                Settings.Default.IpAddress = IpAddress.Text;
                Settings.Default.Save();
 
-               Controller.SelectedValue = Settings.Default.Controller;
+               //Controller.SelectedValue = Settings.Default.Controller;
 
                GetNonItemData();
 
@@ -996,33 +917,6 @@
 
       private void GetNonItemData()
       {
-         // Code Tab Values       
-         // This seems to change in 1.3.1. Redone according to Skoolzout1's Inf Stamina code
-         var staminaPointer = gecko.GetUInt(0x10938A8C) - 0xC10;
-         staminaPointer = gecko.GetUInt(staminaPointer) + 0x60;
-         CurrentStamina.Text = gecko.GetString(staminaPointer);//0x4228B0CC
-
-         var healthPointer = gecko.GetUInt(0x420ACBF0);
-         CurrentHealth.Text = gecko.GetInt(healthPointer + 0x388).ToString(CultureInfo.InvariantCulture);
-
-         CurrentRupees.Text = gecko.GetInt(0x3FF52244).ToString(CultureInfo.InvariantCulture);
-
-         CurrentMon.Text = gecko.GetInt(0x3FF52984).ToString(CultureInfo.InvariantCulture);
-
-         CurrentWeaponSlots.Text = gecko.GetInt(0x3FF52B84).ToString(CultureInfo.InvariantCulture);
-
-         CurrentBowSlots.Text = gecko.GetInt(0x3FF58AA4).ToString(CultureInfo.InvariantCulture);
-
-         CurrentShieldSlots.Text = gecko.GetInt(0x3FF58AC4).ToString(CultureInfo.InvariantCulture);
-
-         var damagePointer = gecko.GetUInt(0x10938A8C) - 0xB1C;
-         damagePointer = gecko.GetUInt(damagePointer) + 0x1AA0;
-         CbDamage.SelectedValue = gecko.GetString(damagePointer);
-
-         var weatherPointer = gecko.GetUInt(0x10938150) + 0x8C;
-         weatherPointer = gecko.GetUInt(weatherPointer) + 0x2340;
-         CbWeather.SelectedValue = gecko.GetString(weatherPointer);
-
          var time = GetCurrentTime();
          CurrentTime.Text = time.ToString(CultureInfo.InvariantCulture);
          TimeSlider.Value = time;
@@ -1037,7 +931,6 @@
          if (state == "Connected")
          {
             LoadItems.IsEnabled = true;
-            LoadObjects.IsEnabled = true;
             Connect.IsEnabled = false;
             Connect.Visibility = Visibility.Hidden;
 
@@ -1156,6 +1049,10 @@
          if (!Codes.IsSelected)
          {
             EnableCoords.IsChecked = false;
+         }
+         else
+         {
+            Save.IsEnabled = true;
          }
       }
 
@@ -1435,8 +1332,8 @@
          try
          {
 
-            var timePointer = gecko.GetUInt(0x10938150) + 0x8C; //0x10937E90
-            timePointer = gecko.GetUInt(timePointer) + 0xA8;
+            var timePointer = gecko.GetUInt(0x1097DF08) + 0x664;
+            timePointer = gecko.GetUInt(timePointer) + 0x98;
 
             var time = gecko.GetFloat(timePointer);
 
@@ -1450,6 +1347,62 @@
          }
 
          return 1;
+      }
+
+      private void LoadApplyCodes()
+      {
+         CurrentCodes.Document.Blocks.Clear();
+
+         if (!File.Exists("codes.xml"))
+         {
+            LogError(new Exception("Can't find codes.xml"));
+            return;
+         }
+
+         using (StreamReader sr = new StreamReader("codes.xml", true))
+         {
+            XDocument xdoc = XDocument.Load(sr);
+
+            codes = new List<uint>();
+
+            foreach (var entry in xdoc.Descendants("entry"))
+            {
+               var name = entry.Attribute("name").Value;
+               var code = entry.Element("code").Value.Trim();
+               var enabled = Convert.ToBoolean(entry.Element("enabled").Value);
+
+               // list in codes tab              
+
+               var paragraph = new Paragraph
+               {
+                  FontSize = 14,
+                  Margin = new Thickness(0),
+                  Padding = new Thickness(0),
+                  LineHeight = 14
+               };
+
+               paragraph.Inlines.Add(string.Format("{0} (Enabled: {1})", name, enabled));
+               paragraph.Inlines.Add(new LineBreak());
+               paragraph.Inlines.Add(code);
+               paragraph.Inlines.Add(new LineBreak());
+
+               CurrentCodes.Document.Blocks.Add(paragraph);
+
+               if (enabled)
+               {
+                  code = code.Replace(Environment.NewLine, ",");
+                  code = code.Replace(" ", ",");
+                  code = code.Replace("\n", ",");
+                  string[] array = code.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                  foreach (var item in array)
+                  {
+                     var temp = uint.Parse(item.Trim(), NumberStyles.HexNumber);
+                     codes.Add(temp);
+                  }
+               }
+            }
+         }
       }
    }
 }
