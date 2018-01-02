@@ -65,9 +65,8 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -89,7 +88,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ByteSwap.cs" />
-    <Compile Include="Codes.cs" />
     <Compile Include="Gecko.cs" />
     <Compile Include="GetDotNetVersion.cs" />
     <Compile Include="IpAddress.cs" />
@@ -98,7 +96,6 @@
       <DependentUpon>JsonViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="MemAreas.cs" />
-    <Compile Include="Obj.cs" />
     <Compile Include="TcpConn.cs" />
     <Compile Include="Json\JPropertyDataTemplateSelector.cs" />
     <Compile Include="Json\ComplexPropertyMethodToValueConverter.cs" />
